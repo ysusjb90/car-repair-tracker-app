@@ -9,3 +9,11 @@
 export default {
 };
 </script>
+<style scoped>
+template{
+  background-color: #E3E1DA;
+}
+.form-input-group {
+  background-color:white;
+}
+</style>

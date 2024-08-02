@@ -1,7 +1,7 @@
 <template>
   <div id="login">
     <form v-on:submit.prevent="login">
-      <h1 >Please Sign In</h1>
+      <h1>Please Sign In</h1>
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password!
       </div>
@@ -60,11 +60,29 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .form-input-group {
   margin-bottom: 1rem;
 }
 label {
   margin-right: 0.5rem;
 }
+input{
+  background-color: white;
+  text-decoration: red;
+}
+button{
+  background-color: rgb(102, 100, 100);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  
+}
+form{
+  color: rgb(189, 14, 14);
+}
+
 </style>

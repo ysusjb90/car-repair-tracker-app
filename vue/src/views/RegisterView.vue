@@ -1,9 +1,17 @@
 <template>
   <div id="register" class="text-center">
     <form v-on:submit.prevent="register">
-      <h1>Create Account</h1>
+      <h1>Registration</h1>
       <div role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
+      </div>
+      <div class="form-input-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" />
+      </div>
+      <div class="form-input-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName"/>
       </div>
       <div class="form-input-group">
         <label for="username">Username</label>
@@ -16,6 +24,14 @@
       <div class="form-input-group">
         <label for="confirmPassword">Confirm Password</label>
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
+      </div>
+      <div class="form-input-group">
+        <label for="email">E-mail</label>
+        <input type="email" id="email"/>
+      </div>
+      <div class="form-input-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="tel" id="phoneNumber"/>
       </div>
       <button type="submit">Create Account</button>
       <p><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
@@ -79,4 +95,5 @@ export default {
 label {
   margin-right: 0.5rem;
 }
+
 </style>
