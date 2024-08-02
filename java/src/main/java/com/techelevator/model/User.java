@@ -67,6 +67,7 @@ public class User {
    }
 
    public void setAuthorities(String authorities) {
+      //TODO: make role for employee
       String[] roles = authorities.split(",");
       for (String role : roles) {
          String authority = role.contains("ROLE_") ? role : "ROLE_" + role;
