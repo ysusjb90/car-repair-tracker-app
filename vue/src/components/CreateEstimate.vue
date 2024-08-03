@@ -14,8 +14,6 @@
         </tr>
       </thead>
 
-
-
     </table>
 
   </div>
@@ -29,17 +27,54 @@
     <td>{{ repair.laborCost }}</td>
     <td>{{ repair.flatRate }}</td>
 
-    <td>
-      <button class="btnActivateDeactivate" v-on:click="flipStatus(user.id)">{{ user.status === 'Active' ? 'Deactivate'
-    : 'Activate' }}</button>
-    </td>
   </tr>
 
+  <div class="actions">
+    <button v-on:click="activateSelectedRepairItems()" v-bind:disabled="!actionButtonEnabled">Add Repair Items</button>
+    <button v-on:click="deactivateSelectedRepairItems()" v-bind:disabled="!actionButtonEnabled">Remove Repair
+      Items</button>
+
+  </div>
 
 </template>
 
 <script>
 export default {
+
+  data() {
+
+    return {
+
+      repairs: [
+        { id: 1, description: 'Oil Change', partsCost: 50, laborCost: 100, flatRate: 2 },
+        { id: 2, description: 'Brake Pad Replacement', partsCost: 100, laborCost: 150, flatRate: 3 },
+        { id: 3, description: 'Battery Replacement', partsCost: 75, laborCost: 125, flatRate: 2.5 },
+        { id: 4, description: 'Replace Brake Lines', partsCost: 25, laborCost: 75, flatRate: 1.5 },
+        { id: 5, description: 'Replace Brake Fluid', partsCost: 10, laborCost: 25, flatRate: 1 }
+      ],
+
+      selectedRepairIDs: []
+
+    };
+  },
+
+  methods: {
+
+    activateSelectedRepairItems() {
+      this.selectedRepairIDs.forEach((repairID) => {
+        const repair = this.repairs.find((repair) => repair.id === repairID);
+        repair.status = 'Active';
+      });
+    },
+
+    deactivateSelectedRepairItems() {
+      this.selectedRepairIDs.forEach((repairID) => {
+        const repair = this.repairs.find((repair) => repair.id === repairID);
+        repair.status = 'Inactive';
+      });
+    }
+
+  }
 
 }
 </script>
@@ -52,12 +87,26 @@ h1 {
 
 }
 
+.actions {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+  padding: 10px;
+}
+
+
+
+
 th {
+  background-color: white;
   text-transform: uppercase;
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(189, 14, 14);
   border: 2px solid black
-  
 }
 
 tr.deactivated {

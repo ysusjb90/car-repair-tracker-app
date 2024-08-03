@@ -1,31 +1,31 @@
 <template>
-<form >
-  <img src="src\assets\manic_720.jpg">
-  <div id="userInfo">
-    <h1>Customer:</h1>
+  <form>
+    <img src="src\assets\manic_720.jpg">
+    <div id="userInfo">
+      <h1>Customer:</h1>
       <p>Name: </p>
       <p>Email: </p>
       <p>Phone: </p>
 
-  </div>
-  <div id="userInfo">
-    <h1>Vehicle:</h1>
-    <p>Year: </p>
-    <p>Make: </p>
-    <p>Model: </p>
+    </div>
+    <div id="userInfo">
+      <h1>Vehicle:</h1>
+      <p>Year: </p>
+      <p>Make: </p>
+      <p>Model: </p>
 
-  </div>
+    </div>
 
-</form>
+  </form>
 
 
-<div>
-        
+  <div>
+
 
     <CreateEstimate />
 
-    </div>
-  
+  </div>
+
 </template>
 
 <script>
@@ -34,33 +34,37 @@ import CreateEstimate from '../components/CreateEstimate.vue';
 
 export default {
 
-components: {
-  CreateEstimate
+  components: {
+    CreateEstimate
 
-},
+  },
 
 }
 </script>
 
 <style scoped>
-img{
+img {
   width: 200px;
 
 }
-h1{
+
+h1 {
   background-color: white;
 }
-p{
+
+p {
   background-color: white;
 }
-form{
+
+form {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
 
 }
-#userInfo{
+
+#userInfo {
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -70,8 +74,8 @@ form{
   width: 200px;
   height: 250px;
 }
-div{
+
+div {
   background-color: white;
 }
-
 </style>
