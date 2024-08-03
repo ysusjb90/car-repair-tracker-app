@@ -1,5 +1,5 @@
 <template>
-  <div id="register" class="text-center">
+  <div id="register" class="reg">
     <form v-on:submit.prevent="register">
       <h1>Registration</h1>
       <div role="alert" v-if="registrationErrors">
@@ -7,11 +7,11 @@
       </div>
       <div class="form-input-group">
         <label for="firstName">First Name</label>
-        <input type="text" id="firstName" />
+        <input type="text" id="firstName" required />
       </div>
       <div class="form-input-group">
         <label for="lastName">Last Name</label>
-        <input type="text" id="lastName"/>
+        <input type="text" id="lastName" required/>
       </div>
       <div class="form-input-group">
         <label for="username">Username</label>
@@ -31,7 +31,7 @@
       </div>
       <div class="form-input-group">
         <label for="phoneNumber">Phone Number</label>
-        <input type="tel" id="phoneNumber"/>
+        <input type="tel" id="phoneNumber" required/>
       </div>
       <button type="submit">Create Account</button>
       <p><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
@@ -89,11 +89,34 @@ export default {
 </script>
 
 <style scoped>
+
+h1 {
+  font-family: 'Arial', sans-serif;
+
+}
+
+
 .form-input-group {
   margin-bottom: 1rem;
 }
+
+.form-input-group label {
+
+font-family: 'Arial', sans-serif;
+font-size: 14px;
+margin-bottom: 5px;
+font-weight: bold;
+text-align: left; 
+
+}
+
+
 label {
   margin-right: 0.5rem;
 }
+
+
+
+
 
 </style>
