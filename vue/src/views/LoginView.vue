@@ -62,7 +62,9 @@ export default {
 
 <style>
 .form-input-group {
-  margin-bottom: 1rem;
+  margin-bottom: 30px;  
+
+
 }
 label {
   margin-right: 0.5rem;
@@ -70,18 +72,23 @@ label {
 input{
   background-color: white;
   text-decoration: red;
+  
 }
 button{
-  background-color: rgb(102, 100, 100);
+  
+  background-color: rgb(189, 14, 14);
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin: 8px 0px;
   border: none;
   cursor: pointer;
   border-radius: 10px;
+  font-weight: bold; 
   
 }
 form{
+
+  
   color: rgb(189, 14, 14);
 }
 

@@ -33,8 +33,11 @@
         <label for="phoneNumber">Phone Number</label>
         <input type="tel" id="phoneNumber" required/>
       </div>
-      <button type="submit">Create Account</button>
-      <p><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
+      <div class = "button-container">
+        <button type="submit">Create Account</button>
+      </div>
+      
+      <p class="center-text"><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
     </form>
   </div>
 </template>
@@ -89,34 +92,60 @@ export default {
 </script>
 
 <style scoped>
-
 h1 {
   font-family: 'Arial', sans-serif;
+  text-align: center;
 
 }
 
 
-.form-input-group {
-  margin-bottom: 1rem;
+
+.center-text {
+  text-align: center; /* Center the text */
+  margin-top: 20px; /* Add spacing if needed */
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
 }
 
 .form-input-group label {
 
-font-family: 'Arial', sans-serif;
-font-size: 14px;
-margin-bottom: 5px;
-font-weight: bold;
-text-align: left; 
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: left; 
+ 
+}
 
+#register {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: left;
+}
+
+.form-input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left; 
+  
 }
 
 
-label {
-  margin-right: 0.5rem;
+.button-container  {
+
+  display: flex;
+  justify-content: center;
+
 }
-
-
-
-
-
 </style>
