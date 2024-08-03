@@ -18,9 +18,6 @@
 
     </table>
 
-
-
-
   </div>
 
   <tr v-for="repair in repairsList" v-bind:key="repair.id" v-bind:class="{ deactivated: user.status === 'Inactive' }">
@@ -59,6 +56,7 @@ th {
   text-transform: uppercase;
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(189, 14, 14);
+  border: 2px solid black
   
 }
 
