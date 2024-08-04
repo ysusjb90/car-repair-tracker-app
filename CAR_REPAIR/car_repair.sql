@@ -1,7 +1,19 @@
 
 START TRANSACTION;
 
-DROP TABLE IF EXISTS user_details, vehicle, user_vehicle CASCADE;
+DROP TABLE IF EXISTS users, user_details, vehicle, user_vehicle CASCADE;
+
+CREATE TABLE users (
+	user_id SERIAL,
+	username varchar(50) NOT NULL UNIQUE,
+	password_hash varchar(200) NOT NULL,
+	role varchar(50) NOT NULL,
+	CONSTRAINT PK_user PRIMARY KEY (user_id));
+	
+
+
+COMMIT TRANSACTION;
+
 
 CREATE TABLE user_details(
 	user_id int NOT NULL,
@@ -32,6 +44,10 @@ CREATE TABLE user_vehicle (
 	CONSTRAINT fk_user_vehicle_users_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
 	CONSTRAINT fk_user_vehicle_vehicle_vehicle_id FOREIGN KEY (vehicle_id) REFERENCES vehicle(vehicle_id)
 );
+
+INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
+INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
+
 
 INSERT INTO users(
 	username,
