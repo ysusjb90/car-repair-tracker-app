@@ -12,28 +12,29 @@ CREATE TABLE user_details(
 	email_address varchar(50),
 	password varchar NOT NULL,
 	phone_number varchar(12) NOT NULL,
-	CONSTRAINT pk_user_details_user_id PRIMARY KEY (user_id),
-	CONSTRAINT fk_user_details_user_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
+	CONSTRAINT pk_user_details_user_id PRIMARY KEY (user_id)
+	-- CONSTRAINT fk_user_details_user_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
--- note that group is a reserved word
+
 CREATE TABLE vehicle (
 	vehicle_id serial,
 	vehicle_make varchar NOT NULL,
 	vehicle_model varchar NOT NULL,
-	vehicle_year smallint NOT NULL,
+	vehicle_year smallint ,
 	vehicle_color varchar,
 	CONSTRAINT pk_vehicle_vehicle_id PRIMARY KEY (vehicle_id)
 );
+-- primary key below will attach to estimates table as FK (on vehicle ID)
 
 CREATE TABLE user_vehicle (
 	user_id int NOT NULL,
 	vehicle_id int NOT NULL,
-	CONSTRAINT pk_user_vehicle_user_id_vehicle_id PRIMARY KEY (user_id, vehicle_id),
-	CONSTRAINT fk_user_vehicle_users_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
-	CONSTRAINT fk_user_vehicle_vehicle_vehicle_id FOREIGN KEY (vehicle_id) REFERENCES vehicle(vehicle_id)
-);
+	CONSTRAINT pk_user_vehicle PRIMARY KEY (vehicle_id),
+	CONSTRAINT FK_user_vehicle_user_details FOREIGN KEY (vehicle_id) REFERENCES user_details (user_id)
 
+);
+-- NOT loading test data into user_vehicle untill user_details table is populated
 
 
 
@@ -44,11 +45,7 @@ VALUES ('DMC', 'Delorean', 1981, 'Silver');
 INSERT INTO vehicle (vehicle_make, vehicle_model, vehicle_year, vehicle_color)
 VALUES ('Chevy', 'COE', 1941, 'Rust-bucket');
 
-INSERT INTO user_vehicle (user_id, vehicle_id) 
-	VALUES 
-	((SELECT user_id FROM users WHERE username = 'nightkitt'), (SELECT vehicle_id FROM vehicle WHERE vehicle_model = 'Trans Am')),
-	((SELECT user_id FROM users WHERE username = '88N55'), (SELECT vehicle_id FROM vehicle WHERE vehicle_model = 'Delorean')),
-	((SELECT user_id FROM users WHERE username = 'Eye4eye'), (SELECT vehicle_id FROM vehicle WHERE vehicle_model = 'COE'));
+
 
 CREATE TABLE repair_items(
 	repair_item_id serial,
@@ -90,6 +87,7 @@ INSERT INTO repair_items (description, parts_cost, labor_cost, flat_rate_hours, 
 
 
 COMMIT;
+--ROLLBACK;
 
-
+SELECT * FROM user_details
 

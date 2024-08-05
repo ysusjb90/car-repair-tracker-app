@@ -1,39 +1,38 @@
-
 START TRANSACTION;
 
-DROP TABLE IF EXISTS user_details, vehicle, user_vehicle,  repair_items CASCADE;
+DROP TABLE IF EXISTS user_detail, vehicle, user_vehicle,  repair_items, estimates,  estimate_repairs, recall_items CASCADE;
 	
-
-CREATE TABLE user_details(
-	user_id int,
+-- below was formerly user_details  -plural; also PW removed as its hash is captured in table users
+CREATE TABLE user_detail(
+	user_id int, -- must be loaded with same user_id as index in users table
 	user_type varchar(20) NOT NULL,
 	first_name varchar(20) NOT NULL,
 	last_name varchar(30) NOT NULL,
 	email_address varchar(50),
-	password varchar NOT NULL,
 	phone_number varchar(12) NOT NULL,
-	CONSTRAINT pk_user_details_user_id PRIMARY KEY (user_id),
-	CONSTRAINT fk_user_details_user_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
+	CONSTRAINT pk_user_detail_user_id PRIMARY KEY (user_id)
+	-- CONSTRAINT fk_user_detail_user_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
--- note that group is a reserved word
+
 CREATE TABLE vehicle (
 	vehicle_id serial,
 	vehicle_make varchar NOT NULL,
 	vehicle_model varchar NOT NULL,
-	vehicle_year smallint NOT NULL,
+	vehicle_year smallint ,
 	vehicle_color varchar,
 	CONSTRAINT pk_vehicle_vehicle_id PRIMARY KEY (vehicle_id)
 );
+-- primary key below will attach to estimates table as FK (on vehicle ID)
 
 CREATE TABLE user_vehicle (
 	user_id int NOT NULL,
 	vehicle_id int NOT NULL,
-	CONSTRAINT pk_user_vehicle_user_id_vehicle_id PRIMARY KEY (user_id, vehicle_id),
-	CONSTRAINT fk_user_vehicle_users_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
-	CONSTRAINT fk_user_vehicle_vehicle_vehicle_id FOREIGN KEY (vehicle_id) REFERENCES vehicle(vehicle_id)
-);
+	CONSTRAINT pk_user_vehicle PRIMARY KEY (vehicle_id),
+	CONSTRAINT FK_user_vehicle_user_detail FOREIGN KEY (vehicle_id) REFERENCES user_detail (user_id)
 
+);
+-- NOT loading test data into user_vehicle untill user_detail table is populated
 
 
 
@@ -44,11 +43,7 @@ VALUES ('DMC', 'Delorean', 1981, 'Silver');
 INSERT INTO vehicle (vehicle_make, vehicle_model, vehicle_year, vehicle_color)
 VALUES ('Chevy', 'COE', 1941, 'Rust-bucket');
 
-INSERT INTO user_vehicle (user_id, vehicle_id) 
-	VALUES 
-	((SELECT user_id FROM users WHERE username = 'nightkitt'), (SELECT vehicle_id FROM vehicle WHERE vehicle_model = 'Trans Am')),
-	((SELECT user_id FROM users WHERE username = '88N55'), (SELECT vehicle_id FROM vehicle WHERE vehicle_model = 'Delorean')),
-	((SELECT user_id FROM users WHERE username = 'Eye4eye'), (SELECT vehicle_id FROM vehicle WHERE vehicle_model = 'COE'));
+
 
 CREATE TABLE repair_items(
 	repair_item_id serial,
@@ -86,10 +81,44 @@ INSERT INTO repair_items (description, parts_cost, labor_cost, flat_rate_hours, 
 INSERT INTO repair_items (description, parts_cost, labor_cost, flat_rate_hours, isSuperseded)  VALUES ('Starter Replacement', 250, 300, 30,'false');
 INSERT INTO repair_items (description, parts_cost, labor_cost, flat_rate_hours, isSuperseded)  VALUES ('Water Pump Replacement', 150, 200, 35,'false');
 
+CREATE TABLE estimates(
+	estimate_id serial,
+	user_id int,
+	vehicle_id int,
+	date_created DATE, 
+	recall_id int,
+	promised_completion_date DATE, 
+	approved_by_customer boolean,
+	job_complete boolean,
+	is_paid boolean,
+	CONSTRAINT PK_estimates PRIMARY KEY (estimate_id),
+	CONSTRAINT FK_estimates_user_detail FOREIGN KEY (user_id) REFERENCES user_detail (user_id),
+	CONSTRAINT FK_estimates_vehicle FOREIGN KEY (vehicle_id) REFERENCES vehicle (vehicle_id)
+);
+	 -- note DATE takes string in YYY-MM_DD format 
 
+-- estimate_id below must match same in estimates table
+CREATE TABLE estimate_repairs(
+	estimate_id int,
+	repair_item_id int,
+	recall_id int,
+	item_complete boolean,
+	repair_notes varchar,
+	is_approved boolean,
+	CONSTRAINT PK_estimate_repairs PRIMARY KEY (estimate_id),
+	CONSTRAINT FK_estimate_repairs_repair_items FOREIGN KEY (repair_item_id) REFERENCES repair_items (repair_item_id)
+); 
 
-
+CREATE TABLE recall_items(
+	recall_id int,
+	description varchar,
+	severity varchar,
+	parts_cost int,
+	labor_cost int,
+	flat_rate_hours int,
+	is_reimbursable boolean,
+	CONSTRAINT PK_recall_items PRIMARY KEY (recall_id)
+);
+	
 COMMIT;
-
-
 
