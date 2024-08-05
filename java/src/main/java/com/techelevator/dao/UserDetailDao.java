@@ -1,23 +1,23 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.UserDetails;
+import com.techelevator.model.UserDetail;
 
 import java.util.List;
 
 public interface UserDetailDao {
 
-    List<UserDetails> getUserDetails();
-    UserDetails getUserType(String userType);
+    List<UserDetail> getUserDetails();
+    UserDetail getUserType(String userType);
 
-    UserDetails getFirstName(String firstName);
+    UserDetail getFirstName(String firstName);
 
-    UserDetails getLastName(String lastName);
+    UserDetail getLastName(String lastName);
 
-    UserDetails getFullName(String fullName);
+    UserDetail getFullName(String fullName);
 
-    UserDetails getEmailAddress(String emailAddress);
+    UserDetail getEmailAddress(String emailAddress);
 
-    UserDetails getPhoneNumber(int phoneNumber);
+    UserDetail getPhoneNumber(int phoneNumber);
 
-    UserDetails createDetails();
+    UserDetail createDetails(UserDetail userDetail);
 }

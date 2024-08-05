@@ -1,25 +1,34 @@
 package com.techelevator.model;
 
-public class UserDetails {
-
+public class UserDetail {
+    private Integer userId;
     private String userType;
     private String firstName;
     private String lastName;
     private String emailAddress;
     private int phoneNumber;
 
-    public UserDetails() {}
+    public UserDetail() {}
 
-    public UserDetails
-            (String userType, String firstName, String lastName,
+    public UserDetail
+            (Integer userId, String userType, String firstName, String lastName,
              String emailAddress, int phoneNumber) {
 
+        this.userId = userId;
         this.userType = userType;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress=emailAddress;
         this.phoneNumber=phoneNumber;
 
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUserType(){
@@ -44,6 +53,26 @@ public class UserDetails {
 
     public int getPhoneNumber(){
         return phoneNumber;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     @Override
