@@ -12,6 +12,9 @@ export default {
 
   register(user) {
     return http.post('/register', user)
+  },
+  registerDetails(userDetails) {
+    return http.post('/users', userDetails)
   }
 
 }

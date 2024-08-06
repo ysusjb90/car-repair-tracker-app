@@ -76,7 +76,7 @@ public class JdbcUserDetailDao implements UserDetailDao {
         String sql = "INSERT INTO user_detail(user_id, user_type, first_name, last_name, email_address, phone_number)  VALUES (?,?,?,?,?,?);";
 
 
-        SqlRowSet newDetailRows = jdbcTemplate.queryForRowSet(sql, userDetail.getUserType(),
+        SqlRowSet newDetailRows = jdbcTemplate.queryForRowSet(sql, 1, "USER",
                 userDetail.getFirstName(), userDetail.getLastName(), userDetail.getEmailAddress(), userDetail.getPhoneNumber());
 
         return newDetails;

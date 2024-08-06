@@ -85,6 +85,8 @@ public class JdbcUserDao implements UserDao {
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
+        //take this out
+        int bridgeUserId = newUser.getId();
         return newUser;
     }
 

@@ -7,11 +7,11 @@
       </div>
       <div class="form-input-group">
         <label for="firstName">First Name</label>
-        <input type="text" id="firstName" required />
+        <input type="text" id="firstName" v-model="userDetail.firstName" required />
       </div>
       <div class="form-input-group">
         <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" required/>
+        <input type="text" id="lastName" v-model="userDetail.lastName" required/>
       </div>
       <div class="form-input-group">
         <label for="username">Username</label>
@@ -27,11 +27,11 @@
       </div>
       <div class="form-input-group">
         <label for="email">E-mail</label>
-        <input type="email" id="email"/>
+        <input type="email" id="email" v-model="userDetail.email"/>
       </div>
       <div class="form-input-group">
         <label for="phoneNumber">Phone Number</label>
-        <input type="tel" id="phoneNumber" required/>
+        <input type="tel" id="phoneNumber" v-model="userDetail.phoneNumber" required/>
       </div>
       <div class = "button-container">
         <button type="submit">Create Account</button>
@@ -54,7 +54,14 @@ export default {
         confirmPassword: '',
         role: 'user',
       },
+      userDetail: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
+      },
       registrationErrors: false,
+    
       registrationErrorMsg: 'There were problems registering this user.',
     };
   },

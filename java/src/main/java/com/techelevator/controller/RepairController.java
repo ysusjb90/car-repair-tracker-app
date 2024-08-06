@@ -36,8 +36,9 @@ public class RepairController {
     }
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/users", method = RequestMethod.POST)
+
     public void createDetails(@RequestBody UserDetail userDetail ){
-        // createDetails(userDetail);
+        userDetailDao.createDetails(userDetail);
     }
 
     @RequestMapping(path="/repairs", method = RequestMethod.GET)
