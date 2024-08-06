@@ -25,7 +25,7 @@ public class JdbcRepairDAO implements RepairDao  {
     @Override
     public List<Repair> getRepairItemsList() {
         List<Repair> repairsList = new ArrayList<>();
-        String sql = "SELECT repair_item_id, description, parts_cost, labor_cost, flat_rate_hours, issuperseded;";
+        String sql = "SELECT repair_item_id, description, parts_cost, labor_cost, flat_rate_hours, issuperseded FROM repair_items;";
 
         try {
             SqlRowSet results = repairItemTemplate.queryForRowSet(sql);
@@ -36,6 +36,8 @@ public class JdbcRepairDAO implements RepairDao  {
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database",e);
         }
+
+        System.out.println(repairsList);
         return repairsList;
     }
 
