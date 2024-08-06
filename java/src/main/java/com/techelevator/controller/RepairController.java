@@ -20,6 +20,7 @@ import com.techelevator.dao.UserDao;
 import com.techelevator.security.jwt.JWTFilter;
 import com.techelevator.security.jwt.TokenProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,13 +28,13 @@ import java.util.List;
 
 public class RepairController {
 
-    private  UserDetailDao userdetailDao;
+    private  UserDetailDao userDetailDao;
     private JdbcUserDetailDao jdbcUserDetailDao;
     private JdbcRepairDAO jdbcRepairDAO;
 
 
     public RepairController (UserDetailDao userDetailDao) {
-        this.userdetailDao = userDetailDao;
+        this.userDetailDao = userDetailDao;
     }
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/users", method = RequestMethod.POST)
@@ -43,8 +44,9 @@ public class RepairController {
 
     @RequestMapping(path="/repairs", method = RequestMethod.GET)
     public List<Repair> getRepairItemsList(){
+        List<Repair> allRepairs=new ArrayList<>();
         getRepairItemsList();
-        return null;
+        return allRepairs;
     }
 //TODO This is returning NULL - it didn't take the variable used in teh jdbc DAO?
 

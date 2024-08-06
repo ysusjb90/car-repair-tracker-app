@@ -21,7 +21,7 @@ public class JdbcRepairDAO implements RepairDao  {
     public JdbcRepairDAO(JdbcTemplate jdbcTemplate) {
         this.repairItemTemplate = jdbcTemplate;
     }
-//TODO what's wrong with the Override?
+
     @Override
     public List<Repair> getRepairItemsList() {
         List<Repair> repairsList = new ArrayList<>();
