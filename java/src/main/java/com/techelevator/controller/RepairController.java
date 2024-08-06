@@ -1,5 +1,6 @@
 package com.techelevator.controller;
 
+import com.techelevator.dao.JdbcRepairDAO;
 import com.techelevator.dao.JdbcUserDetailDao;
 import com.techelevator.dao.UserDetailDao;
 import com.techelevator.exception.DaoException;
@@ -19,17 +20,17 @@ import com.techelevator.dao.UserDao;
 import com.techelevator.security.jwt.JWTFilter;
 import com.techelevator.security.jwt.TokenProvider;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
-
-
-
-
 
 public class RepairController {
 
     private  UserDetailDao userdetailDao;
     private JdbcUserDetailDao jdbcUserDetailDao;
+    private JdbcRepairDAO jdbcRepairDAO;
+
 
     public RepairController (UserDetailDao userDetailDao) {
         this.userdetailDao = userDetailDao;
@@ -40,6 +41,12 @@ public class RepairController {
         createDetails(userDetail);
     }
 
+    @RequestMapping(path="/repairs", method = RequestMethod.GET)
+    public List<Repair> getRepairItemsList(){
+        getRepairItemsList();
+        return null;
+    }
+//TODO This is returning NULL - it didn't take the variable used in teh jdbc DAO?
 
 
 
