@@ -6,13 +6,13 @@ public class UserDetail {
     private String firstName;
     private String lastName;
     private String emailAddress;
-    private int phoneNumber;
+    private String phoneNumber;
 
     public UserDetail() {}
 
     public UserDetail
             (Integer userId, String userType, String firstName, String lastName,
-             String emailAddress, int phoneNumber) {
+             String emailAddress, String phoneNumber) {
 
         this.userId = userId;
         this.userType = userType;
@@ -51,7 +51,7 @@ public class UserDetail {
         return emailAddress;
     }
 
-    public int getPhoneNumber(){
+    public String getPhoneNumber(){
         return phoneNumber;
     }
 
@@ -71,7 +71,7 @@ public class UserDetail {
         this.emailAddress = emailAddress;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

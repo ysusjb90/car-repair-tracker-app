@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.RegisterUserDto;
+import com.techelevator.model.UserDetail;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -80,6 +81,12 @@ public class JdbcUserDao implements UserDao {
         try {
             int newUserId = jdbcTemplate.queryForObject(insertUserSql, int.class, user.getUsername(), password_hash, ssRole);
             newUser = getUserById(newUserId);
+            String sql = "INSERT INTO user_detail(user_id, user_type, first_name, last_name, email_address, phone_number)  VALUES (?,?,?,?,?,?);";
+
+
+            jdbcTemplate.update(sql,newUserId, "USER",
+                    user.getFirstName(), user.getLastName(), user.getEmailAddress(), user.getPhoneNumber());
+
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {

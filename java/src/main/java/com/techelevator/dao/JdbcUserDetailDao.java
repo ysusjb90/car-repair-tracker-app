@@ -25,7 +25,7 @@ public class JdbcUserDetailDao implements UserDetailDao {
     @Override
     public List<UserDetail> getUserDetails() {
         List<UserDetail> userDetailList = new ArrayList<>();
-        String sql = "SELECT user_id, user_type, first_name, last_name, email_address, phone_number FROM user_detail";
+        String sql = "SELECT user_id, user_type, first_name, last_name, email_address, phone_number FROM user_detail;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while (results.next()) {
@@ -70,13 +70,13 @@ public class JdbcUserDetailDao implements UserDetailDao {
     }
 //TODO does method below need to have a RETURNING statement and loop?
     @Override
-    public UserDetail createDetails(UserDetail userDetail) {
+    public UserDetail createDetails(UserDetail userDetail, int userID) {
         UserDetail newDetails = null;
 
         String sql = "INSERT INTO user_detail(user_id, user_type, first_name, last_name, email_address, phone_number)  VALUES (?,?,?,?,?,?);";
 
 
-        SqlRowSet newDetailRows = jdbcTemplate.queryForRowSet(sql, 1, "USER",
+        SqlRowSet newDetailRows = jdbcTemplate.queryForRowSet(sql,userID, "USER",
                 userDetail.getFirstName(), userDetail.getLastName(), userDetail.getEmailAddress(), userDetail.getPhoneNumber());
 
         return newDetails;
@@ -85,11 +85,12 @@ public class JdbcUserDetailDao implements UserDetailDao {
 
     public UserDetail mapRowToUser(SqlRowSet rs) {
         UserDetail userDetail = new UserDetail();
-        userDetail.setUserType(rs.getString("userType"));
-        userDetail.setFirstName(rs.getString("firstName"));
-        userDetail.setLastName((rs.getString("lsatName")));
-        userDetail.setEmailAddress(rs.getString("emailAddress"));
-        userDetail.setPhoneNumber(rs.getInt("phoneNumber"));
+        userDetail.setUserId(rs.getInt("user_id"));
+        userDetail.setUserType(rs.getString("user_type"));
+        userDetail.setFirstName(rs.getString("first_name"));
+        userDetail.setLastName((rs.getString("last_name")));
+        userDetail.setEmailAddress(rs.getString("email_address"));
+        userDetail.setPhoneNumber(rs.getString("phone_number"));
         return userDetail;
     }
 

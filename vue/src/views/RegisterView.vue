@@ -7,11 +7,11 @@
       </div>
       <div class="form-input-group">
         <label for="firstName">First Name</label>
-        <input type="text" id="firstName" v-model="userDetail.firstName" required />
+        <input type="text" id="firstName" v-model="user.firstName" required />
       </div>
       <div class="form-input-group">
         <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" v-model="userDetail.lastName" required/>
+        <input type="text" id="lastName" v-model="user.lastName" required />
       </div>
       <div class="form-input-group">
         <label for="username">Username</label>
@@ -27,23 +27,25 @@
       </div>
       <div class="form-input-group">
         <label for="email">E-mail</label>
-        <input type="email" id="email" v-model="userDetail.email"/>
+        <input type="email" id="email" v-model="user.emailAddress" />
       </div>
       <div class="form-input-group">
         <label for="phoneNumber">Phone Number</label>
-        <input type="tel" id="phoneNumber" v-model="userDetail.phoneNumber" required/>
+        <input type="tel" id="phoneNumber" v-model="user.phoneNumber" required />
       </div>
-      <div class = "button-container">
+      <div class="button-container">
         <button type="submit">Create Account</button>
       </div>
-      
-      <p class="center-text"><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
+
+      <p class="center-text"><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link>
+      </p>
     </form>
   </div>
 </template>
 
 <script>
 import authService from '../services/AuthService';
+import RepairService from '../services/RepairService';
 
 export default {
   data() {
@@ -53,15 +55,13 @@ export default {
         password: '',
         confirmPassword: '',
         role: 'user',
-      },
-      userDetail: {
         firstName: '',
         lastName: '',
-        email: '',
+        emailAddress: '',
         phoneNumber: '',
       },
       registrationErrors: false,
-    
+
       registrationErrorMsg: 'There were problems registering this user.',
     };
   },
@@ -75,10 +75,13 @@ export default {
           .register(this.user)
           .then((response) => {
             if (response.status == 201) {
-              this.$router.push({
-                path: '/login',
-                query: { registration: 'success' },
-              });
+              
+
+                  this.$router.push({
+                    path: '/login',
+                    query: { registration: 'success' },
+                  });
+                
             }
           })
           .catch((error) => {
@@ -108,8 +111,10 @@ h1 {
 
 
 .center-text {
-  text-align: center; /* Center the text */
-  margin-top: 20px; /* Add spacing if needed */
+  text-align: center;
+  /* Center the text */
+  margin-top: 20px;
+  /* Add spacing if needed */
   font-family: 'Arial', sans-serif;
   font-size: 14px;
 }
@@ -120,8 +125,8 @@ h1 {
   font-size: 14px;
   margin-bottom: 5px;
   font-weight: bold;
-  text-align: left; 
- 
+  text-align: left;
+
 }
 
 #register {
@@ -135,7 +140,7 @@ h1 {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
-  
+
 }
 
 input {
@@ -144,12 +149,12 @@ input {
   border-radius: 4px;
   width: 100%;
   box-sizing: border-box;
-  text-align: left; 
-  
+  text-align: left;
+
 }
 
 
-.button-container  {
+.button-container {
 
   display: flex;
   justify-content: center;

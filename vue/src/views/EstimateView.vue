@@ -38,6 +38,9 @@ export default {
     CreateEstimate
 
   },
+  created() {
+    console.log("Here!")
+  }
 
 }
 </script>

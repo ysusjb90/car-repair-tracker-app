@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.techelevator.security.jwt.JWTFilter;
 import com.techelevator.security.jwt.TokenProvider;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,17 +29,20 @@ public class RepairController {
     private  UserDetailDao userDetailDao;
 
     private RepairDao repairDao;
+    private UserDao userDao;
 
 
-    public RepairController (UserDetailDao userDetailDao, RepairDao repairDao) {
+    public RepairController (UserDetailDao userDetailDao, RepairDao repairDao, UserDao userDao) {
         this.userDetailDao = userDetailDao;
         this.repairDao = repairDao;
+        this.userDao= userDao;
     }
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/users", method = RequestMethod.POST)
 
-    public void createDetails(@RequestBody UserDetail userDetail ){
-        userDetailDao.createDetails(userDetail);
+    public void createDetails(@RequestBody UserDetail userDetail, Principal principal){
+        User user = userDao.getUserByUsername(principal.getName());
+        userDetailDao.createDetails(userDetail, user.getId());
     }
 
     @RequestMapping(path="/repairs", method = RequestMethod.GET)
@@ -47,6 +51,10 @@ public class RepairController {
         return repairDao.getRepairItemsList();
         // List<Repair> allRepairs = new ArrayList<>();
 
+    }
+    @RequestMapping (path = "/userlist", method = RequestMethod.GET)
+    public List<UserDetail> deliverUserDetailList(){
+        return userDetailDao.getUserDetails();
     }
 
     //TODO This is returning NULL - it didn't take the variable used in teh jdbc DAO?

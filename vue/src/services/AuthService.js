@@ -14,7 +14,8 @@ export default {
     return http.post('/register', user)
   },
   registerDetails(userDetails) {
-    return http.post('/users', userDetails)
-  }
+    return axios.post('/users', userDetails)
+  },
+  
 
 }

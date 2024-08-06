@@ -18,9 +18,9 @@
 
   </div>
 
-  <tr v-for="repair in repairsList" v-bind:key="repair.id" v-bind:class="{ deactivated: user.status === 'Inactive' }">
+  <tr v-for="repair in repairs" v-bind:key="repair.repairItemId">
     <td>
-      <input type="checkbox" v-bind:id="user.id" v-bind:value="user.id" v-model="selectedUserIDs" />
+      <input type="checkbox" v-bind:id="repair.repairItemId" v-bind:value="repair.repairItemId" v-model="selectedRepairIDs" />
     </td>
     <td>{{ repair.description }}</td>
     <td>{{ repair.partsCost }}</td>
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import RepairService from '../services/RepairService';
+
 export default {
 
   data() {
@@ -46,13 +48,7 @@ export default {
     return {
 
       repairs: [
-        { id: 1, description: 'Oil Change', partsCost: 50, laborCost: 100, flatRate: 2 },
-        { id: 2, description: 'Brake Pad Replacement', partsCost: 100, laborCost: 150, flatRate: 3 },
-        { id: 3, description: 'Battery Replacement', partsCost: 75, laborCost: 125, flatRate: 2.5 },
-        { id: 4, description: 'Replace Brake Lines', partsCost: 25, laborCost: 75, flatRate: 1.5 },
-        { id: 5, description: 'Replace Brake Fluid', partsCost: 10, laborCost: 25, flatRate: 1 }
       ],
-
       selectedRepairIDs: []
 
     };
@@ -72,9 +68,20 @@ export default {
         const repair = this.repairs.find((repair) => repair.id === repairID);
         repair.status = 'Inactive';
       });
-    }
+    },
+    getRepairs(){
+      RepairService.getRepairItems().then((response) => {
+        this.repairs = response.data;
+        console.log(response);
+      });
+    },
+    
 
-  }
+  },
+  created() {
+    this.getRepairs();
+    console.log("Here!")
+  },
 
 }
 </script>
