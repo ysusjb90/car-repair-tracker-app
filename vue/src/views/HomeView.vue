@@ -26,8 +26,10 @@ components: {
 
 };
 </script>
-<style scoped>
-template{
+<style>
+
+
+template {
   background-color: #E3E1DA;
 }
 .form-input-group {

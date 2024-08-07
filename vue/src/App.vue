@@ -10,9 +10,8 @@
   </div>
 </template>
 <style>
-*{
-  background-color: #E3E1DA;
-}
+
+
 #nav {
   display: flex;
   justify-content: flex-start;

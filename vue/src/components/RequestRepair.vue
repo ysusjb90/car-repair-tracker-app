@@ -34,6 +34,11 @@ export default {
 
 <style>
 
+body  {
+
+    background-color: #E3E1DA;
+}
+
 #request-service-form {
     display: flex;
     flex-direction: column;

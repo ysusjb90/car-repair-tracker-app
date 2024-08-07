@@ -1,15 +1,15 @@
 <template>
   <form>
-    <img src="src\assets\manic_720.jpg">
+    <img src="src\assets\manic.jpg">
     <div id="userInfo">
-      <h1>Customer:</h1>
+      <h2>Customer:</h2>
       <p>Name: </p>
       <p>Email: </p>
       <p>Phone: </p>
 
     </div>
     <div id="userInfo">
-      <h1>Vehicle:</h1>
+      <h2>Vehicle:</h2>
       <p>Year: </p>
       <p>Make: </p>
       <p>Model: </p>
@@ -55,6 +55,14 @@ h1 {
   background-color: white;
 }
 
+h2  {
+
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+
+
+}
+
 p {
   background-color: white;
 }
@@ -76,6 +84,7 @@ form {
   border-radius: 10px;
   width: 200px;
   height: 250px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 div {
