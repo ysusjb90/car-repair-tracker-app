@@ -6,20 +6,27 @@ public class Estimate {
     private int estimateID;
     private int userId;
     private int vehicleId;
-    private Date date;
+    private Date createdDate;
+    private int recallId;
     private Date promisedDate;
     private boolean customerApproval;
-    private boolean readyToBill;
+    private boolean isCompleted;
+    private boolean isPaid;
 
-    public Estimate(int estimateID, int userId, int vehicleId, Date date, Date promisedDate, boolean customerApproval, boolean readyToBill) {
+    public Estimate(int estimateID, int userId, int vehicleId, Date createdDate, int recallId, Date promisedDate,
+                    boolean customerApproval, boolean isCompleted, boolean isPaid) {
         this.estimateID = estimateID;
         this.userId = userId;
-        this.vehicleId = userId;
-        this.date = date;
+        this.vehicleId = vehicleId;
+        this.createdDate = createdDate;
+        this.recallId = recallId;
         this.promisedDate = promisedDate;
         this.customerApproval = customerApproval;
-        this.readyToBill = readyToBill;
+        this.isCompleted = isCompleted;
+        this.isPaid = isPaid;
     }
+
+    public Estimate(){};
 
     public int getEstimateID() {
         return estimateID;
@@ -27,14 +34,6 @@ public class Estimate {
 
     public void setEstimateID(int estimateID) {
         this.estimateID = estimateID;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public Date getPromisedDate() {
@@ -53,13 +52,6 @@ public class Estimate {
         this.customerApproval = customerApproval;
     }
 
-    public boolean isReadyToBill() {
-        return readyToBill;
-    }
-
-    public void setReadyToBill(boolean readyToBill) {
-        this.readyToBill = readyToBill;
-    }
 
     public int getUserId() {
         return userId;
@@ -77,15 +69,50 @@ public class Estimate {
         this.vehicleId = vehicleId;
     }
 
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public int getRecallId() {
+        return recallId;
+    }
+
+    public void setRecallId(int recallId) {
+        this.recallId = recallId;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
+    }
+
+    public boolean isPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(boolean paid) {
+        isPaid = paid;
+    }
+
     @Override
     public String toString() {
         return "Estimate{" +
                 "estimateID=" + estimateID +
                 ", userId=" + userId +
-                ", date=" + date +
+                ", vehicleId=" + vehicleId +
+                ", createdDate=" + createdDate +
+                ", recallId=" + recallId +
                 ", promisedDate=" + promisedDate +
                 ", customerApproval=" + customerApproval +
-                ", readyToBill=" + readyToBill +
+                ", isCompleted=" + isCompleted +
+                ", isPaid=" + isPaid +
                 '}';
     }
 }

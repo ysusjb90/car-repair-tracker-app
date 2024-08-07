@@ -41,7 +41,6 @@ public class RepairController {
     }
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/users", method = RequestMethod.POST)
-
     public void createDetails(@RequestBody UserDetail userDetail, Principal principal){
         User user = userDao.getUserByUsername(principal.getName());
         userDetailDao.createDetails(userDetail, user.getId());
@@ -49,23 +48,29 @@ public class RepairController {
 
     @RequestMapping(path="/repairs", method = RequestMethod.GET)
         public List<Repair> deliverRepairList(){
-
         return repairDao.getRepairItemsList();
         // List<Repair> allRepairs = new ArrayList<>();
 
     }
-    @RequestMapping(path="/estimates/", method=RequestMethod.POST)
+
+//TODO note endpoint for create estimate - this is the post
+    @RequestMapping(path="/estimates", method=RequestMethod.POST)
         public void createNewEstimate(@RequestBody Estimate estimate) {
-            //Call create function here//
+            estimateDAO.createEstimate(estimate);
         }
 
+    @RequestMapping(path="/estimates", method=RequestMethod.GET)
+    public List<Estimate> listOfEstimates() {
+        return estimateDAO.getListOfEstimates();
+    }
+
+// TODO need to add an endpoint for estimate using param /{id}
 
     @RequestMapping (path = "/userlist", method = RequestMethod.GET)
     public List<UserDetail> deliverUserDetailList(){
         return userDetailDao.getUserDetails();
     }
 
-    //TODO This is returning NULL - it didn't take the variable used in teh jdbc DAO?
 
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
     @RequestMapping(path="/", method = RequestMethod.GET)

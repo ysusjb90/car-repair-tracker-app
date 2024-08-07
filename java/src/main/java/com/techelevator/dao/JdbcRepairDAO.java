@@ -37,7 +37,7 @@ public class JdbcRepairDAO implements RepairDao  {
             throw new DaoException("Unable to connect to server or database",e);
         }
 
-        System.out.println(repairsList);
+        //System.out.println(repairsList);
         return repairsList;
     }
 

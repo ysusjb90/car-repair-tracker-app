@@ -25,6 +25,7 @@ CREATE TABLE vehicle (
 );
 -- primary key below will attach to estimates table as FK (on vehicle ID)
 
+
 CREATE TABLE user_vehicle (
 	user_id int NOT NULL,
 	vehicle_id int NOT NULL,
@@ -32,7 +33,7 @@ CREATE TABLE user_vehicle (
 	CONSTRAINT FK_user_vehicle_user_detail FOREIGN KEY (vehicle_id) REFERENCES user_detail (user_id)
 
 );
--- NOT loading test data into user_vehicle untill user_detail table is populated
+
 
 
 
@@ -95,7 +96,7 @@ CREATE TABLE estimates(
 	CONSTRAINT FK_estimates_user_detail FOREIGN KEY (user_id) REFERENCES user_detail (user_id),
 	CONSTRAINT FK_estimates_vehicle FOREIGN KEY (vehicle_id) REFERENCES vehicle (vehicle_id)
 );
-	 -- note DATE takes string in YYY-MM_DD format 
+	 -- note DATE takes string in YYYY-MM-DD format
 
 -- estimate_id below must match same in estimates table
 CREATE TABLE estimate_repairs(
