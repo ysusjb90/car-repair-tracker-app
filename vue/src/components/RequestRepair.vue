@@ -28,7 +28,53 @@
 
 
 export default {
+    
+    components: {
 
+
+    },
+    
+    
+    date() {
+        return {
+            estimate: {
+                userId: '',
+                vehicleId: '',
+                createdDate: '',
+                describeIssue: ''
+            },
+            
+            vehicle: {
+                year: '',
+                make: '',
+                model: '',
+                color: ''
+            }
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 }
 </script>
 
