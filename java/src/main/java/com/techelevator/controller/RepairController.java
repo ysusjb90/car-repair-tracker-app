@@ -30,12 +30,14 @@ public class RepairController {
 
     private RepairDao repairDao;
     private UserDao userDao;
+    private EstimateDAO estimateDAO;
 
 
-    public RepairController (UserDetailDao userDetailDao, RepairDao repairDao, UserDao userDao) {
+    public RepairController (UserDetailDao userDetailDao, RepairDao repairDao, UserDao userDao, EstimateDAO estimateDAO) {
         this.userDetailDao = userDetailDao;
         this.repairDao = repairDao;
-        this.userDao= userDao;
+        this.userDao = userDao;
+        this.estimateDAO = estimateDAO;
     }
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/users", method = RequestMethod.POST)
@@ -52,6 +54,12 @@ public class RepairController {
         // List<Repair> allRepairs = new ArrayList<>();
 
     }
+    @RequestMapping(path="/estimates/", method=RequestMethod.POST)
+        public void createNewEstimate(@RequestBody Estimate estimate) {
+            //Call create function here//
+        }
+
+
     @RequestMapping (path = "/userlist", method = RequestMethod.GET)
     public List<UserDetail> deliverUserDetailList(){
         return userDetailDao.getUserDetails();
