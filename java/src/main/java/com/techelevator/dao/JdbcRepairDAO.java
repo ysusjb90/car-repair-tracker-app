@@ -55,7 +55,9 @@ public class JdbcRepairDAO implements RepairDao  {
     public Repair getRepairByDescription(String description) {
         if (description == null) throw new IllegalArgumentException("Part name cannot be null");
         Repair repair = null;
-        String sql = "SELECT repair_item_id, description, parts_cost, labor_cost, flat-rate_hours, issuperseded FROM repair_items WHERE description = LOWER(TRIM(?));";
+        String sql = "SELECT repair_item_id, description, parts_cost, labor_cost, flat-rate_hours, issuperseded " +
+                "FROM repair_items WHERE description = LOWER(TRIM(ILIKE '%?%'));";
+
         //TODO Need to correct the sql to use the LIKE function"
         try {
             SqlRowSet rowSet = repairItemTemplate.queryForRowSet(sql, description);

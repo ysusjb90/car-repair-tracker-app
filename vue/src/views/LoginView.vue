@@ -18,7 +18,8 @@
       </div>
       <button type="submit">Sign in</button>
       <p>
-      <router-link v-bind:to="{ name: 'register' }">Need an account? Sign up.</router-link></p>
+        <router-link v-bind:to="{ name: 'register' }">Need an account? Sign up.</router-link>
+      </p>
     </form>
   </div>
 </template>
@@ -45,37 +46,44 @@ export default {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
-            this.$router.push("/");
+            if (response.data.user.authorities[0].name == "ROLE_ADMIN") {
+              this.$router.push("/admin");
+            } else {
+              this.$router.push("/");
+            }
           }
         })
         .catch(error => {
           const response = error.response;
-
+    
           if (response.status === 401) {
             this.invalidCredentials = true;
           }
         });
     }
-  }
+}
 };
 </script>
 
 <style>
 .form-input-group {
-  margin-bottom: 30px;  
+  margin-bottom: 30px;
 
 
 }
+
 label {
   margin-right: 0.5rem;
 }
-input{
+
+input {
   background-color: white;
   text-decoration: red;
-  
+
 }
-button{
-  
+
+button {
+
   background-color: rgb(189, 14, 14);
   color: white;
   padding: 14px 20px;
@@ -83,13 +91,13 @@ button{
   border: none;
   cursor: pointer;
   border-radius: 10px;
-  font-weight: bold; 
-  
-}
-form{
+  font-weight: bold;
 
-  
+}
+
+form {
+
+
   color: rgb(189, 14, 14);
 }
-
 </style>

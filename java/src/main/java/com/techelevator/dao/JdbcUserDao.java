@@ -92,6 +92,30 @@ public class JdbcUserDao implements UserDao {
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
+
+        return newUser;
+    }
+
+    @Override
+    public User createEmployee(RegisterUserDto user) {
+        User newUser = null;
+        String insertUserSql = "INSERT INTO users (username, password_hash, role) values (LOWER(TRIM(?)), ?, ?) RETURNING user_id";
+        String password_hash = new BCryptPasswordEncoder().encode(user.getPassword());
+        String ssRole = "ROLE_EMPLOYEE";
+        try {
+            int newUserId = jdbcTemplate.queryForObject(insertUserSql, int.class, user.getUsername(), password_hash, ssRole);
+            newUser = getUserById(newUserId);
+            String sql = "INSERT INTO user_detail(user_id, user_type, first_name, last_name, email_address, phone_number)  VALUES (?,?,?,?,?,?);";
+
+
+            jdbcTemplate.update(sql,newUserId, "USER",
+                    user.getFirstName(), user.getLastName(), user.getEmailAddress(), user.getPhoneNumber());
+
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
         //take this out
         int bridgeUserId = newUser.getId();
         return newUser;
