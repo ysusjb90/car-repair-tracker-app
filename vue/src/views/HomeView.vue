@@ -1,8 +1,10 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
+    
+
+
   </div>
+  
   <RequestRepair />
   <VehicleRegistration />
 </template>
@@ -31,4 +33,34 @@ template{
 .form-input-group {
   background-color:white;
 }
+
+.home-view {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(189, 14, 14);
+  font-weight: bold; 
+  font-size: xx-large;
+  margin-top: 45px;
+  margin-bottom: 15px;
+}
+
+#link {
+  background-color: #636364;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: medium;
+  
+}
+
+.authentication-font {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+
 </style>

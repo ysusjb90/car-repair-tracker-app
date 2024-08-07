@@ -14,15 +14,24 @@
   background-color: #E3E1DA;
 }
 #nav {
+  display: flex;
+  justify-content: flex-start;
   background-color: #646363;
-  justify-content: center;
   align-items: center;
-  padding: 10px;
-  
+  color: white;
+  margin-bottom: 50px;
+
 }
-.link {
-  background-color: #646363;
+
+#link {
+
+  background-color: #636364;
   padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: medium;
+
+
 }
 
 </style>
