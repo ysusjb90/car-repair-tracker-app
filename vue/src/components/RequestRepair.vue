@@ -14,6 +14,9 @@
             <label class = "service-label" for="vehicle">Vehicle Model:</label>
             <input class = "service-input" type="text" id="vehicle" name="vehicle" required>
 
+            <label class = "service-label" for="vehicle">Vehicle Color:</label>
+            <input class = "service-input" type="text" id="vehicle" name="vehicle" required>
+
             <label id = "desc-service-label" for="description">Please describe the problem:</label>
             <textarea id="description" name="description" required></textarea>
 
