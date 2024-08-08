@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import com.techelevator.dao.VehicleDAO;
 
 import com.techelevator.security.jwt.JWTFilter;
 import com.techelevator.security.jwt.TokenProvider;
@@ -32,12 +33,17 @@ public class RepairController {
     private UserDao userDao;
     private EstimateDAO estimateDAO;
 
+    private VehicleDAO vehicleDAO;
 
-    public RepairController (UserDetailDao userDetailDao, RepairDao repairDao, UserDao userDao, EstimateDAO estimateDAO) {
+
+    public RepairController (UserDetailDao userDetailDao,
+                             RepairDao repairDao, UserDao userDao, EstimateDAO estimateDAO,
+                             VehicleDAO vehicleDAO) {
         this.userDetailDao = userDetailDao;
         this.repairDao = repairDao;
         this.userDao = userDao;
         this.estimateDAO = estimateDAO;
+        this.vehicleDAO = vehicleDAO;
     }
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/users", method = RequestMethod.POST)
@@ -53,7 +59,7 @@ public class RepairController {
 
     }
 
-//TODO note endpoint for create estimate - this is the post
+
     @RequestMapping(path="/estimates", method=RequestMethod.POST)
         public void createNewEstimate(@RequestBody Estimate estimate) {
             estimateDAO.createEstimate(estimate);
@@ -70,6 +76,14 @@ public class RepairController {
     public List<UserDetail> deliverUserDetailList(){
         return userDetailDao.getUserDetails();
     }
+
+// TODO Add endpoint for vehicle
+    @RequestMapping (path="/vehicle", method = RequestMethod.GET)
+    public List<Vehicle> getUserVehicleList(int userId) {
+        return vehicleDAO.getVehicleByUserId(userId);
+    }
+
+
 
 
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)

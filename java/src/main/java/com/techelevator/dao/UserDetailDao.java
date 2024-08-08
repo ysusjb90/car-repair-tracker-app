@@ -19,5 +19,5 @@ public interface UserDetailDao {
 
     UserDetail getPhoneNumber(int phoneNumber);
 
-    UserDetail createDetails(UserDetail userDetail, int userID);
+    UserDetail createDetails(UserDetail userDetail, int userId);
 }

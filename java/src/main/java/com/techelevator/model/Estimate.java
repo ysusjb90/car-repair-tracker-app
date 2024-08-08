@@ -6,6 +6,7 @@ public class Estimate {
     private int estimateID;
     private int userId;
     private int vehicleId;
+    private String descriptionOfProblem;
     private Date createdDate;
     private int recallId;
     private Date promisedDate;
@@ -13,11 +14,13 @@ public class Estimate {
     private boolean isCompleted;
     private boolean isPaid;
 
-    public Estimate(int estimateID, int userId, int vehicleId, Date createdDate, int recallId, Date promisedDate,
+    public Estimate(int estimateID, int userId, int vehicleId, String descriptionOfProblem,
+                    Date createdDate, int recallId, Date promisedDate,
                     boolean customerApproval, boolean isCompleted, boolean isPaid) {
         this.estimateID = estimateID;
         this.userId = userId;
         this.vehicleId = vehicleId;
+        this.descriptionOfProblem = descriptionOfProblem;
         this.createdDate = createdDate;
         this.recallId = recallId;
         this.promisedDate = promisedDate;
@@ -52,6 +55,13 @@ public class Estimate {
         this.customerApproval = customerApproval;
     }
 
+    public String getDescriptionOfProblem() {
+        return descriptionOfProblem;
+    }
+
+    public void setDescriptionOfProblem(String descriptionOfProblem) {
+        this.descriptionOfProblem = descriptionOfProblem;
+    }
 
     public int getUserId() {
         return userId;
@@ -107,6 +117,7 @@ public class Estimate {
                 "estimateID=" + estimateID +
                 ", userId=" + userId +
                 ", vehicleId=" + vehicleId +
+                ", descriptionOfProblem='" + descriptionOfProblem + '\'' +
                 ", createdDate=" + createdDate +
                 ", recallId=" + recallId +
                 ", promisedDate=" + promisedDate +

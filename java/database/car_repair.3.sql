@@ -21,6 +21,7 @@ CREATE TABLE vehicle (
 	vehicle_model varchar NOT NULL,
 	vehicle_year smallint ,
 	vehicle_color varchar,
+	isActive boolean,
 	CONSTRAINT pk_vehicle_vehicle_id PRIMARY KEY (vehicle_id)
 );
 -- primary key below will attach to estimates table as FK (on vehicle ID)
@@ -29,15 +30,14 @@ CREATE TABLE vehicle (
 CREATE TABLE user_vehicle (
 	user_id int NOT NULL,
 	vehicle_id int NOT NULL,
-	CONSTRAINT pk_user_vehicle PRIMARY KEY (vehicle_id),
-	CONSTRAINT FK_user_vehicle_user_detail FOREIGN KEY (vehicle_id) REFERENCES user_detail (user_id)
-
+	CONSTRAINT pk_user_vehicle PRIMARY KEY (user_id),
+	CONSTRAINT FK_user_vehicle_vehicle FOREIGN KEY (vehicle_id) REFERENCES vehicle (vehicle_id)
 );
+-- in above, corrected FK; primary is userId back to user-detail; FK is Vehicle_id
 
 
 
-
-INSERT INTO vehicle (vehicle_make, vehicle_model, vehicle_year, vehicle_color)
+INSERT INTO vehicle (vehicle_make, vehicle_model, vehicle_year, vehicle_color, isActive)
 VALUES ('Pontiac', 'Trans Am', 1982, 'Black');
 INSERT INTO vehicle (vehicle_make, vehicle_model, vehicle_year, vehicle_color)
 VALUES ('DMC', 'Delorean', 1981, 'Silver');
@@ -86,6 +86,7 @@ CREATE TABLE estimates(
 	estimate_id serial,
 	user_id int,
 	vehicle_id int,
+	description_of_problem varchar,
 	date_created DATE, 
 	recall_id int,
 	promised_completion_date DATE, 
