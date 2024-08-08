@@ -78,8 +78,9 @@ public class RepairController {
     }
 
 // TODO Add endpoint for vehicle
-    @RequestMapping (path="/vehicle", method = RequestMethod.GET)
-    public List<Vehicle> getUserVehicleList(int userId) {
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping (path="/vehicle/{userId}", method = RequestMethod.GET)
+    public List<Vehicle> getUserVehicleList(@PathVariable int userId) {
         return vehicleDAO.getVehicleByUserId(userId);
     }
 
