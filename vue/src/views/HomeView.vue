@@ -44,6 +44,7 @@ template {
   font-size: xx-large;
   margin-top: 45px;
   margin-bottom: 15px;
+  background-color: #E3E1DA;
 }
 
 #link {

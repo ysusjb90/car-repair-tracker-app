@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form id="estimate-form">
     <img src="src\assets\manic.jpg">
     <div id="userInfo">
       <h2>Customer:</h2>
@@ -59,6 +59,7 @@ h2  {
 
   background-color: white;
   font-family: Arial, Helvetica, sans-serif;
+  text-align: center; 
 
 
 }
@@ -67,7 +68,7 @@ p {
   background-color: white;
 }
 
-form {
+#estimate-form {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -78,6 +79,9 @@ form {
 #userInfo {
   display: flex;
   flex-direction: column;
+  align-items: left; 
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(189, 14, 14);
   background-color: white;
   padding: 10px;
   margin: 10px;
@@ -85,6 +89,14 @@ form {
   width: 200px;
   height: 250px;
   font-family: Arial, Helvetica, sans-serif;
+  
+
+}
+
+#userInfo p {
+  text-align: left; 
+  font-family: Arial, Helvetica, sans-serif;
+  color: black; 
 }
 
 div {

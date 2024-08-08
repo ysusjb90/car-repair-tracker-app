@@ -1,7 +1,7 @@
 <template>
   <div id="login">
-    <form v-on:submit.prevent="login">
-      <h1>Please Sign In</h1>
+    <form id="login-form" v-on:submit.prevent="login">
+      <h1 id="sign-in">Please Sign In</h1>
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password!
       </div>
@@ -55,25 +55,50 @@ export default {
         })
         .catch(error => {
           const response = error.response;
-    
+
           if (response.status === 401) {
             this.invalidCredentials = true;
           }
         });
     }
-}
+  }
 };
 </script>
 
 <style>
+body {
+  background-color: #E3E1DA;
+  margin: 0;
+}
+
+#sign-in {
+
+  margin-bottom: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center; 
+  color: rgb(189, 14, 14)
+}
+
+#login {
+  display: flex;
+  justify-content: center; 
+}
+
 .form-input-group {
   margin-bottom: 30px;
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
 
 
 }
 
-label {
-  margin-right: 0.5rem;
+.form-input-group label {
+  margin-right: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white; 
+  font-weight: medium;  
+
+
 }
 
 input {
@@ -84,20 +109,35 @@ input {
 
 button {
 
+
   background-color: rgb(189, 14, 14);
   color: white;
   padding: 14px 20px;
-  margin: 8px 0px;
+  margin-top: 10px;
   border: none;
   cursor: pointer;
   border-radius: 10px;
   font-weight: bold;
+  margin-bottom: 10px; 
+
+
 
 }
 
-form {
+#login-form {
 
-
-  color: rgb(189, 14, 14);
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center elements horizontally */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+p {
+  text-align: center;
+  margin-top: 10px;
+}
+
 </style>

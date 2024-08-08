@@ -1,5 +1,7 @@
 <template>
-  <h1>Create New Estimate</h1>
+  <h1>CREATE NEW ESTIMATE</h1>
+
+  <hr class="divider" />
 
   <div class="table-container">
     <table id="table-repairs">
@@ -93,6 +95,13 @@ export default {
 
 <style>
 
+.divider {
+  border: none;
+  border-top: 2px solid rgb(189, 14, 14); /* Line color and thickness */
+  margin: 20px 0; /* Space around the line */
+  width: 100%; /* Make the line stretch across the container */
+}
+
 body {
 
 background-color: #E3E1DA;
@@ -101,20 +110,22 @@ background-color: #E3E1DA;
 .table-head {
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(189, 14, 14);
-  margin-bottom: 140px; 
+  
 }
 
 .table-container {
   display: flex;
   flex-direction: column;
+  align-items: space-evenly;
+  margin-right: 20px;
 
-  margin-left: 15px; 
-  margin-right: 15px; 
+  
+  
 }
 
 
 .checkbox {
-  margin-left: 150px; 
+  margin-left: 300px; 
 }
 
 table .repair-desc  {
@@ -130,6 +141,7 @@ table .repair-desc  {
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
+  
   
 }
 
@@ -181,6 +193,7 @@ h1 {
   text-align: center;
   color: rgb(189, 14, 14);
   padding: 40px;
+  margin-bottom: -25px;
 
 }
 

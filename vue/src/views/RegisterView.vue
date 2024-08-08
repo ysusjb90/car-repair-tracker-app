@@ -5,31 +5,31 @@
       <div role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
-      <div class="form-input-group">
+      <div class="form-input-group-reg">
         <label for="firstName">First Name</label>
         <input type="text" id="firstName" v-model="user.firstName" required />
       </div>
-      <div class="form-input-group">
+      <div class="form-input-group-reg">
         <label for="lastName">Last Name</label>
         <input type="text" id="lastName" v-model="user.lastName" required />
       </div>
-      <div class="form-input-group">
+      <div class="form-input-group-reg">
         <label for="username">Username</label>
         <input type="text" id="username" v-model="user.username" required autofocus />
       </div>
-      <div class="form-input-group">
+      <div class="form-input-group-reg">
         <label for="password">Password</label>
         <input type="password" id="password" v-model="user.password" required />
       </div>
-      <div class="form-input-group">
+      <div class="form-input-group-reg">
         <label for="confirmPassword">Confirm Password</label>
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
-      <div class="form-input-group">
+      <div class="form-input-group-reg">
         <label for="email">E-mail</label>
         <input type="email" id="email" v-model="user.emailAddress" />
       </div>
-      <div class="form-input-group">
+      <div class="form-input-group-reg">
         <label for="phoneNumber">Phone Number</label>
         <input type="tel" id="phoneNumber" v-model="user.phoneNumber" required />
       </div>
@@ -117,15 +117,17 @@ h1 {
   /* Add spacing if needed */
   font-family: 'Arial', sans-serif;
   font-size: 14px;
+  background-color: E3E1DA;
 }
 
-.form-input-group label {
+.form-input-group-reg label {
 
   font-family: 'Arial', sans-serif;
   font-size: 14px;
   margin-bottom: 5px;
   font-weight: bold;
   text-align: left;
+  background-color: E3E1DA;
 
 }
 
@@ -136,10 +138,11 @@ h1 {
   text-align: left;
 }
 
-.form-input-group {
+.form-input-group-reg {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
+  font-family: Arial, Helvetica, sans-serif;
 
 }
 

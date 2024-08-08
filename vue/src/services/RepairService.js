@@ -6,4 +6,7 @@ export default {
     registerDetails(userDetails) {
         return axios.post('/users', userDetails)
       },
+
+     
+
 };
