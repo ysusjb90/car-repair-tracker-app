@@ -38,11 +38,11 @@ CREATE TABLE user_vehicle (
 
 
 INSERT INTO vehicle (vehicle_make, vehicle_model, vehicle_year, vehicle_color, isActive)
-VALUES ('Pontiac', 'Trans Am', 1982, 'Black');
-INSERT INTO vehicle (vehicle_make, vehicle_model, vehicle_year, vehicle_color)
-VALUES ('DMC', 'Delorean', 1981, 'Silver');
-INSERT INTO vehicle (vehicle_make, vehicle_model, vehicle_year, vehicle_color)
-VALUES ('Chevy', 'COE', 1941, 'Rust-bucket');
+VALUES ('Pontiac', 'Trans Am', 1982, 'Black', true);
+INSERT INTO vehicle (vehicle_make, vehicle_model, vehicle_year, vehicle_color, isActive)
+VALUES ('DMC', 'Delorean', 1981, 'Silver', true);
+INSERT INTO vehicle (vehicle_make, vehicle_model, vehicle_year, vehicle_color, isActive)
+VALUES ('Chevy', 'COE', 1941, 'Rust-bucket', true);
 
 
 
