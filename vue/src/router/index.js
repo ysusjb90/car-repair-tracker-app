@@ -8,6 +8,7 @@ import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import EstimateView from '../views/EstimateView.vue';
 import AdminView from '../views/AdminView.vue';
+import RegisterVehicleView from '../views/RegisterVehicleView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -22,33 +23,25 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
-    meta: {
-      requiresAuth: true
-    }
+    meta: { requiresAuth: true }
   },
   {
     path: "/login",
     name: "login",
     component: LoginView,
-    meta: {
-      requiresAuth: false
-    }
+    meta: { requiresAuth: false }
   },
   {
     path: "/logout",
     name: "logout",
     component: LogoutView,
-    meta: {
-      requiresAuth: false
-    }
+    meta: { requiresAuth: false }
   },
   {
     path: "/register",
     name: "register",
     component: RegisterView,
-    meta: {
-      requiresAuth: false
-    }
+    meta: { requiresAuth: false }
   },
 
   {
@@ -68,6 +61,14 @@ const routes = [
     component: AdminView,
     meta: { requiresAuth: true }
 
+  },
+
+  {
+
+    path: "/vehicle",
+    name: "vehicle",
+    component: RegisterVehicleView,
+    meta: { requiresAuth: true }
 
   }
 
@@ -90,7 +91,7 @@ router.beforeEach((to) => {
 
   // If it does and they are not logged in, send the user to "/login"
   if (requiresAuth && store.state.token === '') {
-    return {name: "login"};
+    return { name: "login" };
   }
   // Otherwise, do nothing and they'll go to their next destination
 });

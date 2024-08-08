@@ -108,8 +108,6 @@ h1 {
 
 }
 
-
-
 .center-text {
   text-align: center;
   /* Center the text */

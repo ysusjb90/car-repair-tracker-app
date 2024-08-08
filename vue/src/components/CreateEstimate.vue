@@ -125,7 +125,7 @@ background-color: #E3E1DA;
 
 
 .checkbox {
-  margin-left: 300px; 
+  margin-left: 160px; 
 }
 
 table .repair-desc  {

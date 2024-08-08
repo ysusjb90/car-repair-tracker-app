@@ -15,6 +15,7 @@ import RequestRepair from '../components/RequestRepair.vue';
 import VehicleRegistration from '../components/VehicleRegistration.vue';
 
 
+
 export default {
 
 components: {
