@@ -68,7 +68,7 @@ const routes = [
     path: "/vehicle",
     name: "vehicle",
     component: RegisterVehicleView,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: false }
 
   }
 

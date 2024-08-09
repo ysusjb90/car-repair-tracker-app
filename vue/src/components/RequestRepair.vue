@@ -8,8 +8,35 @@
             <label class = "service-label" for="name">Vehicle Year:</label>
             <input class = "service-input" type="text" id="name" name="name" required>
 
-            <label class = "service-label" for="vehicle">Vehicle Make:</label>
-            <input class = "service-input" type="text" id="vehicle" name="vehicle" required>
+            <label class = "service-label-dropdown" for="vehicle">Vehicle Make:</label>
+            <select class="make-dropdown" id="vehicle-make" name="vehicle-make" required>
+        <option value="">Select Make</option>
+        <option value="Audi">Audi</option>
+        <option value="BMW">BMW</option>
+        <option value="Buick">Buick</option>
+        <option value="Cadillac">Cadillac</option>
+        <option value="Chevrolet">Chevrolet</option>
+        <option value="Chrysler">Chrysler</option>
+        <option value="Dodge">Dodge</option>
+        <option value="Ford">Ford</option>
+        <option value="Honda">Honda</option>
+        <option value="Hyundai">Hyundai</option>
+        <option value="Jeep">Jeep</option>
+        <option value="Kia">Kia</option>
+        <option value="Lincoln">Lincoln</option>
+        <option value="Mazda">Mazda</option>
+        <option value="Mercury">Mercury</option>
+        <option value="Nissan">Nissan</option>
+        <option value="Plymouth">Plymouth</option>
+        <option value="Pontiac">Pontiac</option>
+        <option value="Porsche">Porsche</option>
+        <option value="Ram">Ram</option>
+        <option value="Subaru">Subaru</option>
+        <option value="Tesla">Tesla</option>
+        <option value="Toyota">Toyota</option>
+        <option value="Volkswagen">Volkswagen</option>
+        <option value="Volvo">Volvo</option>
+        </select>
 
             <label class = "service-label" for="vehicle">Vehicle Model:</label>
             <input class = "service-input" type="text" id="vehicle" name="vehicle" required>
@@ -103,7 +130,7 @@ h1  {
     margin-bottom: 5px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: medium; 
-    
+    color: rgb(189, 14, 14);
    
 
 }
@@ -112,7 +139,25 @@ h1  {
     margin-bottom: 15px;
     border-radius: 2px;
     height: 20px;
+    
 
+}
+
+.make-dropdown {
+    margin-bottom: 15px;
+    border-radius: 2px;
+    height: 30px;
+    width: 43%;
+    border: 1px black solid;
+    
+}
+
+.service-label-dropdown {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: medium; 
+    color: rgb(189, 14, 14);
 }
 
 #description {

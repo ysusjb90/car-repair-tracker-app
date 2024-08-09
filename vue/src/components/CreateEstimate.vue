@@ -6,7 +6,7 @@
   <div class="table-container">
     <table id="table-repairs">
 
-     
+
       <thead class="table-head">
         <tr>
           <th>Add to Estimate</th>
@@ -19,16 +19,16 @@
       </thead>
 
       <tr v-for="repair in repairs" v-bind:key="repair.repairItemId">
-    <td>
-      <input class="checkbox" type="checkbox" v-bind:id="repair.repairItemId" v-bind:value="repair.repairItemId"
-        v-model="selectedRepairIDs" />
-    </td>
-    <td class="repair-desc">{{ repair.description }}</td>
-    <td class="repair-pc">{{ repair.partsCost }}</td>
-    <td class="repair-lc">{{ repair.laborCost }}</td>
-    <td class="repair-flat">{{ repair.flatRateHours / 10 }}</td>
+        <td>
+          <input class="checkbox" type="checkbox" v-bind:id="repair.repairItemId" v-bind:value="repair.repairItemId"
+            v-model="selectedRepairIDs" />
+        </td>
+        <td class="repair-desc">{{ repair.description }}</td>
+        <td class="repair-pc">{{ repair.partsCost }}</td>
+        <td class="repair-lc">{{ repair.laborCost }}</td>
+        <td class="repair-flat">{{ repair.flatRateHours / 10 }}</td>
 
-  </tr>
+      </tr>
 
     </table>
 
@@ -94,66 +94,69 @@ export default {
 </script>
 
 <style>
-
 .divider {
   border: none;
-  border-top: 2px solid rgb(189, 14, 14); /* Line color and thickness */
-  margin: 20px 0; /* Space around the line */
-  width: 100%; /* Make the line stretch across the container */
+  border-top: 2px solid rgb(189, 14, 14);
+  /* Line color and thickness */
+  margin: 20px 0;
+  /* Space around the line */
+  width: 100%;
+  /* Make the line stretch across the container */
 }
 
 body {
 
-background-color: #E3E1DA;
+  background-color: #E3E1DA;
 
-}
-.table-head {
-  font-family: Arial, Helvetica, sans-serif;
-  color: rgb(189, 14, 14);
-  
 }
 
 .table-container {
   display: flex;
   flex-direction: column;
-  align-items: space-evenly;
+  align-items: center;
   margin-right: 20px;
 
-  
-  
+
+
+}
+
+.table-head {
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(189, 14, 14);
+  font-size: 20px;
+
 }
 
 
 .checkbox {
-  margin-left: 160px; 
+  margin-left: 75px;
+
 }
 
-table .repair-desc  {
+table .repair-desc {
 
   width: 200px;
   text-align: center;
-  margin-left: 30px;
-  margin-right: 30px;
+
   font-family: Arial, Helvetica, sans-serif;
-  size: 16px; 
-  
-  background-color: white; 
+  size: 16px;
+
+  background-color: white;
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-  
-  
+
+
 }
 
 table .repair-pc {
   width: 200px;
   text-align: center;
-  margin-left: 30px;
-  margin-right: 30px;
-  font-family: Arial, Helvetica, sans-serif;
-  size: 16px; 
   
-  background-color: white; 
+  font-family: Arial, Helvetica, sans-serif;
+  size: 16px;
+
+  background-color: white;
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -162,12 +165,11 @@ table .repair-pc {
 table .repair-lc {
   width: 200px;
   text-align: center;
-  margin-left: 30px;
-  margin-right: 30px;
+
   font-family: Arial, Helvetica, sans-serif;
-  size: 16px; 
-  
-  background-color: white; 
+  size: 16px;
+
+  background-color: white;
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -176,12 +178,9 @@ table .repair-lc {
 table .repair-flat {
   width: 200px;
   text-align: center;
-  margin-left: 30px;
-  margin-right: 30px;
   font-family: Arial, Helvetica, sans-serif;
-  size: 16px; 
-  
-  background-color: white; 
+  size: 16px;
+  background-color: white;
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -217,7 +216,7 @@ th {
   text-transform: uppercase;
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(189, 14, 14);
-  background-color: white; 
+  background-color: white;
   margin-left: 30px;
   margin-right: 30px;
 

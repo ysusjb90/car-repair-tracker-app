@@ -86,6 +86,7 @@ CREATE TABLE make_model(
 	CONSTRAINT PK_make_model_make PRIMARY KEY (model)
 );
 
+
 --- NOW load all tables with test data  ----
 
 
@@ -282,15 +283,15 @@ VALUES
 INSERT INTO user_vehicle (user_id, vehicle_id)
 VALUES
 	(10,1),
-	(10,2),
-	(10,7),
-	(11,4),
-	(11,5),
-	(16,6),
-	(17,12),
-	(18,8),
-	(12,9),
-	(14,10);
+	(11,2),
+	(12,7),
+	(13,4),
+	(14,5),
+	(15,6),
+	(16,12),
+	(17,8),
+	(18,9),
+	(19,11);
 
 
 
