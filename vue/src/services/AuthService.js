@@ -11,6 +11,9 @@ export default {
   login(user) {
     return http.post('/login', user)
   },
+  getUser(user) {
+    return http.get('/users', user)
+  },
 
 
   register(user) {
