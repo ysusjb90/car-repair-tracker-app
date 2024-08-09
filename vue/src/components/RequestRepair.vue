@@ -19,18 +19,19 @@
             </div>-->
             <div id="userInfo">
                 <h2>Vehicle:</h2>
-                <select class="make-dropdown" id="user-vehicle" name="user-vehicle" v-model="selection">
-                    <option value="vehicle" disabled selected hidden>Select Vehicle</option>
+                <select v-on:click="selectedVehicleSearch" class="make-dropdown" id="user-vehicle" name="user-vehicle" v-model="selection">
+                    <option value="">Select Vehicle</option>
 
-                    <option value="vehicle" v-for="vehicle in vehicles" :key="vehicle.vehicleID">
-                        {{ vehicle.make }} {{ vehicle.model }}
+                    <option  v-for="vehicle in vehicles" :value="vehicle.vehicleID" :key="vehicle.vehicleID">
+                        {{ vehicle.make}} {{ vehicle.model }}
                     </option>
                 </select>
-                <div v-show="selection==vehicle.vehicleID">
+                <div>
 
-                    <p>Year: {{ vehicle.year }}</p>
-                    <p>Make: {{ vehicle.make }}</p>
-                    <p>Model: {{ vehicle.model }} </p>
+                    <p>Year: {{ selectedVehicle.year }}</p>
+                    <p>Make: {{ selectedVehicle.make }}</p>
+                    <p>Model: {{ selectedVehicle.model }} </p>
+                    <p>Color: {{ selectedVehicle.color }} </p>
                 </div>
             </div>
 
@@ -177,6 +178,7 @@ export default {
                 phoneNumber: ''
             },
             vehicles: [],
+            selectedVehicle: {},
             selection: '',
         }
     },
@@ -216,13 +218,20 @@ export default {
             this.registrationErrorMsg = 'An error occurred while registering the vehicle.';
           }
         });
-    }
 
     },
+    selectedVehicleSearch() {
+        if (this.selection !== '') {
+        this.selectedVehicle = this.vehicles.find(vehicle => vehicle.vehicleID === this.selection);
+        }else{
+            this.selectedVehicle = {};
+        }
+    }},
     created() {
         //this.getUserDetails();
         this.getUserVehicleList();
     },
+
 }
 </script>
 
