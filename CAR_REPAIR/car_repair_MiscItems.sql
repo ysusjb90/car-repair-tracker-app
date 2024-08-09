@@ -1,3 +1,5 @@
+-- this is just a scratch pad for sql stuff
+
 SELECT * FROM estimates
 SELECT * FROM user_detail ORDER BY user_id asc
 SELECT * FROM vehicle
@@ -55,6 +57,17 @@ VALUES
 COMMIT;
 
 ROLLBACK;
+
+
+COMMIT;
+
+ROLLBACK;
+
+SET session_replication_role = 'replica';
+Set session_replication_role = 'origin';
+
+
+For Later:
 
 
 SELECT * FROM vehicle v INNER JOIN user_vehicle uv 
