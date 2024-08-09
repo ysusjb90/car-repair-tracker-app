@@ -23,7 +23,7 @@ public class JdbcVehicleDAO implements VehicleDAO{
     @Override
     public List<Vehicle> getVehicleByUserId(int userId) {
         List<Vehicle> usersVehicleList = new ArrayList<>();
-        String sql = "SELECT * FROM vehicle v INNER JOIN user_vehicle uv ON v.vehicle_id = uv.vehicle_id WHERE uv.user_id = ?";
+        String sql = "SELECT * FROM vehicle WHERE user_id = ?";
 
 
         SqlRowSet rs = jdbcTemplate.queryForRowSet(sql, userId);
@@ -52,7 +52,6 @@ public class JdbcVehicleDAO implements VehicleDAO{
         vehicle.setModel(rs.getString("vehicle_model"));
         vehicle.setYear(rs.getInt("vehicle_year"));
         vehicle.setColor(rs.getString("vehicle_color"));
-        //vehicle.setActive(rs.getBoolean("isactive"));
         return vehicle;
     }
 }

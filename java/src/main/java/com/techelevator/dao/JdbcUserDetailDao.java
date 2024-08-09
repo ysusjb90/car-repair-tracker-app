@@ -29,7 +29,7 @@ public class JdbcUserDetailDao implements UserDetailDao {
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while (results.next()) {
-                UserDetail userDetail = mapRowToUser(results);
+                UserDetail userDetail = mapRowToUserDetail(results);
                 userDetailList.add(userDetail);
             }
         } catch (CannotGetJdbcConnectionException e) {
@@ -38,6 +38,23 @@ public class JdbcUserDetailDao implements UserDetailDao {
         return userDetailList;
 
     }
+// TODO note that the method below works for Users when logged in - as it uses principal
+    @Override
+    public UserDetail getUserDetailById(int userId) {
+        UserDetail userdetail = null;
+        String sql = "SELECT * FROM user_detail WHERE user_id = ?";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+            if (results.next()) {
+                userdetail = mapRowToUserDetail(results);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return userdetail;
+    }
+
+
 
     @Override
     public UserDetail getUserType(String userType) {
@@ -83,7 +100,7 @@ public class JdbcUserDetailDao implements UserDetailDao {
 
     }
 
-    public UserDetail mapRowToUser(SqlRowSet rs) {
+    public UserDetail mapRowToUserDetail(SqlRowSet rs) {
         UserDetail userDetail = new UserDetail();
         userDetail.setUserId(rs.getInt("user_id"));
         userDetail.setUserType(rs.getString("user_type"));

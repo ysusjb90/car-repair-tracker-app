@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import com.techelevator.dao.VehicleDAO;
+import com.techelevator.dao.UserDao;
 
 import com.techelevator.security.jwt.JWTFilter;
 import com.techelevator.security.jwt.TokenProvider;
@@ -93,7 +94,13 @@ public class RepairController {
         return vehicleDAO.getVehicleByUserId(user.getId());
     }
 
-
+    //TODO below returns user details though Principal, not UserId
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping (path="/users", method = RequestMethod.GET)
+    public UserDetail getUserInformation(Principal principal) {
+        User user = userDao.getUserByUsername(principal.getName());
+        return userDetailDao.getUserDetailById(user.getId());
+    }
 
 
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)

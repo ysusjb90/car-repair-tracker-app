@@ -20,4 +20,6 @@ public interface UserDetailDao {
     UserDetail getPhoneNumber(int phoneNumber);
 
     UserDetail createDetails(UserDetail userDetail, int userId);
+
+    UserDetail getUserDetailById(int userId);
 }
