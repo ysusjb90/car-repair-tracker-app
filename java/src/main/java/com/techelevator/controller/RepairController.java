@@ -6,6 +6,7 @@ import com.techelevator.model.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -24,6 +25,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@PreAuthorize("isAuthenticated()")
 
 public class RepairController {
 
@@ -78,10 +80,17 @@ public class RepairController {
     }
 
 // TODO Add endpoint for vehicle
+//@ResponseStatus(HttpStatus.OK)
+//@RequestMapping(path = "/vehicle/{userId}", method = RequestMethod.GET)
+//public List<Vehicle> getUserVehicleList(@PathVariable int userId) {
+//    return vehicleDAO.getVehicleByUserId(userId);
+//}
+
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping (path="/vehicle/{userId}", method = RequestMethod.GET)
-    public List<Vehicle> getUserVehicleList(@PathVariable int userId) {
-        return vehicleDAO.getVehicleByUserId(userId);
+    @RequestMapping (path="/vehicle", method = RequestMethod.GET)
+    public List<Vehicle> getUserVehicleList(Principal principal) {
+        User user = userDao.getUserByUsername(principal.getName());
+        return vehicleDAO.getVehicleByUserId(user.getId());
     }
 
 
