@@ -44,26 +44,7 @@ export default {
     };
   },
   methods: {
-    registerVehicle() {
-      vehicleService
-        .registerVehicle(this.vehicle)
-        .then((response) => {
-          if (response.status === 201) {
-            this.$router.push({
-              path: '/vehicle',
-              query: { registration: 'Great success!' },
-            });
-          }
-        })
-        .catch((error) => {
-          this.registrationErrors = true;
-          if (error.response && error.response.status === 400) {
-            this.registrationErrorMsg = 'Bad Request: Validation Errors';
-          } else {
-            this.registrationErrorMsg = 'An error occurred while registering the vehicle.';
-          }
-        });
-    }
+    
   },
 };
 </script>

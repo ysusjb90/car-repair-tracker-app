@@ -66,6 +66,7 @@ export default {
     };
   },
   methods: {
+    
     register() {
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;

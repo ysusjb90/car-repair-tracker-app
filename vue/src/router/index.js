@@ -70,6 +70,12 @@ const routes = [
     component: RegisterVehicleView,
     meta: { requiresAuth: false }
 
+  },
+
+  {
+    path: "/users",
+    name: "users",
+    component: RegisterView,
   }
 
 

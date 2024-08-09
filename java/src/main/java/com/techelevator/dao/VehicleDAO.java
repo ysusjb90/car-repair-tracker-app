@@ -6,7 +6,10 @@ import java.util.List;
 
 public interface VehicleDAO {
     List<Vehicle> getVehicleByUserId(int userId);
-    Vehicle createVehicle(Vehicle vehicle);
+    Vehicle createVehicle(Vehicle vehicle, int userId);
+    Vehicle getVehicleById(int vehicleId);
+
+    List<Vehicle> getModelByMake(String make);
 
 
 }

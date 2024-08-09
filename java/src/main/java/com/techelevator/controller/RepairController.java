@@ -54,6 +54,12 @@ public class RepairController {
         User user = userDao.getUserByUsername(principal.getName());
         userDetailDao.createDetails(userDetail, user.getId());
     }
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path="/vehicle", method= RequestMethod.POST)
+    public void createVehicle(@RequestBody Vehicle vehicle, Principal principal){
+        User user = userDao.getUserByUsername(principal.getName());
+        vehicleDAO.createVehicle(vehicle, user.getId());
+    }
 
     @RequestMapping(path="/repairs", method = RequestMethod.GET)
         public List<Repair> deliverRepairList(){
