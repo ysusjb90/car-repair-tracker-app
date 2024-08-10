@@ -46,8 +46,8 @@ const routes = [
 
   {
 
-    path: "/estimate",
-    name: "estimate",
+    path: "/estimates",
+    name: "estimates",
     component: EstimateView,
     meta: { requiresAuth: true }
 

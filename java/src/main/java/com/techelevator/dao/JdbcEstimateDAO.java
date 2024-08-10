@@ -34,7 +34,7 @@ public class JdbcEstimateDAO implements EstimateDAO{
     public List<Estimate> getListOfEstimates() {
         List<Estimate> estimatesList = new ArrayList<>();
 
-        String sql = "SELECT estimate_id, user_id, vehicle_id, date_created, recall_id, " +
+        String sql = "SELECT estimate_id, user_id, vehicle_id, description_of_problem, date_created, recall_id, " +
                 "promised_completion_date, approved_by_customer, job_complete, is_paid FROM estimates";
 
         try {
@@ -70,7 +70,7 @@ public class JdbcEstimateDAO implements EstimateDAO{
         newEstimate = getEstimateByID(newEstimateRows);
 
         return newEstimate;
-//TODO in the method above - need to add appropriate variables for placeholder values
+//TODO Look at rewriting the above to match the createvehicle method jbdcVehicleDAO
     }
 
     private Estimate mapRowToEstimate(SqlRowSet rows) {
@@ -78,7 +78,7 @@ public class JdbcEstimateDAO implements EstimateDAO{
         estimate.setEstimateID(rows.getInt("estimate_id"));
         estimate.setUserId(rows.getInt("user_id"));
         estimate.setVehicleId((rows.getInt("vehicle_id")));
-        estimate.setDescriptionOfProblem(rows.getNString("description_of_problem"));
+        estimate.setDescriptionOfProblem(rows.getString("description_of_problem"));
         estimate.setCreatedDate(rows.getDate("date_created"));
         estimate.setRecallId(rows.getInt("recall_id"));
         estimate.setPromisedDate(rows.getDate("promised_completion_date"));

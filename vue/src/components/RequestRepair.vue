@@ -1,45 +1,61 @@
 <template>
-
-    <div>
-        <form id="estimate-form">
-            <!--<div id="userInfo" v-bind="user">
+  <div>
+    <form id="estimate-form" v-on:submit.prevent="requestEstimate">
+      <!--<div id="userInfo" v-bind="user">
                 <h2>Customer:</h2>
                 <p>Name: {{ user.firstName }} {{ user.lastName }}</p>
                 <p>Email: {{ user.emailAddress }} </p>
                 <p>Phone: {{ user.phoneNumber }} </p>
 
             </div>-->
-            <div id="request-service-form">
-                <img src="src\assets\manic.jpg">
-                <h1>Service Request Form</h1>
-            
-                <h2>Vehicle:</h2>
-                <select v-on:click="selectedVehicleSearch" class="make-dropdown" id="user-vehicle" name="user-vehicle" v-model="selection">
-                    <option value="">Select Vehicle</option>
+      <div id="request-service-form">
+        <img src="src\assets\manic.jpg" />
+        <h1>Service Request Form</h1>
 
-                    <option  v-for="vehicle in vehicles" :value="vehicle.vehicleID" :key="vehicle.vehicleID">
-                        {{ vehicle.make}} {{ vehicle.model }}
-                    </option>
-                </select>
-                <div>
-                    <div v-bind="user">
-                        <p>Customer Name: {{ user.firstName }} {{ user.lastName }}</p>
-                        <p>Email: {{ user.emailAddress }} </p>
-                        <p>Phone: {{ user.phoneNumber }} </p>
-                    </div>
-                    <p>Year: {{ selectedVehicle.year }}</p>
-                    <p>Make: {{ selectedVehicle.make }}</p>
-                    <p>Model: {{ selectedVehicle.model }} </p>
-                    <p>Color: {{ selectedVehicle.color }} </p>
-                    <p>Reason for Request: </p>
-                    <input class="reason" type="text" id="model" v-model="vehicle.model" required />
-                </div>
-            </div>
+        <h2>Vehicle:</h2>
+        <select
+          v-on:click="selectedVehicleSearch"
+          class="make-dropdown"
+          id="user-vehicle"
+          name="user-vehicle"
+          v-model="selection"
+        >
+          <option value="">Select Vehicle</option>
 
-        </form>
+          <option
+            v-for="vehicle in vehicles"
+            :value="vehicle.vehicleID"
+            :key="vehicle.vehicleID"
+          >
+            {{ vehicle.make }} {{ vehicle.model }}
+          </option>
+        </select>
+        <div>
+          <div v-bind="user">
+            <p>Customer Name: {{ user.firstName }} {{ user.lastName }}</p>
+            <p>Email: {{ user.emailAddress }}</p>
+            <p>Phone: {{ user.phoneNumber }}</p>
+          </div>
+          <p>Year: {{ selectedVehicle.year }}</p>
+          <p>Make: {{ selectedVehicle.make }}</p>
+          <p>Model: {{ selectedVehicle.model }}</p>
+          <p>Color: {{ selectedVehicle.color }}</p>
+          <p>Reason for Request:</p>
+          <input
+            class="reason"
+            type="text"
+            id="reason"
+            v-model="estimate.DescriptionOfProblem"
+            required
+          />
+        </div>
+        <div class="button-container">
+          <button type="submit">Submit Request</button>
+        </div>
+      </div>
+    </form>
 
-
-       <!--  <form id="request-service-form">
+    <!--  <form id="request-service-form">
             <h1>Request Service</h1>
 
             
@@ -139,249 +155,265 @@
 
             <button type="submit">Submit</button>
         </form> -->
-
-    </div> 
-
-
+  </div>
 </template>
 
 <script>
-import AuthService from '../services/AuthService';
-import repairService from '../services/RepairService';
-import vehicleService from '../services/VehicleService';
+import AuthService from "../services/AuthService";
+import repairService from "../services/RepairService";
+import vehicleService from "../services/VehicleService";
 
 export default {
+  components: {},
 
+  data() {
+    return {
+      estimate: {
+        userId: "",
+        vehicleId: "",
+        createdDate: "",
+        DescriptionOfProblem: "",
+      },
 
-    components: {
+      vehicle: {
+        userId: "",
+        year: "",
+        make: "",
+        model: "",
+        color: "",
+      },
+      user: {
+        firstName: "",
+        lastName: "",
+        emailAddress: "",
+        phoneNumber: "",
+      },
+      vehicles: [],
+      selectedVehicle: {},
+      selection: "",
+    };
+  },
 
-
-    },
-
-
-    data() {
-        return {
-            estimate: {
-                userId: '',
-                vehicleId: '',
-                createdDate: ''
-            },
-
-            vehicle: {
-                userId: '',
-                year: '',
-                make: '',
-                model: '',
-                color: ''
-            },
-            user: {
-                firstName: '',
-                lastName: '',
-                emailAddress: '',
-                phoneNumber: ''
-            },
-            vehicles: [],
-            selectedVehicle: {},
-            selection: '',
-        }
-    },
-
-    methods: {
-        getUserInformation() {
-            repairService.getUserDetails().then(response => {
-                this.user = response.data;
-            }).catch(error => {
-                console.log(error);
-            });
-        },
-        getUserVehicleList() {
-            repairService.getUserVehicleList().then(response => {
-                this.vehicles = response.data;
-            }).catch(error => {
-                console.log(error);
-            });
-
-        },
-        registerVehicle() {
-      vehicleService
-        .registerVehicle(this.vehicle)
+  methods: {
+    getUserInformation() {
+      repairService
+        .getUserDetails()
         .then((response) => {
-          if (response.status === 201) {
-            this.$router.push({
-              path: '/vehicle',
-              query: { registration: 'Great success!' },
-            });
-          }
+          this.user = response.data;
         })
         .catch((error) => {
-          this.registrationErrors = true;
-          if (error.response && error.response.status === 400) {
-            this.registrationErrorMsg = 'Bad Request: Validation Errors';
-          } else {
-            this.registrationErrorMsg = 'An error occurred while registering the vehicle.';
-          }
+          console.log(error);
         });
-
     },
-    selectedVehicleSearch() {
-        if (this.selection !== '') {
-        this.selectedVehicle = this.vehicles.find(vehicle => vehicle.vehicleID === this.selection);
-        }else{
-            this.selectedVehicle = {};
+    getUserVehicleList() {
+      repairService
+        .getUserVehicleList()
+        .then((response) => {
+          this.vehicles = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    async requestEstimate() {
+      try {
+        // Pass the vehicle data to the service method
+        const response = await AuthService.registerEstimate(this.estimate);
+        if (response.status === 201) {
+          this.$router.push({
+            path: '/estimates',
+            query: { registration: 'Great success!' },
+          });
         }
-    }},
-    created() {
-        //this.getUserDetails();
-        this.getUserVehicleList();
+      } catch (error) {
+        this.registrationErrors = true;
+        if (error.response && error.response.status === 400) {
+          this.registrationErrorMsg = 'Bad Request: Validation Errors';
+        } else {
+          this.registrationErrorMsg = 'An error occurred while trying to create this estimate.';
+        }
+      }
     },
-
-}
+    // registerVehicle() {
+    //   vehicleService
+    //     .registerVehicle(this.vehicle)
+    //     .then((response) => {
+    //       if (response.status === 201) {
+    //         this.$router.push({
+    //           path: "/vehicle",
+    //           query: { registration: "Great success!" },
+    //         });
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       this.registrationErrors = true;
+    //       if (error.response && error.response.status === 400) {
+    //         this.registrationErrorMsg = "Bad Request: Validation Errors";
+    //       } else {
+    //         this.registrationErrorMsg =
+    //           "An error occurred while registering the vehicle.";
+    //       }
+    //     });
+    // },
+    selectedVehicleSearch() {
+      if (this.selection !== "") {
+        this.selectedVehicle = this.vehicles.find(
+          (vehicle) => vehicle.vehicleID === this.selection
+        );
+      } else {
+        this.selectedVehicle = {};
+      }
+    },
+    // requestEstimate() {
+    //   vehicleService
+    //     .registerEstimate(this.estimate)
+    //     .then((response) => {
+    //       if (response.status == 201) {
+    //         this.$router.push({
+    //           path: "/estimates",
+    //           query: { registration: "estimate request submitted" },
+    //         });
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       const response = error.response;
+    //       if (response.status === 400) {
+    //         this.registrationErrorMsg = "Bad Request: Validation Errors";
+    //       }
+    //     });
+    // },
+  },
+  created() {
+    //this.getUserDetails();
+    this.getUserVehicleList();
+  },
+};
 </script>
 
 <style scoped>
 img {
-    width: 300px;
-    height: 300px;
-
+  width: 300px;
+  height: 300px;
 }
 
 h1 {
-    background-color: white;
+  background-color: white;
 }
 
 h2 {
-
-    background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-
-
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
 }
 
 p {
-    background-color: white;
+  background-color: white;
 }
 
 #estimate-form {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
-
+/* create .css for id="reason" */
 #userInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    font-family: Arial, Helvetica, sans-serif;
-    color: rgb(189, 14, 14);
-    background-color: white;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 10px;
-    width: 200px;
-    height: 250px;
-    font-family: Arial, Helvetica, sans-serif;
-
-
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(189, 14, 14);
+  background-color: white;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  width: 200px;
+  height: 250px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #userInfo p {
-    text-align: left;
-    font-family: Arial, Helvetica, sans-serif;
-    color: black;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
 }
 
 body {
-
-    background-color: #E3E1DA;
+  background-color: #e3e1da;
 }
 
 h1 {
-
-    margin-top: -10px;
-    margin-bottom: -25px;
+  margin-top: -10px;
+  margin-bottom: -25px;
 }
 
 #request-service-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #fff;
-    padding-left: 400px;
-    padding-right: 400px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    border-radius: 100px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: 0px auto;
-
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding-left: 400px;
+  padding-right: 400px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  border-radius: 100px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0px auto;
 }
 
 .service-label {
-
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: medium;
-    color: rgb(189, 14, 14);
-
-
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: medium;
+  color: rgb(189, 14, 14);
 }
 
 .service-input {
-    margin-bottom: 15px;
-    border-radius: 2px;
-    height: 20px;
-
-
+  margin-bottom: 15px;
+  border-radius: 2px;
+  height: 20px;
 }
 
 .make-dropdown {
-    margin-bottom: 15px;
-    border-radius: 2px;
-    height: 30px;
-    width: 43%;
-    border: 1px black solid;
-
+  margin-bottom: 15px;
+  border-radius: 2px;
+  height: 30px;
+  width: 43%;
+  border: 1px black solid;
 }
 
 .service-label-dropdown {
-    margin-top: 10px;
-    margin-bottom: 5px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: medium;
-    color: rgb(189, 14, 14);
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: medium;
+  color: rgb(189, 14, 14);
 }
 
 #description {
-
-    margin-top: 5px;
-    background-color: white;
-    border-radius: 4px;
-    border: 2px solid #ccc;
-    width: 75%;
-    box-sizing: border-box;
-    /* Ensure textarea aligns with input fields */
-    padding: 10px;
+  margin-top: 5px;
+  background-color: white;
+  border-radius: 4px;
+  border: 2px solid #ccc;
+  width: 75%;
+  box-sizing: border-box;
+  /* Ensure textarea aligns with input fields */
+  padding: 10px;
 }
 
 #desc-service-label {
-    margin-top: 10px;
-    margin-bottom: 5px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: medium;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: medium;
 }
 
-.reason{
-    text-align: left;
-    width: 100%;
-    height: 100px;
-    word-wrap: normal;
+.reason {
+  text-align: left;
+  width: 100%;
+  height: 100px;
+  word-wrap: normal;
 }
-
-
 </style>
