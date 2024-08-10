@@ -28,5 +28,10 @@ export default {
     return axios.post('/users', userDetails)
   },
 
+  registerVehicle(vehicleData) {
+
+    return axios.post('/vehicle', vehicleData);
+  },
+
 
 }

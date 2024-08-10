@@ -27,7 +27,7 @@
 
 <script>
 import vehicleService from '../services/VehicleService';
-import AuthService from '../services/AuthService';
+import authService from '../services/AuthService';
 
 export default {
   name: 'RegisterVehicleView',
@@ -44,10 +44,30 @@ export default {
     };
   },
   methods: {
-    
+    async registerVehicle() {
+      try {
+        // Pass the vehicle data to the service method
+        const response = await authService.registerVehicle(this.vehicle);
+        if (response.status === 201) {
+          this.$router.push({
+            path: '/vehicle',
+            query: { registration: 'Great success!' },
+          });
+        }
+      } catch (error) {
+        this.registrationErrors = true;
+        if (error.response && error.response.status === 400) {
+          this.registrationErrorMsg = 'Bad Request: Validation Errors';
+        } else {
+          this.registrationErrorMsg = 'An error occurred while registering the vehicle.';
+        }
+      }
+    }
   },
 };
 </script>
+
+
 
 <style scoped>
 .reg-vehicle-label {

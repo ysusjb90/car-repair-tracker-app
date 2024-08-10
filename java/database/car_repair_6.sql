@@ -268,5 +268,5 @@ VALUES
 
 COMMIT;
 
-SELECT * FROM vehicle
+
 
