@@ -3,14 +3,6 @@
     <h1>Register Vehicle</h1>
     <form @submit.prevent="registerVehicle">
       <div>
-        <label class="reg-vehicle-label" for="make">Make:</label>
-        <input class="reg-vehicle-input" type="text" id="make" v-model="vehicle.make" required />
-      </div>
-      <div>
-        <label class="reg-vehicle-label" for="model">Model:</label>
-        <input class="reg-vehicle-input" type="text" id="model" v-model="vehicle.model" required />
-      </div>
-      <div>
        <label class="reg-vehicle-label" for="year">Vehicle Year:</label>
             <select class="make-dropdown" id="year" v-model="vehicle.year" required>
                 <option value="">Select Year</option>
@@ -73,6 +65,14 @@
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>
             </select>
+      </div>
+      <div>
+        <label class="reg-vehicle-label" for="make">Make:</label>
+        <input class="reg-vehicle-input" type="text" id="make" v-model="vehicle.make" required />
+      </div>
+      <div>
+        <label class="reg-vehicle-label" for="model">Model:</label>
+        <input class="reg-vehicle-input" type="text" id="model" v-model="vehicle.model" required />
       </div>
       <div>
         <label class="reg-vehicle-label" for="color">Vehicle Color:</label>
