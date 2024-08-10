@@ -2,14 +2,6 @@
 
     <div>
         <form id="estimate-form">
-            <img src="src\assets\manic.jpg">
-            <div id="userInfo">
-                <h2>Customer: </h2>
-                <p>Name: </p>
-                <p>Email: </p>
-                <p>Phone: </p>
-
-            </div>
             <!--<div id="userInfo" v-bind="user">
                 <h2>Customer:</h2>
                 <p>Name: {{ user.firstName }} {{ user.lastName }}</p>
@@ -17,7 +9,10 @@
                 <p>Phone: {{ user.phoneNumber }} </p>
 
             </div>-->
-            <div id="userInfo">
+            <div id="request-service-form">
+                <img src="src\assets\manic.jpg">
+                <h1>Service Request Form</h1>
+            
                 <h2>Vehicle:</h2>
                 <select v-on:click="selectedVehicleSearch" class="make-dropdown" id="user-vehicle" name="user-vehicle" v-model="selection">
                     <option value="">Select Vehicle</option>
@@ -27,18 +22,24 @@
                     </option>
                 </select>
                 <div>
-
+                    <div v-bind="user">
+                        <p>Customer Name: {{ user.firstName }} {{ user.lastName }}</p>
+                        <p>Email: {{ user.emailAddress }} </p>
+                        <p>Phone: {{ user.phoneNumber }} </p>
+                    </div>
                     <p>Year: {{ selectedVehicle.year }}</p>
                     <p>Make: {{ selectedVehicle.make }}</p>
                     <p>Model: {{ selectedVehicle.model }} </p>
                     <p>Color: {{ selectedVehicle.color }} </p>
+                    <p>Reason for Request: </p>
+                    <input class="reason" type="text" id="model" v-model="vehicle.model" required />
                 </div>
             </div>
 
         </form>
 
 
-        <form id="request-service-form">
+       <!--  <form id="request-service-form">
             <h1>Request Service</h1>
 
             
@@ -137,9 +138,9 @@
             <textarea id="description" name="description" required></textarea>
 
             <button type="submit">Submit</button>
-        </form>
+        </form> -->
 
-    </div>
+    </div> 
 
 
 </template>
@@ -239,8 +240,8 @@ export default {
 
 <style scoped>
 img {
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
 
 }
 
@@ -308,11 +309,14 @@ h1 {
     flex-direction: column;
     align-items: center;
     background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
+    padding-left: 400px;
+    padding-right: 400px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-radius: 100px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: 50px auto;
+    max-width: 800px;
+    margin: 0px auto;
 
 
 }
@@ -371,4 +375,13 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: medium;
 }
+
+.reason{
+    text-align: left;
+    width: 100%;
+    height: 100px;
+    word-wrap: normal;
+}
+
+
 </style>
