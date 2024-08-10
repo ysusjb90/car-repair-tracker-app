@@ -145,6 +145,7 @@
 </template>
 
 <script>
+import AuthService from '../services/AuthService';
 import repairService from '../services/RepairService';
 import vehicleService from '../services/VehicleService';
 
@@ -166,6 +167,7 @@ export default {
             },
 
             vehicle: {
+                userId: '',
                 year: '',
                 make: '',
                 model: '',

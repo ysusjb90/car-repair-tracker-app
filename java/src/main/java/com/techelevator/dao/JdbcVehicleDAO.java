@@ -41,9 +41,9 @@ public class JdbcVehicleDAO implements VehicleDAO{
     public Vehicle createVehicle(Vehicle vehicle, int userId) {
 
 
-        String sql = "INSERT INTO vehicle(vehicle_make, vehicle_model, vehicle_year, vehicle_color) VALUES (?,?,?,?);";
+        String sql = "INSERT INTO vehicle(user_id, vehicle_make, vehicle_model, vehicle_year, vehicle_color) VALUES (?,?,?,?,?);";
 
-        jdbcTemplate.update(sql, vehicle.getMake(), vehicle.getModel(), vehicle.getYear(), vehicle.getColor());
+        jdbcTemplate.update(sql, userId, vehicle.getMake(), vehicle.getModel(), vehicle.getYear(), vehicle.getColor());
 
         return vehicle;
     }
