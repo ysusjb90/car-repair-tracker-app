@@ -41,6 +41,7 @@ public class JdbcRepairDAO implements RepairDao  {
         return repairsList;
     }
 
+
     public Repair mapRowToRepair(SqlRowSet rs) {
         Repair repair = new Repair();
         repair.setRepairItemId(rs.getInt("repair_item_id"));

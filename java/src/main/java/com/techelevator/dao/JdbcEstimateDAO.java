@@ -51,14 +51,34 @@ public class JdbcEstimateDAO implements EstimateDAO{
 
 
 
+
+    //public Estimate createEstimate(Estimate estimate) {
+    //    Estimate newEstimate = null;
+    //    String sql = "INSERT INTO estimates (user_id, vehicle_id, description_of_problem, date_created, recall_id, " +
+    //            "promised_completion_date, approved_by_customer, job_complete, is_paid) " +
+    //            "VALUES (?,?,?,?,?,?,?,?,?) RETURNING estimate_id;";
+    //    int newEstimateRows = jdbcTemplate.queryForObject(sql, int.class,
+    //            estimate.getUserId(),
+    //            estimate.getVehicleId(),
+    //            estimate.getDescriptionOfProblem(),
+    //            estimate.getCreatedDate(),
+    //            estimate.getRecallId(),
+    //            estimate.getPromisedDate(),
+    //            estimate.isCustomerApproval(),
+    //            estimate.isCompleted(),
+    //            estimate.isPaid());
+    //    newEstimate = getEstimateByID(newEstimateRows);
+//
+    //    return newEstimate;
+//TO//DO Look at rewriting the above to match the createvehicle method jbdcVehicleDAO
+    //}
     @Override
-    public Estimate createEstimate(Estimate estimate) {
-        Estimate newEstimate = null;
+    public Estimate createEstimate(Estimate estimate, int userId){
         String sql = "INSERT INTO estimates (user_id, vehicle_id, description_of_problem, date_created, recall_id, " +
-                "promised_completion_date, approved_by_customer, job_complete, is_paid) " +
-                "VALUES (?,?,?,?,?,?,?,?,?) RETURNING estimate_id;";
-        int newEstimateRows = jdbcTemplate.queryForObject(sql, int.class,
-                estimate.getUserId(),
+                    "promised_completion_date, approved_by_customer, job_complete, is_paid) " +
+                   "VALUES (?,?,?,?,?,?,?,?,?);";
+        jdbcTemplate.update(sql,
+                userId,
                 estimate.getVehicleId(),
                 estimate.getDescriptionOfProblem(),
                 estimate.getCreatedDate(),
@@ -67,10 +87,18 @@ public class JdbcEstimateDAO implements EstimateDAO{
                 estimate.isCustomerApproval(),
                 estimate.isCompleted(),
                 estimate.isPaid());
-        newEstimate = getEstimateByID(newEstimateRows);
+        return estimate;
+    }
 
-        return newEstimate;
-//TODO Look at rewriting the above to match the createvehicle method jbdcVehicleDAO
+    public void addRepairItemToEstimate( int repairItemId, int estimateId){
+
+        String sql = "INSERT INTO estimate_repairs " +
+                "(estimate_id, repair_item_id, recall_id, item_complete, repair_notes, is_approved) " +
+                "VALUES (?, ?, ?, ?, ?, ?);";
+        jdbcTemplate.update(sql,
+                repairItemId,
+                estimateId) ;
+
     }
 
     private Estimate mapRowToEstimate(SqlRowSet rows) {

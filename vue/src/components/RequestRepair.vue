@@ -13,41 +13,27 @@
         <h1>Service Request Form</h1>
 
         <h2>Vehicle:</h2>
-        <select
-          v-on:click="selectedVehicleSearch"
-          class="make-dropdown"
-          id="user-vehicle"
-          name="user-vehicle"
-          v-model="selection"
-        >
+        <select v-on:click="selectedVehicleSearch" class="make-dropdown" id="user-vehicle" name="user-vehicle"
+          v-model="selection">
           <option value="">Select Vehicle</option>
 
-          <option
-            v-for="vehicle in vehicles"
-            :value="vehicle.vehicleID"
-            :key="vehicle.vehicleID"
-          >
+          <option v-for="vehicle in vehicles" :value="vehicle.vehicleID" :key="vehicle.vehicleID">
             {{ vehicle.make }} {{ vehicle.model }}
           </option>
         </select>
         <div>
-          <div v-bind="user">
-            <p>Customer Name: {{ user.firstName }} {{ user.lastName }}</p>
-            <p>Email: {{ user.emailAddress }}</p>
-            <p>Phone: {{ user.phoneNumber }}</p>
-          </div>
+
+          <p>Customer Name: {{ user.firstName }} {{ user.lastName }}</p>
+          <p>Email: {{ user.emailAddress }}</p>
+          <p>Phone: {{ user.phoneNumber }}</p>
+
           <p>Year: {{ selectedVehicle.year }}</p>
           <p>Make: {{ selectedVehicle.make }}</p>
           <p>Model: {{ selectedVehicle.model }}</p>
           <p>Color: {{ selectedVehicle.color }}</p>
           <p>Reason for Request:</p>
-          <input
-            class="reason"
-            type="text"
-            id="reason"
-            v-model="estimate.DescriptionOfProblem"
-            required
-          />
+          <input class="reason" type="text" id="reason" v-model="selectedVehicle.DescriptionOfProblem"
+            v-on:click="getUserInformation" required />
         </div>
         <div class="button-container">
           <button type="submit">Submit Request</button>
@@ -168,19 +154,14 @@ export default {
 
   data() {
     return {
-      estimate: {
-        userId: "",
-        vehicleId: "",
-        createdDate: "",
-        DescriptionOfProblem: "",
-      },
-
+      
       vehicle: {
         userId: "",
         year: "",
         make: "",
         model: "",
         color: "",
+
       },
       user: {
         firstName: "",
@@ -197,7 +178,7 @@ export default {
   methods: {
     getUserInformation() {
       repairService
-        .getUserDetails()
+        .getUserInformation()
         .then((response) => {
           this.user = response.data;
         })
@@ -215,10 +196,10 @@ export default {
           console.log(error);
         });
     },
-    async requestEstimate() {
+    requestEstimate() {
       try {
         // Pass the vehicle data to the service method
-        const response = await AuthService.registerEstimate(this.estimate);
+        const response =  AuthService.registerEstimate(this.selectedVehicle);
         if (response.status === 201) {
           this.$router.push({
             path: '/estimates',
@@ -316,6 +297,7 @@ p {
   justify-content: space-evenly;
   align-items: center;
 }
+
 /* create .css for id="reason" */
 #userInfo {
   display: flex;

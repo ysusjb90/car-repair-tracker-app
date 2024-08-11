@@ -40,6 +40,7 @@
     <button v-on:click="activateSelectedRepairItems()" v-bind:disabled="!actionButtonEnabled">Add Repair Items</button>
     <button v-on:click="deactivateSelectedRepairItems()" v-bind:disabled="!actionButtonEnabled">Remove Repair
       Items</button>
+    <button class="submit">Add To Estimate</button>
 
   </div>
 
@@ -82,6 +83,9 @@ export default {
         console.log(response);
       });
     },
+    //getSelectedRepairItems() {
+    //  return this.selectedRepairIDs.filter((repair) => );
+    //},
 
 
   },

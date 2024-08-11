@@ -32,8 +32,8 @@ export default {
 
     return axios.post('/vehicle', vehicleData);
   },
-  registerEstimate(estimate){
-    return axios.post('/estimates', estimate)
+  registerEstimate(selectedVehicle) {
+    return axios.post('/estimates', selectedVehicle)
   }
 
 

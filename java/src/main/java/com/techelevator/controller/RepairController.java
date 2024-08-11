@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.*;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.*;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -70,8 +71,9 @@ public class RepairController {
 
 
     @RequestMapping(path="/estimates", method=RequestMethod.POST)
-        public void createNewEstimate(@RequestBody Estimate estimate) {
-            estimateDAO.createEstimate(estimate);
+        public void createNewEstimate(@RequestBody Estimate estimate, Principal principal) {
+        User user = userDao.getUserByUsername(principal.getName()) ;
+        estimateDAO.createEstimate(estimate, user.getId());
         }
 
     @RequestMapping(path="/estimates", method=RequestMethod.GET)
@@ -92,6 +94,15 @@ public class RepairController {
 //public List<Vehicle> getUserVehicleList(@PathVariable int userId) {
 //    return vehicleDAO.getVehicleByUserId(userId);
 //}
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/repairs/{repairItemId}", method = RequestMethod.POST)
+    public void addRepairToEstimate(@PathVariable int repairItemId, int estimateId) {
+        estimateDAO.addRepairItemToEstimate(repairItemId,estimateId);
+
+        //call method to add Repair to SQL
+
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping (path="/vehicle", method = RequestMethod.GET)
