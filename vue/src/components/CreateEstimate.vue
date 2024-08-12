@@ -10,7 +10,8 @@
 
       <thead class="table-head">
         <tr>
-          <th>Customer Name</th>
+          <th>Estimate ID</th>
+          <th>Customer Name </th>
           <th>Promised Date</th>
           <th>Vehicle Model</th>
           <th>Reason for Repair</th>
@@ -24,9 +25,10 @@
           <input class="checkbox" type="checkbox" v-bind:id="estimate.estimateId" v-bind:value="estimate.estimateId"
             v-model="selectedEstimateIDs" />
         </td> -->
-        <td class="repair-desc">{{ estimate.userId }}</td>
+        <td class="repair-desc">{{ estimate.estimateID }}</td>
+        <td class="repair-desc">{{ estimate.vehicleId }}</td>
         <td class="repair-pc">{{ estimate.promisedDate }}</td>
-        <td class="repair-lc">{{ estimate.estimateId }}</td>
+        <td class="repair-lc">{{ getVehicleModel(estimate.vehicleId) }}</td>
         <td class="repair-flat">{{ estimate.descriptionOfProblem }}</td>
 <!-- TODO add different class and CSS formatting? -->
       </tr>
@@ -97,8 +99,10 @@ export default {
       repairs: [
       ],
       selectedRepairIDs: [],
-      estimate: [],
+      estimates: [],
       selectedEstimateIDs: [],
+      user: [],
+      vehicles: []
 
     };
   },
@@ -124,12 +128,45 @@ export default {
         console.log(response);
       });
     },
-    getEstimates() {
-      RepairService.getEstimates().then((response) => {
-        this.estimate = response.data;
+    listOfEstimates() {
+      RepairService.listOfEstimates().then((response) => {
+        this.estimates = response.data;
         console.log(response);
       });
-    }
+    },
+    getUserInformation() {
+      RepairService
+        .getUserInformation()
+        .then((response) => {
+          this.user = response.data;
+          console.log("Got the users")
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getUserVehicleList() {
+      RepairService
+        .getUserVehicleList()
+        .then((response) => {
+          this.vehicles = response.data;
+          console.log("Got the vehicles")
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getVehicleModel(vehicleId) {
+      const vehicle = this.vehicles.find(vehicle => vehicle.vehicleId == vehicleId);
+      return vehicle ? vehicle.model : 'Unknown';
+    },
+    // getLastName() {
+    //   const lastName = this.user.find(user => user.userId == user.userId).lastName;
+    //   return lastName;
+    // },
+
+
+
     //getSelectedRepairItems() {
     //  return this.selectedRepairIDs.filter((repair) => );
     //},
@@ -138,8 +175,10 @@ export default {
   },
   created() {
     this.getRepairs();
-    this.getEstimates();
-    console.log("Here!")
+    this.listOfEstimates();
+    this.getUserInformation();
+    this.getUserVehicleList();
+    console.log("Loaded repairs, estimates, user detail and vehicles!")
   },
 
 }

@@ -10,11 +10,12 @@ export default {
         return axios.get('/users')
     },
     getUserVehicleList() {
-        return axios.get('/vehicle')
+        return axios.get('/vehicles')
     },
-    getEstimates() {
+    listOfEstimates() {
         return axios.get('/estimates')
     }
+    
      
 
 };
