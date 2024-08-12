@@ -8,6 +8,7 @@ public class Estimate {
     private int vehicleId;
     private String descriptionOfProblem;
     private Date createdDate;
+    private int totalCost;
     private int recallId;
     private Date promisedDate;
     private boolean customerApproval;
@@ -111,6 +112,14 @@ public class Estimate {
         isPaid = paid;
     }
 
+    public int getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(int totalCost) {
+        this.totalCost = totalCost;
+    }
+
     @Override
     public String toString() {
         return "Estimate{" +
@@ -119,6 +128,7 @@ public class Estimate {
                 ", vehicleId=" + vehicleId +
                 ", descriptionOfProblem='" + descriptionOfProblem + '\'' +
                 ", createdDate=" + createdDate +
+                ", totalCost =" + totalCost +
                 ", recallId=" + recallId +
                 ", promisedDate=" + promisedDate +
                 ", customerApproval=" + customerApproval +

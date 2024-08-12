@@ -85,7 +85,7 @@ CREATE TABLE make_model(
 
 INSERT INTO user_detail (user_id, user_type, first_name, last_name, email_address, phone_number)
 VALUES
-(1,'employee', 'Jonathan', 'Frakes', 'Comma@nextgen.cmm', '201-555-1001'),
+(1,'user', 'Jonathan', 'Frakes', 'Comma@nextgen.cmm', '201-555-1001'),
 (2,'admin', 'Patrick', 'Stewart', 'Capta@nextgen.cmm', '201-555-1000'),
 (13,'employee', 'Brent', 'Spiner', 'Lieut@nextgen.cmm', '201-555-1002'),
 (14,'user', 'LeVar', 'Burton', 'Lt. C@nextgen.cmm', '201-555-1003'),

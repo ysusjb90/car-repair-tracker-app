@@ -12,7 +12,7 @@ SELECT * FROM user_detail
 For Later:
 
 --- pull all user data
-SELECT * FROM user_detail ud INNER JOIN users u 
+SELECT * FROM user_detail ud LEFT JOIN users u 
 ON ud.user_id = u.user_id 
 
 -- pull vehicle data by user & user detail

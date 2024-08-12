@@ -88,12 +88,12 @@ public class RepairController {
         return userDetailDao.getUserDetails();
     }
 
-// TODO Add endpoint for vehicle
-//@ResponseStatus(HttpStatus.OK)
-//@RequestMapping(path = "/vehicle/{userId}", method = RequestMethod.GET)
-//public List<Vehicle> getUserVehicleList(@PathVariable int userId) {
-//    return vehicleDAO.getVehicleByUserId(userId);
-//}
+// TODO Add endpoint for vehicle using pathvariable
+@ResponseStatus(HttpStatus.OK)
+@RequestMapping(path = "/vehicle/{userId}", method = RequestMethod.GET)
+public List<Vehicle> getUserVehicleList(@PathVariable int userId) {
+    return vehicleDAO.getVehicleByUserId(userId);
+}
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/repairs/{repairItemId}", method = RequestMethod.POST)

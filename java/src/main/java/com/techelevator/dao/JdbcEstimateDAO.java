@@ -34,7 +34,7 @@ public class JdbcEstimateDAO implements EstimateDAO{
     public List<Estimate> getListOfEstimates() {
         List<Estimate> estimatesList = new ArrayList<>();
 
-        String sql = "SELECT estimate_id, user_id, vehicle_id, description_of_problem, date_created, recall_id, " +
+        String sql = "SELECT estimate_id, user_id, vehicle_id, description_of_problem, date_created, total_cost, recall_id, " +
                 "promised_completion_date, approved_by_customer, job_complete, is_paid FROM estimates";
 
         try {
@@ -54,7 +54,7 @@ public class JdbcEstimateDAO implements EstimateDAO{
 
     //public Estimate createEstimate(Estimate estimate) {
     //    Estimate newEstimate = null;
-    //    String sql = "INSERT INTO estimates (user_id, vehicle_id, description_of_problem, date_created, recall_id, " +
+    //    String sql = "INSERT INTO estimates (user_id, vehicle_id, description_of_problem, date_created, total_cost, recall_id, " +
     //            "promised_completion_date, approved_by_customer, job_complete, is_paid) " +
     //            "VALUES (?,?,?,?,?,?,?,?,?) RETURNING estimate_id;";
     //    int newEstimateRows = jdbcTemplate.queryForObject(sql, int.class,
@@ -63,6 +63,7 @@ public class JdbcEstimateDAO implements EstimateDAO{
     //            estimate.getDescriptionOfProblem(),
     //            estimate.getCreatedDate(),
     //            estimate.getRecallId(),
+    //            estimate.getTotalCost(),
     //            estimate.getPromisedDate(),
     //            estimate.isCustomerApproval(),
     //            estimate.isCompleted(),
@@ -74,15 +75,16 @@ public class JdbcEstimateDAO implements EstimateDAO{
     //}
     @Override
     public Estimate createEstimate(Estimate estimate, int userId){
-        String sql = "INSERT INTO estimates (user_id, vehicle_id, description_of_problem, date_created, recall_id, " +
+        String sql = "INSERT INTO estimates (user_id, vehicle_id, description_of_problem, date_created, total_cost, recall_id, " +
                     "promised_completion_date, approved_by_customer, job_complete, is_paid) " +
-                   "VALUES (?,?,?,?,?,?,?,?,?);";
+                   "VALUES (?,?,?,?,?,?,?,?,?,?);";
         jdbcTemplate.update(sql,
                 userId,
                 estimate.getVehicleId(),
                 estimate.getDescriptionOfProblem(),
                 estimate.getCreatedDate(),
                 estimate.getRecallId(),
+                estimate.getTotalCost(),
                 estimate.getPromisedDate(),
                 estimate.isCustomerApproval(),
                 estimate.isCompleted(),
@@ -108,6 +110,7 @@ public class JdbcEstimateDAO implements EstimateDAO{
         estimate.setVehicleId((rows.getInt("vehicle_id")));
         estimate.setDescriptionOfProblem(rows.getString("description_of_problem"));
         estimate.setCreatedDate(rows.getDate("date_created"));
+        estimate.setTotalCost(rows.getInt("total_cost"));
         estimate.setRecallId(rows.getInt("recall_id"));
         estimate.setPromisedDate(rows.getDate("promised_completion_date"));
         estimate.setCustomerApproval(rows.getBoolean("approved_by_customer"));
