@@ -34,7 +34,13 @@ export default {
   },
   registerEstimate(selectedVehicle) {
     return axios.post('/estimates', selectedVehicle)
-  }
+  },
+
+  getAllVehicles() {
+    return axios.get('/vehicle/all')
+},
+
+
  
 
 }

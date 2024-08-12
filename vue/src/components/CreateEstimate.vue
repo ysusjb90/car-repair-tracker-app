@@ -12,7 +12,7 @@
         <tr>
           <th>Estimate ID</th>
           <th>Customer Name </th>
-          <th>Promised Date</th>
+          <th>Date Created</th>
           <th>Vehicle Model</th>
           <th>Reason for Repair</th>
          
@@ -26,8 +26,8 @@
             v-model="selectedEstimateIDs" />
         </td> -->
         <td class="repair-desc">{{ estimate.estimateID }}</td>
-        <td class="repair-desc">{{ estimate.vehicleId }}</td>
-        <td class="repair-pc">{{ estimate.promisedDate }}</td>
+        <td class="repair-desc">{{ getLastName(estimate.userId) }}</td>
+        <td class="repair-pc">{{ estimate.createdDate }}</td>
         <td class="repair-lc">{{ getVehicleModel(estimate.vehicleId) }}</td>
         <td class="repair-flat">{{ estimate.descriptionOfProblem }}</td>
 <!-- TODO add different class and CSS formatting? -->
@@ -89,6 +89,9 @@
 <script>
 
 import RepairService from '../services/RepairService';
+import authService from '../services/AuthService';
+import UserDetail from './UserDetail.vue';
+import UserDetailsService from '../services/UserDetailsService';
 
 export default {
 
@@ -101,7 +104,7 @@ export default {
       selectedRepairIDs: [],
       estimates: [],
       selectedEstimateIDs: [],
-      user: [],
+      users: [],
       vehicles: []
 
     };
@@ -135,19 +138,30 @@ export default {
       });
     },
     getUserInformation() {
-      RepairService
+      UserDetailsService
         .getUserInformation()
         .then((response) => {
-          this.user = response.data;
+          this.users = response.data;
           console.log("Got the users")
         })
         .catch((error) => {
           console.log(error);
         });
     },
+
+    getLastName(userId) {
+    const lastName = this.users.find(user => user.userId == userId);
+    return lastName ? this.users.lastName : 'Unknown';
+    },
+
+    getVehicleModel(vehicleId) {
+      const vehicle = this.vehicles.find(vehicle => vehicle.vehicleId == vehicleId);
+      return vehicle ? vehicle.model : 'Unknown';
+    },
+
     getUserVehicleList() {
-      RepairService
-        .getUserVehicleList()
+      authService
+        .getAllVehicles()
         .then((response) => {
           this.vehicles = response.data;
           console.log("Got the vehicles")
@@ -156,14 +170,12 @@ export default {
           console.log(error);
         });
     },
-    getVehicleModel(vehicleId) {
-      const vehicle = this.vehicles.find(vehicle => vehicle.vehicleId == vehicleId);
-      return vehicle ? vehicle.model : 'Unknown';
-    },
-    // getLastName() {
-    //   const lastName = this.user.find(user => user.userId == user.userId).lastName;
-    //   return lastName;
-    // },
+   
+
+   
+
+
+   
 
 
 

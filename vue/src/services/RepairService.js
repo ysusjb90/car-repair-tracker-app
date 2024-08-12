@@ -10,7 +10,7 @@ export default {
         return axios.get('/users')
     },
     getUserVehicleList() {
-        return axios.get('/vehicles')
+        return axios.get('/vehicle')
     },
     listOfEstimates() {
         return axios.get('/estimates')

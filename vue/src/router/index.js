@@ -9,6 +9,7 @@ import RegisterView from '../views/RegisterView.vue';
 import EstimateView from '../views/EstimateView.vue';
 import AdminView from '../views/AdminView.vue';
 import RegisterVehicleView from '../views/RegisterVehicleView.vue';
+import CreateEstimate from '../components/CreateEstimate.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -76,7 +77,17 @@ const routes = [
     path: "/users",
     name: "users",
     component: RegisterView,
-  }
+  },
+
+  {
+
+    path: "/vehicle/all",
+    name: "vehicleAll",
+    component: CreateEstimate,
+    meta: { requiresAuth: false }
+
+  },
+
 
 
 ];

@@ -77,12 +77,12 @@ public class JdbcEstimateDAO implements EstimateDAO{
     public Estimate createEstimate(Estimate estimate, int userId){
         String sql = "INSERT INTO estimates (user_id, vehicle_id, description_of_problem, date_created, total_cost, recall_id, " +
                     "promised_completion_date, approved_by_customer, job_complete, is_paid) " +
-                   "VALUES (?,?,?,?,?,?,?,?,?,?);";
+                   "VALUES (?,?,?,CURRENT_DATE,?,?,?,?,?,?);";
         jdbcTemplate.update(sql,
                 userId,
                 estimate.getVehicleId(),
                 estimate.getDescriptionOfProblem(),
-                estimate.getCreatedDate(),
+                // estimate.getCreatedDate(),
                 estimate.getRecallId(),
                 estimate.getTotalCost(),
                 estimate.getPromisedDate(),

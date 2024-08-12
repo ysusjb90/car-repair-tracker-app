@@ -9,6 +9,8 @@ public interface VehicleDAO {
     Vehicle createVehicle(Vehicle vehicle, int userId);
     Vehicle getVehicleById(int vehicleId);
 
+    List<Vehicle> getEntireVehicleList();
+
     List<Vehicle> getModelByMake(String make);
 
 

@@ -10,7 +10,9 @@ export default {
     },
     getVehicleMakeByModel(){
         return axios.get('/vehicle/make/model')
-    }
+    },
+
+    
     
     
 // Need to add argument "estimate" to registerEstimate

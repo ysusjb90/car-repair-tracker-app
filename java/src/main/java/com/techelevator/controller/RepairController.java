@@ -31,7 +31,7 @@ import java.util.List;
 
 public class RepairController {
 
-    private  UserDetailDao userDetailDao;
+    private UserDetailDao userDetailDao;
 
     private RepairDao repairDao;
     private UserDao userDao;
@@ -40,100 +40,104 @@ public class RepairController {
     private VehicleDAO vehicleDAO;
 
 
-    public RepairController (UserDetailDao userDetailDao,
-                             RepairDao repairDao, UserDao userDao, EstimateDAO estimateDAO,
-                             VehicleDAO vehicleDAO) {
+    public RepairController(UserDetailDao userDetailDao,
+                            RepairDao repairDao, UserDao userDao, EstimateDAO estimateDAO,
+                            VehicleDAO vehicleDAO) {
         this.userDetailDao = userDetailDao;
         this.repairDao = repairDao;
         this.userDao = userDao;
         this.estimateDAO = estimateDAO;
         this.vehicleDAO = vehicleDAO;
     }
-    @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path="/users", method = RequestMethod.POST)
-    public void createDetails(@RequestBody UserDetail userDetail, Principal principal){
-        User user = userDao.getUserByUsername(principal.getName());
-        userDetailDao.createDetails(userDetail, user.getId());
-    }
-    @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path="/vehicle", method= RequestMethod.POST)
-    public void createVehicle(@RequestBody Vehicle vehicle, Principal principal){
-        User user = userDao.getUserByUsername(principal.getName());
-        vehicleDAO.createVehicle(vehicle, user.getId());
-    }
 
-    @RequestMapping(path="/repairs", method = RequestMethod.GET)
-        public List<Repair> deliverRepairList(){
+
+    @RequestMapping(path = "/repairs", method = RequestMethod.GET)
+    public List<Repair> deliverRepairList() {
         return repairDao.getRepairItemsList();
         // List<Repair> allRepairs = new ArrayList<>();
 
     }
 
 
-    @RequestMapping(path="/estimates", method=RequestMethod.POST)
-        public void createNewEstimate(@RequestBody Estimate estimate, Principal principal) {
-        User user = userDao.getUserByUsername(principal.getName()) ;
+    @RequestMapping(path = "/estimates", method = RequestMethod.POST)
+    public void createNewEstimate(@RequestBody Estimate estimate, Principal principal) {
+        User user = userDao.getUserByUsername(principal.getName());
         estimateDAO.createEstimate(estimate, user.getId());
-        }
+    }
 
-    @RequestMapping(path="/estimates", method=RequestMethod.GET)
+    @RequestMapping(path = "/estimates", method = RequestMethod.GET)
     public List<Estimate> listOfEstimates() {
         return estimateDAO.getListOfEstimates();
     }
 
 // TODO need to add an endpoint for estimate using param /{id}
 
-    @RequestMapping (path = "/userlist", method = RequestMethod.GET)
-    public List<UserDetail> deliverUserDetailList(){
-        return userDetailDao.getUserDetails();
-    }
 
-// TODO Add endpoint for vehicle using pathvariable
-@ResponseStatus(HttpStatus.OK)
-@RequestMapping(path = "/vehicle/{userId}", method = RequestMethod.GET)
-public List<Vehicle> getUserVehicleList(@PathVariable int userId) {
-    return vehicleDAO.getVehicleByUserId(userId);
-}
 
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/repairs/{repairItemId}", method = RequestMethod.POST)
     public void addRepairToEstimate(@PathVariable int repairItemId, int estimateId) {
-        estimateDAO.addRepairItemToEstimate(repairItemId,estimateId);
+        estimateDAO.addRepairItemToEstimate(repairItemId, estimateId);
 
         //call method to add Repair to SQL
 
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping (path="/vehicle", method = RequestMethod.GET)
+    @RequestMapping(path = "/vehicle", method = RequestMethod.GET)
     public List<Vehicle> getUserVehicleList(Principal principal) {
         User user = userDao.getUserByUsername(principal.getName());
         return vehicleDAO.getVehicleByUserId(user.getId());
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/vehicle", method = RequestMethod.POST)
+    public void createVehicle(@RequestBody Vehicle vehicle, Principal principal) {
+        User user = userDao.getUserByUsername(principal.getName());
+        vehicleDAO.createVehicle(vehicle, user.getId());
+
+    }
+
+    // TODO Add endpoint for vehicle using pathvariable
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "/vehicle/{userId}", method = RequestMethod.GET)
+    public List<Vehicle> getUserVehicleList(@PathVariable int userId) {
+        return vehicleDAO.getVehicleByUserId(userId);
+    }
+
+    @RequestMapping(path = "/vehicle/all", method = RequestMethod.GET)
+    public List<Vehicle> getAllVehicles() {
+        return vehicleDAO.getEntireVehicleList();
+
+
+    }
+
     //TODO below returns user details though Principal, not UserId
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping (path="/users", method = RequestMethod.GET)
+    @RequestMapping(path = "/users", method = RequestMethod.GET)
     public UserDetail getUserInformation(Principal principal) {
         User user = userDao.getUserByUsername(principal.getName());
         return userDetailDao.getUserDetailById(user.getId());
     }
 
-
-    @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
-    @RequestMapping(path="/", method = RequestMethod.GET)
-    public String getSuccessMessage() {
-        return"You have reached the server";
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/users", method = RequestMethod.POST)
+    public void createDetails(@RequestBody UserDetail userDetail, Principal principal) {
+        User user = userDao.getUserByUsername(principal.getName());
+        userDetailDao.createDetails(userDetail, user.getId());
     }
 
+    @RequestMapping(path = "/userlist", method = RequestMethod.GET)
+    public List<UserDetail> deliverUserDetailList() {
+        return userDetailDao.getUserDetails();
+    }
 
-
-
-
-
-
-
+    @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
+    @RequestMapping(path = "/", method = RequestMethod.GET)
+    public String getSuccessMessage() {
+        return "You have reached the server";
+    }
 
 
 }

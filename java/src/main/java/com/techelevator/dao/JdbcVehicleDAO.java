@@ -36,7 +36,20 @@ public class JdbcVehicleDAO implements VehicleDAO{
         return usersVehicleList;
     }
 
+    @Override
+    public List<Vehicle> getEntireVehicleList() {
+        List<Vehicle> usersVehicleList = new ArrayList<>();
+        String sql = "SELECT * FROM vehicle";
 
+
+        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql);
+
+        while (rs.next()) {
+            usersVehicleList.add(mapRowToVehicle(rs));
+        }
+
+        return usersVehicleList;
+    }
     @Override
     public Vehicle createVehicle(Vehicle vehicle, int userId) {
 
