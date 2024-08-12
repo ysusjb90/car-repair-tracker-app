@@ -1,7 +1,7 @@
 -- This script creates all tables and then loads them with test information.
 START TRANSACTION;
 
-DROP TABLE IF EXISTS user_detail, vehicle, user_vehicle, repair_items, estimates, estimate_repairs, recall_items, make_model CASCADE;
+DROP TABLE IF EXISTS user_detail, vehicle, repair_items, estimates, estimate_repairs, recall_items, make_model CASCADE;
 
 CREATE TABLE user_detail(
 	user_id int, -- must be loaded with same user_id as index in users table - not a serial
@@ -13,7 +13,7 @@ CREATE TABLE user_detail(
 	CONSTRAINT pk_user_detail_user_id PRIMARY KEY (user_id)
 	-- CONSTRAINT fk_user_detail_user_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
--- NOTE addition of user_id;
+
 CREATE TABLE vehicle (
 	vehicle_id serial,
 	user_id int,
@@ -33,13 +33,14 @@ CREATE TABLE repair_items(
 	isSuperseded boolean,
 	CONSTRAINT PK_repair_Items PRIMARY KEY (repair_item_id)
 );
-	
+
 CREATE TABLE estimates(
 	estimate_id serial,
 	user_id int,
 	vehicle_id int,
 	description_of_problem varchar,
 	date_created DATE,
+	total_cost int,
 	recall_id int,
 	promised_completion_date DATE,
 	approved_by_customer boolean,
@@ -60,7 +61,8 @@ CREATE TABLE estimate_repairs(
 	CONSTRAINT PK_estimate_repairs PRIMARY KEY (estimate_id),
 	CONSTRAINT FK_estimate_repairs_repair_items FOREIGN KEY (repair_item_id) REFERENCES repair_items (repair_item_id)
 );
-	
+
+
 CREATE TABLE recall_items(
 	recall_id int,
 	description varchar,
@@ -83,25 +85,17 @@ CREATE TABLE make_model(
 
 INSERT INTO user_detail (user_id, user_type, first_name, last_name, email_address, phone_number)
 VALUES
-(3,'employee','Johnny', 'Frakes', 'Comma@nextgen.cmm', '201-555-1001'),
-(4,'user', 'Majel', 'Barrett', 'Lwaxa@nextgen.cmm', '201-555-1009'),
-(5,'employee', 'BruHa', 'Spiner', 'Lieut@nextgen.cmm', '201-555-1002'),
-(6,'user', 'Burtr', 'Burton', 'Lt. C@nextgen.cmm', '201-555-1003'),
-(7,'user', 'Maris', 'Sirtis', 'Couns@nextgen.cmm', '201-555-1004'),
-(8,'user', 'Mikl', 'Dorn', 'Lt. W@nextgen.cmm', '201-555-1005'),
-(9,'user', 'Gattois', 'McFadden', 'Dr. B@nextgen.cmm', '201-555-1006'),
-(10,'admin', 'Patrick', 'Stewart', 'Capta@nextgen.cmm', '201-555-1000'),
-(11,'employee', 'Jonathan', 'Frakes', 'Comma@nextgen.cmm', '201-555-1001'),
-(12,'employee', 'Brent', 'Spiner', 'Lieut@nextgen.cmm', '201-555-1002'),
-(13,'user', 'LeVar', 'Burton', 'Lt. C@nextgen.cmm', '201-555-1003'),
-(14,'user', 'Marina', 'Sirtis', 'Couns@nextgen.cmm', '201-555-1004'),
-(15,'user', 'Michael', 'Dorn', 'Lt. W@nextgen.cmm', '201-555-1005'),
-(16,'user', 'Gates', 'McFadden', 'Dr. B@nextgen.cmm', '201-555-1006'),
-(17,'user', 'Wil', 'Wheaton', 'Wesle@nextgen.cmm', '201-555-1007'),
-(18,'user', 'Denise', 'Crosby', 'Lt. T@nextgen.cmm', '201-555-1008'),
-(19,'user', 'Willliam', 'Wheaton', 'Wesle@nextgen.cmm', '201-555-1007'),
-(1,'user', 'Deenny', 'Crosby', 'Lt. T@nextgen.cmm', '201-555-1008'),
-(2,'user', 'Marjorie', 'Barrett', 'Lwaxa@nextgen.cmm', '201-555-1009');
+(1,'employee', 'Jonathan', 'Frakes', 'Comma@nextgen.cmm', '201-555-1001'),
+(2,'admin', 'Patrick', 'Stewart', 'Capta@nextgen.cmm', '201-555-1000'),
+(13,'employee', 'Brent', 'Spiner', 'Lieut@nextgen.cmm', '201-555-1002'),
+(14,'user', 'LeVar', 'Burton', 'Lt. C@nextgen.cmm', '201-555-1003'),
+(15,'user', 'Marina', 'Sirtis', 'Couns@nextgen.cmm', '201-555-1004'),
+(16,'user', 'Michael', 'Dorn', 'Lt. W@nextgen.cmm', '201-555-1005'),
+(17,'user', 'Gates', 'McFadden', 'Dr. B@nextgen.cmm', '201-555-1006'),
+(18,'user', 'Wil', 'Wheaton', 'Wesle@nextgen.cmm', '201-555-1007'),
+(19,'user', 'Denise', 'Crosby', 'Lt. T@nextgen.cmm', '201-555-1008'),
+(20,'user', 'Willliam', 'Wheaton', 'Wesle@nextgen.cmm', '201-555-1007');
+
 
 INSERT INTO repair_items (description, parts_cost, labor_cost, flat_rate_hours, isSuperseded)  
 VALUES 
@@ -132,22 +126,22 @@ VALUES
 
 
 
--- added user_id
+
 INSERT INTO vehicle (user_id, vehicle_make, vehicle_model, vehicle_year, vehicle_color)
 VALUES
-	(1,'DMC', 'Delorean', 1981, 'Silver'),
-	(2,'Pontiac', 'Trans Am', 1982, 'Black'),
-	(3,'Chevy', 'COE', 1941, 'Rust-bucket'),
-	(4,'Ford', 'F-150', 2010, 'Red'),
-	(4,'Chevrolet', 'Silverado', 2011, 'Blue'),
-	(4,'Toyota', 'Camry', 2012, 'Green'),
-	(5,'Honda', 'Civic', 2013, 'Black'),
-	(6,'Nissan', 'Rogue', 2014, 'White'),
-	(7,'Ram', 'Pickup', 2015, 'Silver'),
-	(8,'Honda', 'CR-V', 2016, 'Yellow'),
-	(9,'Toyota', 'Corolla', 2017, 'Gray'),
-	(10,'Chevrolet', 'Equinox', 2018, 'Brown'),
-	(11,'Ford', 'Escape', 2019, 'Orange');
+	(2,'DMC', 'Delorean', 1981, 'Silver'),
+	(1,'Pontiac', 'Trans Am', 1982, 'Black'),
+	(13,'Chevy', 'COE', 1941, 'Rust-bucket'),
+	(14,'Ford', 'F-150', 2010, 'Red'),
+	(14,'Chevrolet', 'Silverado', 2011, 'Blue'),
+	(14,'Toyota', 'Camry', 2012, 'Green'),
+	(15,'Honda', 'Civic', 2013, 'Black'),
+	(16,'Nissan', 'Rogue', 2014, 'White'),
+	(17,'Ram', 'Pickup', 2015, 'Silver'),
+	(18,'Honda', 'CR-V', 2016, 'Yellow'),
+	(19,'Toyota', 'Corolla', 2017, 'Gray'),
+	(20,'Chevrolet', 'Equinox', 2018, 'Brown'),
+	(20,'Ford', 'Escape', 2019, 'Orange');
 
 
 INSERT INTO make_model (make, model) VALUES
@@ -254,19 +248,20 @@ INSERT INTO make_model (make, model) VALUES
 ;
 
 INSERT INTO estimates (user_id, vehicle_id, date_created, recall_id,
-                       promised_completion_date, approved_by_customer,
+                       promised_completion_date, total_cost, approved_by_customer,
                        job_complete, is_paid)
 VALUES
-    (4, 2, '2024-08-07', 0, '2024-08-10', false, false, false),
-    (5, 7, '2024-07-15', 1, '2024-08-01', true, false, true),
-    (2, 5, '2024-06-20', 2, '2024-07-10', false, true, false),
-    (8, 3, '2024-07-01', 3, '2024-08-05', true, true, true),
-    (2, 8, '2024-05-15', 4, '2024-06-25', false, false, false),
-    (4, 1, '2024-08-01', 5, '2024-08-15', true, false, true),
-	(4, 3, '2024-08-07', 0, '2024-08-10', false, false, false);
+    (2, 2, '2024-08-07', 0, '2024-08-10',0, false, false, false),
+    (15, 7, '2024-07-15', 1, '2024-08-01',0, false, false, false),
+    (13, 5, '2024-06-20', 2, '2024-07-10',0, false, false, false),
+    (18, 3, '2024-07-01', 3, '2024-08-05',0, false, false, false),
+    (2, 2, '2024-05-15', 4, '2024-06-25',0, false, false, false),
+    (1, 1, '2024-08-01', 5, '2024-08-15',0, false, false, true),
+	(14, 3, '2024-08-07', 0, '2024-08-10',0, false, false, false);
 	
 
 COMMIT;
+
 
 
 
