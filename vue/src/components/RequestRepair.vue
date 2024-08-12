@@ -26,15 +26,18 @@
           <p>Customer Name: {{ user.firstName }} {{ user.lastName }}</p>
           <p>Email: {{ user.emailAddress }}</p>
           <p>Phone: {{ user.phoneNumber }}</p>
-
           <p>Year: {{ selectedVehicle.year }}</p>
           <p>Make: {{ selectedVehicle.make }}</p>
           <p>Model: {{ selectedVehicle.model }}</p>
           <p>Color: {{ selectedVehicle.color }}</p>
+          <p>userId: {{ user.userId }}</p>
+         
+      </div>
+          <p>vehicleID: {{ selectedVehicle.vehicleID }}</p>
           <p>Reason for Request:</p>
           <input class="reason" type="text" id="reason" v-model="selectedVehicle.DescriptionOfProblem"
             v-on:click="getUserInformation" required />
-        </div>
+      
         <div class="button-container">
           <button type="submit">Submit Request</button>
         </div>
@@ -148,6 +151,8 @@
 import AuthService from "../services/AuthService";
 import repairService from "../services/RepairService";
 import vehicleService from "../services/VehicleService";
+import CreateEstimate from "../components/CreateEstimate.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {},
@@ -172,7 +177,7 @@ export default {
       vehicles: [],
       selectedVehicle: {},
       selection: "",
-    };
+    }
   },
 
   methods: {
