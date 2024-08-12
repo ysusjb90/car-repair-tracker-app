@@ -1,15 +1,15 @@
 package com.techelevator.model;
 
 public class Vehicle {
-    private int vehicleID;
+    private int vehicleId;
     private String make;
     private String model;
     private int year;
     private String color;
 
 
-    public Vehicle(int vehicleID, String make, String model, int year, String color) {
-        this.vehicleID = vehicleID;
+    public Vehicle(int vehicleId, String make, String model, int year, String color) {
+        this.vehicleId = vehicleId;
         this.make = make;
         this.model = model;
         this.year = year;
@@ -19,12 +19,12 @@ public class Vehicle {
 //do explicit default constructor
     public Vehicle(){};
 
-    public int getVehicleID() {
-        return vehicleID;
+    public int getVehicleId() {
+        return vehicleId;
     }
 
-    public void setVehicleID(int vehicleID) {
-        this.vehicleID = vehicleID;
+    public void setVehicleId(int vehicleId) {
+        this.vehicleId = vehicleId;
     }
 
     public String getMake() {

@@ -13,11 +13,11 @@
         <h1>Service Request Form</h1>
 
         <h2>Vehicle:</h2>
-        <select v-on:click="selectedVehicleSearch" class="make-dropdown" id="user-vehicle" name="user-vehicle"
+        <select v-on:change="selectedVehicleSearch" class="make-dropdown" id="user-vehicle" name="user-vehicle"
           v-model="selection">
           <option value="">Select Vehicle</option>
 
-          <option v-for="vehicle in vehicles" :value="vehicle.vehicleID" :key="vehicle.vehicleID">
+          <option v-for="vehicle in vehicles" :value="vehicle.vehicleId" :key="vehicle.vehicleId">
             {{ vehicle.make }} {{ vehicle.model }}
           </option>
         </select>
@@ -33,9 +33,9 @@
           <p>userId: {{ user.userId }}</p>
          
       </div>
-          <p>vehicleID: {{ selectedVehicle.vehicleID }}</p>
+          <p>vehicle ID: {{ selectedVehicle.vehicleId }}</p>
           <p>Reason for Request:</p>
-          <input class="reason" type="text" id="reason" v-model="selectedVehicle.DescriptionOfProblem"
+          <input class="reason" type="text" id="reason" v-model="selectedVehicle.descriptionOfProblem"
             v-on:click="getUserInformation" required />
       
         <div class="button-container">
@@ -202,72 +202,40 @@ export default {
         });
     },
     requestEstimate() {
-      try {
+      
         // Pass the vehicle data to the service method
-        const response =  AuthService.registerEstimate(this.selectedVehicle);
-        if (response.status === 201) {
-          this.$router.push({
-            path: '/estimates',
-            query: { registration: 'Great success!' },
-          });
-        }
-      } catch (error) {
+        let response;
+        
+        AuthService.registerEstimate(this.selectedVehicle).then((response) => {
+          
+            alert("Estimate Requested!");
+            this.$router.push(
+              {
+                path: '/estimates',
+                query: { registration: 'Great success!' },
+              }
+            );
+          
+      }).catch( (error) => {
         this.registrationErrors = true;
         if (error.response && error.response.status === 400) {
           this.registrationErrorMsg = 'Bad Request: Validation Errors';
         } else {
           this.registrationErrorMsg = 'An error occurred while trying to create this estimate.';
         }
-      }
+      })
     },
-    // registerVehicle() {
-    //   vehicleService
-    //     .registerVehicle(this.vehicle)
-    //     .then((response) => {
-    //       if (response.status === 201) {
-    //         this.$router.push({
-    //           path: "/vehicle",
-    //           query: { registration: "Great success!" },
-    //         });
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       this.registrationErrors = true;
-    //       if (error.response && error.response.status === 400) {
-    //         this.registrationErrorMsg = "Bad Request: Validation Errors";
-    //       } else {
-    //         this.registrationErrorMsg =
-    //           "An error occurred while registering the vehicle.";
-    //       }
-    //     });
-    // },
+    
     selectedVehicleSearch() {
       if (this.selection !== "") {
         this.selectedVehicle = this.vehicles.find(
-          (vehicle) => vehicle.vehicleID === this.selection
+          (vehicle) => vehicle.vehicleId === this.selection
         );
       } else {
         this.selectedVehicle = {};
       }
     },
-    // requestEstimate() {
-    //   vehicleService
-    //     .registerEstimate(this.estimate)
-    //     .then((response) => {
-    //       if (response.status == 201) {
-    //         this.$router.push({
-    //           path: "/estimates",
-    //           query: { registration: "estimate request submitted" },
-    //         });
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       const response = error.response;
-    //       if (response.status === 400) {
-    //         this.registrationErrorMsg = "Bad Request: Validation Errors";
-    //       }
-    //     });
-    // },
+    
   },
   created() {
     //this.getUserDetails();

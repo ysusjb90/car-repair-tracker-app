@@ -71,7 +71,7 @@ public class JdbcVehicleDAO implements VehicleDAO{
 
     public Vehicle mapRowToVehicle(SqlRowSet rs) {
         Vehicle vehicle = new Vehicle();
-        vehicle.setVehicleID(rs.getInt("vehicle_id"));
+        vehicle.setVehicleId(rs.getInt("vehicle_id"));
         vehicle.setMake(rs.getString("vehicle_make"));
         vehicle.setModel(rs.getString("vehicle_model"));
         vehicle.setYear(rs.getInt("vehicle_year"));
