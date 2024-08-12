@@ -35,6 +35,6 @@ export default {
   registerEstimate(selectedVehicle) {
     return axios.post('/estimates', selectedVehicle)
   }
-
+ 
 
 }

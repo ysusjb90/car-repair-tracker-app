@@ -11,6 +11,9 @@ export default {
     },
     getUserVehicleList() {
         return axios.get('/vehicle')
+    },
+    getEstimates() {
+        return axios.get('/estimates')
     }
      
 

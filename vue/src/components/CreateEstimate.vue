@@ -1,7 +1,45 @@
 <template>
-  <h1>CREATE NEW ESTIMATE</h1>
+  <h1>Select Estimate</h1>
 
   <hr class="divider" />
+
+
+  <div class="table-container">
+    <table id="table-estimates-list">
+
+
+      <thead class="table-head">
+        <tr>
+          <th>Customer Name</th>
+          <th>Promised Date</th>
+          <th>Vehicle Model</th>
+          <th>Reason for Repair</th>
+         
+
+        </tr>
+      </thead>
+
+      <tr v-for="estimate in estimates" v-bind:key="estimate.estimateId">
+        <!-- <td>
+          <input class="checkbox" type="checkbox" v-bind:id="estimate.estimateId" v-bind:value="estimate.estimateId"
+            v-model="selectedEstimateIDs" />
+        </td> -->
+        <td class="repair-desc">{{ estimate.userId }}</td>
+        <td class="repair-pc">{{ estimate.promisedDate }}</td>
+        <td class="repair-lc">{{ estimate.estimateId }}</td>
+        <td class="repair-flat">{{ estimate.descriptionOfProblem }}</td>
+<!-- TODO add different class and CSS formatting? -->
+      </tr>
+
+    </table>
+
+  </div>
+
+ <hr class="divider" />
+
+
+ <h1>Add Repairs to Estimate</h1>
+
 
   <div class="table-container">
     <table id="table-repairs">
@@ -47,6 +85,7 @@
 </template>
 
 <script>
+
 import RepairService from '../services/RepairService';
 
 export default {
@@ -57,7 +96,9 @@ export default {
 
       repairs: [
       ],
-      selectedRepairIDs: []
+      selectedRepairIDs: [],
+      estimate: [],
+      selectedEstimateIDs: [],
 
     };
   },
@@ -83,6 +124,12 @@ export default {
         console.log(response);
       });
     },
+    getEstimates() {
+      RepairService.getEstimates().then((response) => {
+        this.estimate = response.data;
+        console.log(response);
+      });
+    }
     //getSelectedRepairItems() {
     //  return this.selectedRepairIDs.filter((repair) => );
     //},
@@ -91,6 +138,7 @@ export default {
   },
   created() {
     this.getRepairs();
+    this.getEstimates();
     console.log("Here!")
   },
 
