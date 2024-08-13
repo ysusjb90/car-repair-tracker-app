@@ -10,6 +10,7 @@ import EstimateView from '../views/EstimateView.vue';
 import AdminView from '../views/AdminView.vue';
 import RegisterVehicleView from '../views/RegisterVehicleView.vue';
 import CreateEstimate from '../components/CreateEstimate.vue';
+import WorkOrderProgressView from '../views/WorkOrderProgressView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -85,6 +86,15 @@ const routes = [
     name: "vehicleAll",
     component: CreateEstimate,
     meta: { requiresAuth: false }
+
+  },
+  {
+
+    path: "/workorder",
+    name: "workOrder",
+    component: WorkOrderProgressView,
+    meta: { requiresAuth: true }
+
 
   },
 

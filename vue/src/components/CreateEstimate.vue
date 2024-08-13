@@ -9,6 +9,7 @@
 
       <thead class="table-head">
         <tr>
+          <th></th>
           <th>Estimate ID</th>
           <th>Customer Name </th>
           <th>Date Created</th>
@@ -41,19 +42,30 @@
   <hr class="divider" />
   
   
-      <div>
-    
+      <div class="table-container">
+    <!-- <h1>Selected Estimate: {{ this.$store.estimate }}</h1> -->
     <table class="work-order">
+      <thead class="table-head">
+        <tr>
+          <th>Description</th>
+          <th>Parts Cost</th>
+          <th>Labor Cost</th>
+          <th>Customer Approved?</th>
+        </tr>
+      </thead>
       <!--TODO: SHOW SELECTED ESTIMATE ID, USER INFO, STYLING-->
       <tr v-for="repair in selectedRepairs" v-bind:key="repair" class="selected-repair-items">
-        <td>{{ repair.description }}</td>
-        <td>{{ repair.partsCost }}</td>
-        <td>{{ repair.laborCost }}</td>
-        <hr class="divider" />
+        
+        <td class="repair-desc">{{ repair.description }}</td>
+        <td class="repair-pc">${{ repair.partsCost }}</td>
+        <td class="repair-lc">${{ repair.laborCost }}</td>
+        <input class="checkbox" type="checkbox"/>
        
       </tr>
-      <td>total cost: {{ totalCost }}</td>
-      <button v-on:click="doThis" class="submit">Add To Work Order</button>
+    
+      <button v-on:click="submitWorkOrder" class="submit">Add To Work Order</button>
+      
+      <td class="total-cost">total cost: ${{ totalCost }}</td>
       <!-- TODO: SUBMIT SENDS TO PROPER SQL TABLE -->
     </table>
         </div>
@@ -85,8 +97,8 @@
             v-model="selectedRepairIDs" />
         </td>
         <td class="repair-desc" >{{ repair.description }}</td>
-        <td class="repair-pc">{{ repair.partsCost }}</td>
-        <td class="repair-lc">{{ repair.laborCost }}</td>
+        <td class="repair-pc">${{ repair.partsCost }}</td>
+        <td class="repair-lc">${{ repair.laborCost }}</td>
         
 
       </tr>
@@ -200,11 +212,15 @@ export default {
       const vehicle = this.vehicles.find(vehicle => vehicle.vehicleId == vehicleId);
       return vehicle ? vehicle.model : 'Unknown';
     },
+    submitWorkOrder() {
+      console.log("Work Order Submitted!");
+    },
 
    
     //getSelectedRepairItems() {
     //  return this.selectedRepairIDs.filter((repair) => );
     //},
+
 
 
   },
@@ -268,6 +284,7 @@ body {
 
 .checkbox {
   margin-left: 75px;
+  margin-top: 12px;
 
 }
 
@@ -362,5 +379,8 @@ th {
 
 tr.deactivated {
   color: rgb(2, 2, 151);
+}
+.total-cost {
+  justify-content: right;
 }
 </style>
