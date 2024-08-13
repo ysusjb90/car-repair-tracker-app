@@ -5,7 +5,8 @@ export function createStore(currentToken, currentUser) {
   let store = _createStore({
     state: {
       token: currentToken || '',
-      user: currentUser || {}
+      user: currentUser || {},
+      estimate: [],
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -17,6 +18,10 @@ export function createStore(currentToken, currentUser) {
         state.user = user;
         localStorage.setItem('user', JSON.stringify(user));
       },
+     SAVE_ESTIMATE(state, estimateID){
+    state.estimate.push(estimateID);
+      
+     },
 
       
 

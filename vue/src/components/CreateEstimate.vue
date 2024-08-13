@@ -1,10 +1,9 @@
 <template>
+<button v-on:click="toggleEvent">Hide/Show</button>
+  <div class="table-container" v-show="!hidden">
   <h1>Select Estimate</h1>
 
   <hr class="divider" />
-
-
-  <div class="table-container">
     <table id="table-estimates-list">
 
 
@@ -21,10 +20,9 @@
       </thead>
 
       <tr v-for="estimate in estimates" v-bind:key="estimate.estimateId">
-        <!-- <td>
-          <input class="checkbox" type="checkbox" v-bind:id="estimate.estimateId" v-bind:value="estimate.estimateId"
-            v-model="selectedEstimateIDs" />
-        </td> -->
+        <td>
+          <button v-on:click.prevent="chosenEstimate(estimate.estimateID)">Select Estimate</button>
+        </td>
         <td class="repair-desc">{{ estimate.estimateID }}</td>
         <td class="repair-desc">{{ getLastName(estimate.userId) }}</td>
         <td class="repair-pc">{{ estimate.createdDate }}</td>
@@ -32,6 +30,7 @@
         <td class="repair-flat">{{ estimate.descriptionOfProblem }}</td>
 <!-- TODO add different class and CSS formatting? -->
       </tr>
+      
 
     </table>
 
@@ -98,14 +97,15 @@ export default {
   data() {
 
     return {
-
+      hidden: false,
       repairs: [
       ],
       selectedRepairIDs: [],
-      estimates: [],
+      estimate: [],
       selectedEstimateIDs: [],
       users: [],
-      vehicles: []
+      vehicles: [],
+      setEstimateId: 0,
 
     };
   },
@@ -137,9 +137,16 @@ export default {
         console.log(response);
       });
     },
+    chosenEstimate(estimateID) {
+    
+        console.log(estimateID +"$$$$");
+        this.$store.commit('SAVE_ESTIMATE', estimateID);
+        this.hidden = true;
+      
+    },
     getUserInformation() {
       UserDetailsService
-        .getUserInformation()
+        .getAllUsers()
         .then((response) => {
           this.users = response.data;
           console.log("Got the users")
@@ -148,16 +155,13 @@ export default {
           console.log(error);
         });
     },
-
-    getLastName(userId) {
-    const lastName = this.users.find(user => user.userId == userId);
-    return lastName ? this.users.lastName : 'Unknown';
+    toggleEvent() {
+      this.hidden = !this.hidden;
     },
 
-    getVehicleModel(vehicleId) {
-      const vehicle = this.vehicles.find(vehicle => vehicle.vehicleId == vehicleId);
-      return vehicle ? vehicle.model : 'Unknown';
-    },
+  
+
+   
 
     getUserVehicleList() {
       authService
@@ -170,26 +174,33 @@ export default {
           console.log(error);
         });
     },
-   
+   getLastName(userId) {
+      console.log(userId + "**********");
+    const user = this.users.find(user => user.userId == userId);
+      //console.log(index + "**********");
+    return user ? user.lastName : 'Unknown';
+    },
+     getVehicleModel(vehicleId) {
+      const vehicle = this.vehicles.find(vehicle => vehicle.vehicleId == vehicleId);
+      return vehicle ? vehicle.model : 'Unknown';
+    },
 
    
-
-
-   
-
-
-
     //getSelectedRepairItems() {
     //  return this.selectedRepairIDs.filter((repair) => );
     //},
 
 
   },
+  computed: {
+    
+  },
   created() {
-    this.getRepairs();
+    
     this.listOfEstimates();
     this.getUserInformation();
     this.getUserVehicleList();
+    this.getRepairs();
     console.log("Loaded repairs, estimates, user detail and vehicles!")
   },
 
