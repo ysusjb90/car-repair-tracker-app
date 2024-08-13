@@ -1,9 +1,8 @@
--- NOW car_repair v.7 In order to avoid a file issue car_repair-6.sql was modified with the below
-
+-- NOW car_repair v.7 This script creates all tables and then loads them with test information.
 START TRANSACTION;
-
+ 
 DROP TABLE IF EXISTS user_detail, vehicle, repair_items, estimates, work_order_items, estimate_repairs, recall_items, make_model CASCADE;
-
+ 
 CREATE TABLE user_detail(
         	user_id int, -- must be loaded with same user_id as index in users table - not a serial
         	user_type varchar(20) NOT NULL,
@@ -13,7 +12,7 @@ CREATE TABLE user_detail(
         	phone_number varchar(12) NOT NULL,
         	CONSTRAINT pk_user_detail_user_id PRIMARY KEY (user_id)
 );
-
+ 
 CREATE TABLE vehicle (
         	vehicle_id serial,
         	user_id int,
@@ -23,7 +22,7 @@ CREATE TABLE vehicle (
         	vehicle_color varchar,
         	CONSTRAINT pk_vehicle_vehicle_id PRIMARY KEY (vehicle_id)
         	);
-
+           
 CREATE TABLE repair_items(
         	repair_item_id serial,
         	description varchar NOT NULL,
@@ -52,7 +51,7 @@ CREATE TABLE estimates(
         	CONSTRAINT FK_estimates_user_detail FOREIGN KEY (user_id) REFERENCES user_detail (user_id),
         	CONSTRAINT FK_estimates_vehicle FOREIGN KEY (vehicle_id) REFERENCES vehicle (vehicle_id)
 );
-
+           
 CREATE TABLE work_order_items (
         	line_item_id serial,
 			estimate_id int,
@@ -65,7 +64,7 @@ CREATE TABLE work_order_items (
         	CONSTRAINT FK_estimate_repairs_repair_items FOREIGN KEY (repair_item_id) REFERENCES repair_items (repair_item_id),
         	CONSTRAINT FK_work_order_items_estimates FOREIGN KEY (estimate_id) REFERENCES estimates (estimate_id)
 );
-
+ 
 CREATE TABLE recall_items (
         	recall_id serial,
         	description varchar,
@@ -77,15 +76,15 @@ CREATE TABLE recall_items (
         	is_reimbursable boolean,
         	CONSTRAINT PK_recall_items PRIMARY KEY (recall_id)
 );
-
+ 
 CREATE TABLE make_model(
         	make varchar,
         	model varchar,
         	CONSTRAINT PK_make_model_make PRIMARY KEY (model)
 );
-
+ 
 --- NOW load all tables with test data  ----
-
+ 
 INSERT INTO user_detail (user_id, user_type, first_name, last_name, email_address, phone_number)
 VALUES
 (1,'user', 'Jonathan', 'Frakes', 'Comma@nextgen.cmm', '201-555-1001'),
@@ -98,9 +97,9 @@ VALUES
 (18,'user', 'Wil', 'Wheaton', 'Wesle@nextgen.cmm', '201-555-1007'),
 (19,'user', 'Denise', 'Crosby', 'Lt. T@nextgen.cmm', '201-555-1008'),
 (20,'user', 'Willliam', 'Wheaton', 'Wesle@nextgen.cmm', '201-555-1007');
-
-INSERT INTO repair_items (description, parts_cost, labor_cost, flat_rate_hours, isSuperseded)
-VALUES
+ 
+INSERT INTO repair_items (description, parts_cost, labor_cost, flat_rate_hours, isSuperseded)  
+VALUES 
         	('Oil Change', 30, 30, 5,'false'),
         	('Brake Pad Replacement', 100, 150, 20,'false'),
         	 ('Battery Replacement', 150, 50, 50,'false'),
@@ -145,7 +144,7 @@ VALUES
         	(19,'Toyota', 'Corolla', 2017, 'Gray'),
         	(20,'Chevrolet', 'Equinox', 2018, 'Brown'),
         	(20,'Ford', 'Escape', 2019, 'Orange');
-
+ 
 INSERT INTO make_model (make, model) VALUES
         	('Honda', 'Civic'),
         	('Honda', 'Accord'),
@@ -248,7 +247,7 @@ INSERT INTO make_model (make, model) VALUES
         	(('Toyota'), 'Prius'),
         	(('Toyota'), 'Supra')
 ;
-
+ 
 INSERT INTO estimates (user_id, vehicle_id, date_created, recall_id,
                        promised_completion_date, total_cost, approved_by_customer,
                        job_complete, is_paid)
@@ -260,5 +259,5 @@ VALUES
     (2, 2, '2024-05-15', 4, '2024-06-25',0, false, false, false),
     (1, 1, '2024-08-01', 5, '2024-08-15',0, false, false, true),
     (14, 3, '2024-08-07', 0, '2024-08-10',0, false, false, false);
-
+           
 COMMIT;
