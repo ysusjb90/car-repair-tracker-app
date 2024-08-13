@@ -9,6 +9,7 @@
 
       <thead class="table-head">
         <tr>
+          <th></th>
           <th>Estimate ID</th>
           <th>Customer Name </th>
           <th>Date Created</th>
@@ -18,6 +19,8 @@
 
         </tr>
       </thead>
+
+      
 
       <tr v-for="estimate in estimates" v-bind:key="estimate.estimateId">
         <td>
@@ -36,6 +39,37 @@
 
   </div>
 
+  <hr class="divider" />
+  
+  
+      <div class="table-container">
+    <!-- <h1>Selected Estimate: {{ this.$store.estimate }}</h1> -->
+    <table class="work-order">
+      <thead class="table-head">
+        <tr>
+          <th>Description</th>
+          <th>Parts Cost</th>
+          <th>Labor Cost</th>
+          <th>Customer Approved?</th>
+        </tr>
+      </thead>
+      <!--TODO: SHOW SELECTED ESTIMATE ID, USER INFO, STYLING-->
+      <tr v-for="repair in selectedRepairs" v-bind:key="repair" class="selected-repair-items">
+        
+        <td class="repair-desc">{{ repair.description }}</td>
+        <td class="repair-pc">${{ repair.partsCost }}</td>
+        <td class="repair-lc">${{ repair.laborCost }}</td>
+        <input class="checkbox" type="checkbox"/>
+       
+      </tr>
+    
+      <button v-on:click="submitWorkOrder" class="submit">Add To Work Order</button>
+      
+      <td class="total-cost">total cost: ${{ totalCost }}</td>
+      <!-- TODO: SUBMIT SENDS TO PROPER SQL TABLE -->
+    </table>
+        </div>
+
  <hr class="divider" />
 
 
@@ -52,7 +86,7 @@
           <th>Description</th>
           <th>Parts Cost</th>
           <th>Labor Cost</th>
-          <th>Flat Rate (Time)</th>
+          
 
         </tr>
       </thead>
@@ -62,10 +96,10 @@
           <input class="checkbox" type="checkbox" v-bind:id="repair.repairItemId" v-bind:value="repair.repairItemId"
             v-model="selectedRepairIDs" />
         </td>
-        <td class="repair-desc">{{ repair.description }}</td>
-        <td class="repair-pc">{{ repair.partsCost }}</td>
-        <td class="repair-lc">{{ repair.laborCost }}</td>
-        <td class="repair-flat">{{ repair.flatRateHours / 10 }}</td>
+        <td class="repair-desc" >{{ repair.description }}</td>
+        <td class="repair-pc">${{ repair.partsCost }}</td>
+        <td class="repair-lc">${{ repair.laborCost }}</td>
+        
 
       </tr>
 
@@ -75,13 +109,7 @@
 
 
 
-  <div class="actions">
-    <button v-on:click="activateSelectedRepairItems()" v-bind:disabled="!actionButtonEnabled">Add Repair Items</button>
-    <button v-on:click="deactivateSelectedRepairItems()" v-bind:disabled="!actionButtonEnabled">Remove Repair
-      Items</button>
-    <button class="submit">Add To Estimate</button>
 
-  </div>
 
 </template>
 
@@ -184,6 +212,9 @@ export default {
       const vehicle = this.vehicles.find(vehicle => vehicle.vehicleId == vehicleId);
       return vehicle ? vehicle.model : 'Unknown';
     },
+    submitWorkOrder() {
+      console.log("Work Order Submitted!");
+    },
 
    
     //getSelectedRepairItems() {
@@ -191,10 +222,19 @@ export default {
     //},
 
 
+
   },
   computed: {
+    selectedRepairs(){
+      return this.repairs.filter(repair => this.selectedRepairIDs.includes(repair.repairItemId));
+    },
+
+    totalCost() {
+      return this.selectedRepairs.reduce((total, repair) => total + repair.partsCost + repair.laborCost, 0);
+    },
     
   },
+
   created() {
     
     this.listOfEstimates();
@@ -244,6 +284,7 @@ body {
 
 .checkbox {
   margin-left: 75px;
+  margin-top: 12px;
 
 }
 
@@ -338,5 +379,8 @@ th {
 
 tr.deactivated {
   color: rgb(2, 2, 151);
+}
+.total-cost {
+  justify-content: right;
 }
 </style>
