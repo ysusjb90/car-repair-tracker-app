@@ -19,6 +19,8 @@
         </tr>
       </thead>
 
+      
+
       <tr v-for="estimate in estimates" v-bind:key="estimate.estimateId">
         <td>
           <button v-on:click.prevent="chosenEstimate(estimate.estimateID)">Select Estimate</button>
@@ -36,6 +38,26 @@
 
   </div>
 
+  <hr class="divider" />
+  
+  
+      <div>
+    
+    <table class="work-order">
+      <!--TODO: SHOW SELECTED ESTIMATE ID, USER INFO, STYLING-->
+      <tr v-for="repair in selectedRepairs" v-bind:key="repair" class="selected-repair-items">
+        <td>{{ repair.description }}</td>
+        <td>{{ repair.partsCost }}</td>
+        <td>{{ repair.laborCost }}</td>
+        <hr class="divider" />
+       
+      </tr>
+      <td>total cost: {{ totalCost }}</td>
+      <button v-on:click="doThis" class="submit">Add To Work Order</button>
+      <!-- TODO: SUBMIT SENDS TO PROPER SQL TABLE -->
+    </table>
+        </div>
+
  <hr class="divider" />
 
 
@@ -52,7 +74,7 @@
           <th>Description</th>
           <th>Parts Cost</th>
           <th>Labor Cost</th>
-          <th>Flat Rate (Time)</th>
+          
 
         </tr>
       </thead>
@@ -62,10 +84,10 @@
           <input class="checkbox" type="checkbox" v-bind:id="repair.repairItemId" v-bind:value="repair.repairItemId"
             v-model="selectedRepairIDs" />
         </td>
-        <td class="repair-desc">{{ repair.description }}</td>
+        <td class="repair-desc" >{{ repair.description }}</td>
         <td class="repair-pc">{{ repair.partsCost }}</td>
         <td class="repair-lc">{{ repair.laborCost }}</td>
-        <td class="repair-flat">{{ repair.flatRateHours / 10 }}</td>
+        
 
       </tr>
 
@@ -75,13 +97,7 @@
 
 
 
-  <div class="actions">
-    <button v-on:click="activateSelectedRepairItems()" v-bind:disabled="!actionButtonEnabled">Add Repair Items</button>
-    <button v-on:click="deactivateSelectedRepairItems()" v-bind:disabled="!actionButtonEnabled">Remove Repair
-      Items</button>
-    <button class="submit">Add To Estimate</button>
 
-  </div>
 
 </template>
 
@@ -193,8 +209,16 @@ export default {
 
   },
   computed: {
+    selectedRepairs(){
+      return this.repairs.filter(repair => this.selectedRepairIDs.includes(repair.repairItemId));
+    },
+
+    totalCost() {
+      return this.selectedRepairs.reduce((total, repair) => total + repair.partsCost + repair.laborCost, 0);
+    },
     
   },
+
   created() {
     
     this.listOfEstimates();
