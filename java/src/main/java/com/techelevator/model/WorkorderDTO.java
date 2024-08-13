@@ -5,14 +5,14 @@ import java.util.List;
 
 public class WorkorderDTO {
 
-    private List<String> SelectedItems = new ArrayList<>();
+    private List<Repair> SelectedItems = new ArrayList<>();
     private int estimateId;
 
-    public List<String> getSelectedItems() {
+    public List<Repair> getSelectedItems() {
         return SelectedItems;
     }
 
-    public void setSelectedItems(List<String> selectedItems) {
+    public void setSelectedItems(List<Repair> selectedItems) {
         SelectedItems = selectedItems;
     }
 
