@@ -5,7 +5,7 @@ SELECT * FROM user_detail ORDER BY user_id asc
 SELECT * FROM vehicle
 SELECT * FROM work_order_items
 SELECT * FROM users
-
+SELECT * FROM repair_items
 SELECT * FROM user_detail 
 
 
@@ -74,16 +74,4 @@ VALUES
 
 COMMIT;
 ROLLBACK;
-
-CREATE TABLE repair_items(
-repair_item_id serial,
-description varchar NOT NULL,
-parts_cost numeric(10,2) int NOT NULL,
-labor_cost numeric(10,2)int,
-flat_rate_hours numeric(10,2)int,
-isSuperseded boolean,
-line_item_total numeric(10,2) GENERATED ALWAYS AS (parts_cost + labor_cost) 
-STORED,
-CONSTRAINT PK_repair_Items PRIMARY KEY (repair_item_id)
-);
 

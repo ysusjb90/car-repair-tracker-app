@@ -94,13 +94,21 @@ public class JdbcEstimateDAO implements EstimateDAO{
 
     public void addRepairItemToEstimate( int repairItemId, int estimateId){
 
-        String sql = "INSERT INTO estimate_repairs " +
+        String sql = "INSERT INTO work_order_items " +
                 "(estimate_id, repair_item_id, recall_id, item_complete, repair_notes, is_approved) " +
                 "VALUES (?, ?, ?, ?, ?, ?);";
         jdbcTemplate.update(sql,
                 repairItemId,
                 estimateId) ;
-
+        //TODO test this to confirm that it works.
+    }
+    public Estimate addListOfRepairItemsToEstimate(List<String> selectedItems, int estimateId){
+        int targetEstimate = estimateId;
+        String sql = "INSERT INTO work_order_items (estimate_id,repair_item_id) VALUES (?,?)";
+        for(String item : selectedItems) {
+            jdbcTemplate.update(sql, targetEstimate, Integer.parseInt(item));
+        }
+        return getEstimateByID(targetEstimate);
     }
 
     private Estimate mapRowToEstimate(SqlRowSet rows) {

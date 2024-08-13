@@ -79,10 +79,21 @@ public class RepairController {
     @RequestMapping(path = "/repairs/{repairItemId}", method = RequestMethod.POST)
     public void addRepairToEstimate(@PathVariable int repairItemId, int estimateId) {
         estimateDAO.addRepairItemToEstimate(repairItemId, estimateId);
-
-        //call method to add Repair to SQL
-
+        //this method appears to work - keeping it for possible use with recall_items//
     }
+
+//TODO NEW ENDPOINTS FOR ESTIMATES/WORKORDERS
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/workorder", method = RequestMethod.POST)
+    public Estimate addWorkOrderItemsToEstimate  (@RequestBody WorkorderDTO newRepairItems) {
+        return estimateDAO.addListOfRepairItemsToEstimate(newRepairItems.getSelectedItems(), newRepairItems.getEstimateId());
+    }
+
+
+
+
+
+
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/vehicle", method = RequestMethod.GET)
