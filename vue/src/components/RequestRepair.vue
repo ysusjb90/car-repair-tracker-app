@@ -1,13 +1,6 @@
 <template>
   <div>
     <form id="estimate-form" v-on:submit.prevent="requestEstimate">
-      <!--<div id="userInfo" v-bind="user">
-                <h2>Customer:</h2>
-                <p>Name: {{ user.firstName }} {{ user.lastName }}</p>
-                <p>Email: {{ user.emailAddress }} </p>
-                <p>Phone: {{ user.phoneNumber }} </p>
-
-            </div>-->
       <div id="request-service-form">
         <img src="src\assets\manic.jpg" />
         <h1>Service Request Form</h1>
@@ -21,7 +14,7 @@
             {{ vehicle.make }} {{ vehicle.model }}
           </option>
         </select>
-        <div>
+        <div class="hiddenWhenEmpty" v-show="selection != ''">
 
           <p>Customer Name: {{ user.firstName }} {{ user.lastName }}</p>
           <p>Email: {{ user.emailAddress }}</p>
@@ -30,13 +23,10 @@
           <p>Make: {{ selectedVehicle.make }}</p>
           <p>Model: {{ selectedVehicle.model }}</p>
           <p>Color: {{ selectedVehicle.color }}</p>
-          <p>userId: {{ user.userId }}</p>
-         
       </div>
-          <p>vehicle ID: {{ selectedVehicle.vehicleId }}</p>
           <p>Reason for Request:</p>
           <input class="reason" type="text" id="reason" v-model="selectedVehicle.descriptionOfProblem"
-            v-on:click="getUserInformation" required />
+         required />
       
         <div class="button-container">
           <button type="submit">Submit Request</button>
@@ -145,6 +135,7 @@ export default {
   created() {
     //this.getUserDetails();
     this.getUserVehicleList();
+    this.getUserInformation();
   },
 };
 </script>
