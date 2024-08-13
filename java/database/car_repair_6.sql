@@ -84,12 +84,7 @@ CREATE TABLE make_model(
         	CONSTRAINT PK_make_model_make PRIMARY KEY (model)
 );
 
-CREATE TABLE estimate_repair(
-	estimate_id int,
-	repair_item_id int,
-	CONSTRAINT pk_estimate_repair_repair_item PRIMARY KEY (repair_item_id)
-	CONSTRAINT fk_estimate_repair_estimate_id FOREIGN KEY (estimate_id)
-)
+
 --- NOW load all tables with test data  ----
 
 INSERT INTO user_detail (user_id, user_type, first_name, last_name, email_address, phone_number)
