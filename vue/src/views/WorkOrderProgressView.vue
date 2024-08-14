@@ -42,12 +42,12 @@ export default {
                 console.log(response);
             });
         },
-        //getWorkOrderItems() {
-          //  WorkOrderService.getWorkOrder(8).then((response) => {
-            //    this.workOrders = response.data;
-              //  console.log(response);
-            //});
-        //},
+        getWorkOrderItems() {
+           WorkOrderService.getWorkOrder(8).then((response) => {
+            this.workOrders = response.data;
+                console.log(response);
+            });
+        },
 
     },
     created() {

@@ -67,7 +67,7 @@ public class JdbcRepairDAO implements RepairDao  {
         repair.setPartsCost(rs.getInt("parts_cost"));
         repair.setLaborCost(rs.getInt("labor_cost"));
         repair.setFlatRateHours(rs.getInt("flat_rate_hours"));
-        repair.setSuperseded(rs.getBoolean("is_superseded"));
+        repair.setSuperseded(rs.getBoolean("issuperseded"));
         return repair;
     }
     public Repair mapRowToLineItem(SqlRowSet rs) {
