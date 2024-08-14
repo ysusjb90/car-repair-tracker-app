@@ -212,11 +212,13 @@ export default {
       try {
         // Pass the vehicle data to the service method
         const response = await authService.registerVehicle(this.vehicle);
-        if (response.status === 201) {
+        if (response.status === 201) { alert('Vehicle registration successful');
           this.$router.push({
-            path: '/vehicle',
+            path: '/',
             query: { registration: 'Great success!' },
           });
+    
+
         }
       } catch (error) {
         this.registrationErrors = true;
@@ -247,6 +249,7 @@ export default {
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
+   
 }
 
 .register-vehicle-view {

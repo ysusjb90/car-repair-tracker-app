@@ -1,5 +1,5 @@
 <template>
-  <form id="estimate-form">
+  <!-- <form id="estimate-form">
     <img src="src\assets\manic.jpg">
     <div id="userInfo">
       <h2>Customer:</h2>
@@ -16,7 +16,7 @@
 
     </div>
 
-  </form>
+  </form> -->
 
 
   <div>

@@ -1,9 +1,13 @@
 <template>
   <div>
-    <form id="estimate-form" v-on:submit.prevent="requestEstimate">
-      <div id="request-service-form">
-        <img src="src\assets\manic.jpg" />
-        <h1>Service Request Form</h1>
+
+    <h1 id="welcome">Welcome, {{ user.firstName }} {{ user.lastName }}</h1>
+
+    <form class="service-request-form" v-on:submit.prevent="requestEstimate">
+      <div id="car_stuff">
+
+        
+        <h2>Service Request Form</h2>
 
         <h2>Vehicle:</h2>
         <select v-on:change="selectedVehicleSearch" class="make-dropdown" id="user-vehicle" name="user-vehicle"
@@ -106,7 +110,7 @@ export default {
             alert("Estimate Requested!");
             this.$router.push(
               {
-                path: '/estimates',
+                path: '/',
                 query: { registration: 'Great success!' },
               }
             );
@@ -146,24 +150,48 @@ img {
   height: 300px;
 }
 
-h1 {
-  background-color: white;
+#welcome  {
+  color: black; 
+  margin-bottom: 15px; 
 }
 
 h2 {
   background-color: white;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
+  size: 18px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  Color: rgb(189, 14, 14);
 }
 
-p {
+h3 {
   background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+ 
 }
 
-#estimate-form {
+
+.service-request-form {
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0px auto;
+
+}
+
+#car_stuff {
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 

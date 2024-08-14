@@ -1,12 +1,22 @@
 <template>
   <div id="capstone-app">
+    
     <div id="nav">
-      <router-link id="link" v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
+      <img id="manic-logo" src="src/assets/manic.png" />
+
+      <router-link id="link" v-bind:to="{ name: 'home' }">Home</router-link>
+
+    <!-- Conditional Links with Delimiters -->
+    <template v-if="$store.state.token != ''">
+
+      
       <router-link id="link" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>&nbsp;|&nbsp;
-      <router-link id="link" v-bind:to="{ name: 'estimates'}" v-if="$store.state.token != ''">Estimate</router-link>&nbsp;|&nbsp;
+      <router-link id="link" v-bind:to="{ name: 'estimates'}" v-if="$store.state.token != '' && $store.state.role != 'USER'">Estimate</router-link>&nbsp;|&nbsp;
       <router-link id="link" v-bind:to="{ name: 'vehicle'}" v-if="$store.state.token != ''">Register Vehicle</router-link>
      
       {{role}}
+
+      </template>
 
     </div>
     <router-view />
@@ -36,13 +46,21 @@ export default {
 
 
 #nav {
+ 
   display: flex;
   justify-content: flex-start;
   background-color: #646363;
   align-items: center;
-  color: white;
   margin-bottom: 50px;
+  color: white;
 
+}
+
+#manic-logo {
+  width: 250px;
+ 
+  margin-left: 50px;
+  background-color: #636364;
 }
 
 #link {

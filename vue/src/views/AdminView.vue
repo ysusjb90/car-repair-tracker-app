@@ -83,7 +83,7 @@
           authService
             .registerEmployee(this.user)
             .then((response) => {
-              if (response.status == 201) {
+              if (response.status == 201) { alert('Employee registration successful');
                 
   
                     this.$router.push({

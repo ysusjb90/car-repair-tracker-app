@@ -51,10 +51,18 @@ const routes = [
     path: "/estimates",
     name: "estimates",
     component: EstimateView,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, allowedRoles: ['admin', 'employee'] }
 
 
   },
+
+/*   routes: [ { path: '/admin', component: AdminComponent, meta: { allowedRoles: ['admin'] } }, 
+{ path: '/employee', component: EmployeeComponent, meta: { allowedRoles: ['admin', 'employee'] } }, 
+ {
+ */
+
+ //meta: { requiresAuth: true, allowedRoles: ['admin'] }
+
 
   {
 

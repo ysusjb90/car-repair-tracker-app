@@ -1,7 +1,10 @@
 <template>
-  <button v-on:click="toggleEvent">Hide/Show</button>
-  <div class="table-container" v-show="!hidden">
+  
+  
     <h1>Select Estimate</h1>
+
+    <button v-on:click="toggleEvent">Hide/Show</button>
+    <div class="table-container" v-show="!hidden">
 
     <hr class="divider" />
     <table id="table-estimates-list">
