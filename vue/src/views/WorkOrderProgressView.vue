@@ -1,35 +1,39 @@
 <template>
-    <div>Work Order Progress</div>
+    <div>Work Order Progress
     <form action="">
-        <label for="workOrder">Work Order:</label>
-        <select name="workOrder" id="workOrder">
-            <option value="workOrder1">Work Order 1</option>
-            <option value="workOrder2">Work Order 2</option>
-            <option value="workOrder3">Work Order 3</option>
-        </select>
-        <button v-on:click="submitWorkOrder" class="submit">Get Work Orders</button>
-        <div class="table-container">
-            <table id="table-work-orders">
-                <thead class="table-head">
-                    <tr>
-                        <th>Work Order</th>
-                        <th>Vehicle</th>
-                        <th>Customer</th>
-                        <th>Progress</th>
-                    </tr>
-                </thead>
-                <tr v-for="workOrder in workOrders" v-bind:key="workOrder.workOrderId">
-                    <td class="work-order">{{ workOrder.workOrderId }}</td>
-                </tr>
-            </table>
-        </div>
+        <tr v-for="lineItem in lineItems" v-bind:key="lineItem.description">
+        <td>
+          <!-- TODO: SUSPEND USE OF V-MODEL -->
+          <input
+            class="checkbox"
+            type="checkbox"
+            v-bind:id="repair.repairItemId"
+            v-bind:value="repair.repairItemId"
+            
+            @change="addRemoveRepairToSelected($event, repair)"
+            
+          />
+        </td>
+        <td class="repair-desc">{{ lineItem.description }}</td>
+        <td class="repair-pc">${{ lineItem.isApproved }}</td>
+        <td class="repair-lc">${{ lineItem.isComplete}}</td>
+      </tr>
     </form>
 
+     
+                
+</div>
 </template>
 
 <script>
 import WorkOrderService from '../services/WorkOrderService';
 export default {
+    data() {
+        return {
+            lineItems: [],
+            
+        };
+    },
     
     methods: {
         submitWorkOrders() {
@@ -38,8 +42,17 @@ export default {
                 console.log(response);
             });
         },
+        //getWorkOrderItems() {
+          //  WorkOrderService.getWorkOrder(8).then((response) => {
+            //    this.workOrders = response.data;
+              //  console.log(response);
+            //});
+        //},
 
-    }
+    },
+    created() {
+        this.getWorkOrderItems();
+    },
 
 }
 </script>

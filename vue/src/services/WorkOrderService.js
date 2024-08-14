@@ -6,7 +6,10 @@ export default {
             estimateId: estimateID
         }
         return axios.post('/workorder', workOrderData)
-    }
+    },
+    //getWorkOrder(estimateId) {
+      //  return axios.get(`/workorder/${estimateId}`)
+    //},
     
      
 };

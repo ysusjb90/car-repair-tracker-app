@@ -240,7 +240,7 @@ export default {
     /* ------------------------------------- */
 
     totalCost() {
-      return this.selectedRepairs.reduce(
+      return this.xSelectedRepairs.reduce(
         (total, repair) => total + repair.partsCost + repair.laborCost,
         0
       );

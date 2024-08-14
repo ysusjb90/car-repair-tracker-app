@@ -111,6 +111,7 @@ public class JdbcEstimateDAO implements EstimateDAO{
         return getEstimateByID(targetEstimate);
     }
 
+
     private Estimate mapRowToEstimate(SqlRowSet rows) {
         Estimate estimate = new Estimate();
         estimate.setEstimateID(rows.getInt("estimate_id"));

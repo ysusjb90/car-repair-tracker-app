@@ -89,6 +89,12 @@ public class RepairController {
         return estimateDAO.addListOfRepairItemsToEstimate(newRepairItems.getSelectedItems(), newRepairItems.getEstimateId());
     }
 
+    @RequestMapping(path = "/workorder/{estimateId}", method = RequestMethod.GET)
+    public List<Repair> listOfPendingRepairs(@PathVariable int estimateId) {
+        return repairDao.getListOfPendingRepairs(estimateId);
+    }
+
+
 
 
 

@@ -40,6 +40,24 @@ public class JdbcRepairDAO implements RepairDao  {
         //System.out.println(repairsList);
         return repairsList;
     }
+    public List<Repair> getListOfPendingRepairs(int estimateId){
+        List<Repair> pendingRepairs = new ArrayList<>();
+        String sql ="SELECT ri.description, wo.is_approved, wo.item_complete " +
+                "FROM work_order_items wo " +
+                "JOIN repair_items ri ON wo.repair_item_id = ri.repair_item_id " +
+                "WHERE wo.estimate_id = ?;";
+        try{
+            SqlRowSet results = repairItemTemplate.queryForRowSet(sql, estimateId);
+            while (results.next()){
+                Repair repair = mapRowToLineItem(results);
+                pendingRepairs.add(repair);
+
+            }
+        }catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database",e);
+        }
+        return pendingRepairs;
+    }
 
 
     public Repair mapRowToRepair(SqlRowSet rs) {
@@ -49,7 +67,14 @@ public class JdbcRepairDAO implements RepairDao  {
         repair.setPartsCost(rs.getInt("parts_cost"));
         repair.setLaborCost(rs.getInt("labor_cost"));
         repair.setFlatRateHours(rs.getInt("flat_rate_hours"));
-        repair.setSuperseded(rs.getBoolean("issuperseded"));
+        repair.setSuperseded(rs.getBoolean("is_superseded"));
+        return repair;
+    }
+    public Repair mapRowToLineItem(SqlRowSet rs) {
+        Repair repair = new Repair();
+        repair.setDescription(rs.getString("description"));
+        repair.setIsApproved(rs.getBoolean("is_approved"));
+        repair.setIsComplete(rs.getBoolean("item_complete"));
         return repair;
     }
     @Override

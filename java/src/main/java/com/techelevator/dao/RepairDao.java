@@ -8,7 +8,7 @@ public interface RepairDao {
 
     List<Repair> getRepairItemsList();
     Repair getRepairByDescription(String description);
-    //TODO add additional methods as they are added to jdbcRepairDAO
+    public List<Repair> getListOfPendingRepairs(int estimateId);
 
 
 
