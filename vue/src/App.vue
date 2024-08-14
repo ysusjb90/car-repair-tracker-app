@@ -11,7 +11,7 @@
 
       
       <router-link id="link" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>&nbsp;|&nbsp;
-      <router-link id="link" v-bind:to="{ name: 'estimates'}" v-if="$store.state.token != '' && $store.state.role != 'USER'">Estimate</router-link>&nbsp;|&nbsp;
+      <router-link id="link" v-bind:to="{ name: 'estimates'}" v-if="$store.state.currRole != 'ROLE_USER'">Estimate</router-link>&nbsp;|&nbsp;
       <router-link id="link" v-bind:to="{ name: 'vehicle'}" v-if="$store.state.token != ''">Register Vehicle</router-link>
      
       {{role}}
@@ -34,8 +34,15 @@ export default {
   },
   watch: {
     '$store.state.token': function() {
+      
       this.$store.commit('SET_ROLE', this.$store.state.user.authorities[0].name);
     },
+  },
+  created() {
+    if(this.$store.state.token != '') {
+      this.$store.commit('SET_ROLE', this.$store.state.user.authorities[0].name);
+    }
+   
   },
 };
 

@@ -64,13 +64,15 @@ export default {
       this.$router.push("/");
     },
     hideCheckboxes() {
-    //   Set to hidden if user role is user
-      this.hidden = !this.hidden;
+        if(this.$store.state.currRole === "ROLE_USER"){
+            this.hidden = true;
+        }
     },
   },
   created() {
     this.workOrderId = Number.parseInt(this.$route.params.id);
     this.getWorkOrderItems();
+    this.hideCheckboxes();
   },
 };
 </script>

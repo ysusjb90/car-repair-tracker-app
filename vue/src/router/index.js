@@ -51,7 +51,7 @@ const routes = [
     path: "/estimates",
     name: "estimates",
     component: EstimateView,
-    meta: { requiresAuth: true, allowedRoles: ['admin', 'employee'] }
+    meta: { requiresAuth: true }
 
 
   },
