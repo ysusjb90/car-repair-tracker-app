@@ -68,11 +68,102 @@
       </div>
       <div>
         <label class="reg-vehicle-label" for="make">Make:</label>
-        <input class="reg-vehicle-input" type="text" id="make" v-model="vehicle.make" required />
+        <select class="reg-vehicle-input" id="make" v-model="vehicle.make" required>
+          <option value="">Select Make</option>
+          <option value="Ford">Ford</option>
+          <option value="Chevrolet">Chevrolet</option>
+          <option value="Toyota">Toyota</option>
+          <option value="Honda">Honda</option>
+          <option value="Nissan">Nissan</option>
+          <option value="Jeep">Jeep</option>
+          <option value="Ram">Ram</option>
+          <option value="GMC">GMC</option>
+          <option value="Subaru">Subaru</option>
+          <option value="Hyundai">Hyundai</option>
+        </select>
       </div>
       <div>
         <label class="reg-vehicle-label" for="model">Model:</label>
-        <input class="reg-vehicle-input" type="text" id="model" v-model="vehicle.model" required />
+        <select class="reg-vehicle-input" id="model" v-model="vehicle.model" required>
+          <option value="">Select Model</option>
+          <option v-if="vehicle.make === 'Ford'" value="F-150">F-150</option>
+          <option v-if="vehicle.make === 'Ford'" value="Mustang">Mustang</option>
+          <option v-if="vehicle.make === 'Ford'" value="Explorer">Explorer</option>
+          <option v-if="vehicle.make === 'Ford'" value="Escape">Escape</option>
+          <option v-if="vehicle.make === 'Ford'" value="Focus">Focus</option>
+          <option v-if="vehicle.make === 'Ford'" value="Edge">Edge</option>
+          <option v-if="vehicle.make === 'Ford'" value="Ranger">Ranger</option>
+          <option v-if="vehicle.make === 'Ford'" value="Expedition">Expedition</option>
+          <option v-if="vehicle.make === 'Chevrolet'" value="Silverado">Silverado</option>
+          <option v-if="vehicle.make === 'Chevrolet'" value="Camaro">Camaro</option>
+          <option v-if="vehicle.make === 'Chevrolet'" value="Equinox">Equinox</option>
+          <option v-if="vehicle.make === 'Chevrolet'" value="Malibu">Malibu</option>
+          <option v-if="vehicle.make === 'Chevrolet'" value="Impala">Impala</option>
+          <option v-if="vehicle.make === 'Chevrolet'" value="Traverse">Traverse</option>
+          <option v-if="vehicle.make === 'Chevrolet'" value="Tahoe">Tahoe</option>
+          <option v-if="vehicle.make === 'Chevrolet'" value="Suburban">Suburban</option>
+          <option v-if="vehicle.make === 'Toyota'" value="Camry">Camry</option>
+          <option v-if="vehicle.make === 'Toyota'" value="Corolla">Corolla</option>
+          <option v-if="vehicle.make === 'Toyota'" value="RAV4">RAV4</option>
+          <option v-if="vehicle.make === 'Toyota'" value="Highlander">Highlander</option>
+          <option v-if="vehicle.make === 'Toyota'" value="Tacoma">Tacoma</option>
+          <option v-if="vehicle.make === 'Toyota'" value="Tundra">Tundra</option>
+          <option v-if="vehicle.make === 'Toyota'" value="4Runner">4Runner</option>
+          <option v-if="vehicle.make === 'Toyota'" value="Sienna">Sienna</option>
+          <option v-if="vehicle.make === 'Honda'" value="Civic">Civic</option>
+          <option v-if="vehicle.make === 'Honda'" value="Accord">Accord</option>
+          <option v-if="vehicle.make === 'Honda'" value="CR-V">CR-V</option>
+          <option v-if="vehicle.make === 'Honda'" value="Pilot">Pilot</option>
+          <option v-if="vehicle.make === 'Honda'" value="Odyssey">Odyssey</option>
+          <option v-if="vehicle.make === 'Honda'" value="Ridgeline">Ridgeline</option>
+          <option v-if="vehicle.make === 'Honda'" value="Fit">Fit</option>
+          <option v-if="vehicle.make === 'Honda'" value="HR-V">HR-V</option>
+          <option v-if="vehicle.make === 'Nissan'" value="Altima">Altima</option>
+          <option v-if="vehicle.make === 'Nissan'" value="Sentra">Sentra</option>
+          <option v-if="vehicle.make === 'Nissan'" value="Rogue">Rogue</option>
+          <option v-if="vehicle.make === 'Nissan'" value="Maxima">Maxima</option>
+          <option v-if="vehicle.make === 'Nissan'" value="Murano">Murano</option>
+          <option v-if="vehicle.make === 'Nissan'" value="Pathfinder">Pathfinder</option>
+          <option v-if="vehicle.make === 'Nissan'" value="Titan">Titan</option>
+          <option v-if="vehicle.make === 'Nissan'" value="Frontier">Frontier</option>
+          <option v-if="vehicle.make === 'Jeep'" value="Wrangler">Wrangler</option>
+          <option v-if="vehicle.make === 'Jeep'" value="Cherokee">Cherokee</option>
+          <option v-if="vehicle.make === 'Jeep'" value="Grand Cherokee">Grand Cherokee</option>
+          <option v-if="vehicle.make === 'Jeep'" value="Compass">Compass</option>
+          <option v-if="vehicle.make === 'Jeep'" value="Renegade">Renegade</option>
+          <option v-if="vehicle.make === 'Jeep'" value="Gladiator">Gladiator</option>
+          <option v-if="vehicle.make === 'Jeep'" value="Commander">Commander</option>
+          <option v-if="vehicle.make === 'Jeep'" value="Patriot">Patriot</option>
+          <option v-if="vehicle.make === 'Ram'" value="1500">1500</option>
+          <option v-if="vehicle.make === 'Ram'" value="2500">2500</option>
+          <option v-if="vehicle.make === 'Ram'" value="3500">3500</option>
+          <option v-if="vehicle.make === 'Ram'" value="4500">4500</option>
+          <option v-if="vehicle.make === 'Ram'" value="5500">5500</option>
+          <option v-if="vehicle.make === 'Ram'" value="ProMaster">ProMaster</option>
+          <option v-if="vehicle.make === 'Ram'" value="ProMaster City">ProMaster City</option>
+          <option v-if="vehicle.make === 'Ram'" value="Dakota">Dakota</option>
+          <option v-if="vehicle.make === 'GMC'" value="Sierra">Sierra</option>
+          <option v-if="vehicle.make === 'GMC'" value="Yukon">Yukon</option>
+          <option v-if="vehicle.make === 'GMC'" value="Terrain">Terrain</option>
+          <option v-if="vehicle.make === 'GMC'" value="Acadia">Acadia</option>
+          <option v-if="vehicle.make === 'GMC'" value="Canyon">Canyon</option>
+          <option v-if="vehicle.make === 'GMC'" value="Envoy">Envoy</option>
+          <option v-if="vehicle.make === 'GMC'" value="Savana">Savana</option>
+          <option v-if="vehicle.make === 'Subaru'" value="Outback">Outback</option>
+          <option v-if="vehicle.make === 'Subaru'" value="Forester">Forester</option>
+          <option v-if="vehicle.make === 'Subaru'" value="Impreza">Impreza</option>
+          <option v-if="vehicle.make === 'Subaru'" value="Legacy">Legacy</option>
+          <option v-if="vehicle.make === 'Subaru'" value="Crosstrek">Crosstrek</option>
+          <option v-if="vehicle.make === 'Subaru'" value="Ascent">Ascent</option>
+          <option v-if="vehicle.make === 'Subaru'" value="BRZ">BRZ</option>
+          <option v-if="vehicle.make === 'Hyundai'" value="Elantra">Elantra</option>
+          <option v-if="vehicle.make === 'Hyundai'" value="Tucson">Tucson</option>
+          <option v-if="vehicle.make === 'Hyundai'" value="Santa Fe">Santa Fe</option>
+          <option v-if="vehicle.make === 'Hyundai'" value="Sonata">Sonata</option>
+          <option v-if="vehicle.make === 'Hyundai'" value="Kona">Kona</option>
+          <option v-if="vehicle.make === 'Hyundai'" value="Veloster">Veloster</option>
+          <option v-if="vehicle.make === 'Hyundai'" value="Palisade">Palisade</option>
+        </select>
       </div>
       <div>
         <label class="reg-vehicle-label" for="color">Vehicle Color:</label>
