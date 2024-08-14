@@ -8,6 +8,14 @@ public class Repair {
     private int laborCost;
     private int flatRateHours;
     private boolean isSuperseded;
+    private boolean isApproved;
+    public boolean getIsApproved() {
+        return isApproved;
+    }
+
+    public void setIsApproved(boolean approved) {
+        isApproved = approved;
+    }
 
     public int getRepairItemId() {
         return repairItemId;
@@ -61,12 +69,13 @@ public class Repair {
     public Repair(){};
 
     //overload constructor//
-    public Repair(int repairItemId, String description, int partsCost, int laborCost, int flatRateHours, boolean isSuperseded) {
+    public Repair(int repairItemId, String description, int partsCost, int laborCost, int flatRateHours, boolean isSuperseded, boolean isApproved) {
         this.repairItemId = repairItemId;
         this.description = description;
         this.partsCost = partsCost;
         this.laborCost = laborCost;
         this.flatRateHours = flatRateHours;
         this.isSuperseded = isSuperseded;
+        this.isApproved = isApproved;
     }
 }

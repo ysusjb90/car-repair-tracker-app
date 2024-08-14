@@ -104,9 +104,9 @@ public class JdbcEstimateDAO implements EstimateDAO{
     }
     public Estimate addListOfRepairItemsToEstimate(List<com.techelevator.model.Repair> selectedItems, int estimateId){
         int targetEstimate = estimateId;
-        String sql = "INSERT INTO work_order_items (estimate_id,repair_item_id) VALUES (?,?)";
+        String sql = "INSERT INTO work_order_items (estimate_id,repair_item_id, is_approved) VALUES (?, ?, ?)";
         for(Repair item : selectedItems) {
-            jdbcTemplate.update(sql, targetEstimate, item.getRepairItemId());
+            jdbcTemplate.update(sql, targetEstimate, item.getRepairItemId(), item.getIsApproved());
         }
         return getEstimateByID(targetEstimate);
     }

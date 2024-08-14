@@ -47,14 +47,14 @@
       </thead>
       <!--TODO: SHOW SELECTED ESTIMATE ID, USER INFO, STYLING-->
       <tr
-        v-for="repair in selectedRepairs"
+        v-for="repair in xSelectedRepairs"
         v-bind:key="repair"
         class="selected-repair-items"
       >
         <td class="repair-desc">{{ repair.description }}</td>
         <td class="repair-pc">${{ repair.partsCost }}</td>
         <td class="repair-lc">${{ repair.laborCost }}</td>
-        <input class="checkbox" type="checkbox" />
+        <input class="checkbox" type="checkbox" v-model="repair.isApproved"/>
       </tr>
 
       
@@ -83,12 +83,15 @@
 
       <tr v-for="repair in repairs" v-bind:key="repair.repairItemId">
         <td>
+          <!-- TODO: SUSPEND USE OF V-MODEL -->
           <input
             class="checkbox"
             type="checkbox"
             v-bind:id="repair.repairItemId"
             v-bind:value="repair.repairItemId"
-            v-model="selectedRepairIDs"
+            
+            @change="addRemoveRepairToSelected($event, repair)"
+            
           />
         </td>
         <td class="repair-desc">{{ repair.description }}</td>
@@ -117,10 +120,30 @@ export default {
       users: [],
       vehicles: [],
       setEstimateId: 0,
+      //TODO: EVALUATE AND REFACTOR BASED ON FUNCTION
+      xSelectedRepairs: [],
     };
   },
 
   methods: {
+
+    addRemoveRepairToSelected(event, repair){
+
+      const item = {
+        repairItemId: repair.repairItemId,
+        description: repair.description,
+        partsCost: repair.partsCost,
+        laborCost: repair.laborCost,
+        isApproved: true,
+      }
+
+      if(event.target.checked){
+        this.xSelectedRepairs.push(item);
+      } else {
+        this.xSelectedRepairs = this.xSelectedRepairs.filter((r) => r.repairItemId !== item.repairItemId);
+      }
+    },
+
     activateSelectedRepairItems() {
       this.selectedRepairIDs.forEach((repairID) => {
         const repair = this.repairs.find((repair) => repair.id === repairID);
@@ -192,7 +215,7 @@ export default {
       console.log("Work Order Submitted!");
       let response;
 
-      WorkOrderService.createWorkOrder(this.selectedRepairs, this.$store.state.estimate)
+      WorkOrderService.createWorkOrder(this.xSelectedRepairs, this.$store.state.estimate)
         .then((response) => {
           alert("Work Order Submitted!");
           this.$router.push({
@@ -206,11 +229,15 @@ export default {
     },
   },
   computed: {
+    /* ------------------------------------- */
+    //TODO: SUSPEND USE OF DERIVED DATA
+    /* ------------------------------------- */
     selectedRepairs() {
       return this.repairs.filter((repair) =>
         this.selectedRepairIDs.includes(repair.repairItemId)
       );
     },
+    /* ------------------------------------- */
 
     totalCost() {
       return this.selectedRepairs.reduce(
