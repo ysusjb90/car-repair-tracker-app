@@ -7,6 +7,7 @@ export function createStore(currentToken, currentUser) {
       token: currentToken || '',
       user: currentUser || {},
       estimate: 0,
+      currRole: '',
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -22,6 +23,10 @@ export function createStore(currentToken, currentUser) {
     state.estimate = estimateID;
       
      },
+
+     SET_ROLE(state, role){
+       state.currRole = role;
+    },
 
       
 

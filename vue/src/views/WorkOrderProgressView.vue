@@ -1,22 +1,18 @@
 <template>
     <div>Work Order Progress
     <form action="">
-        <tr v-for="lineItem in lineItems" v-bind:key="lineItem.description">
+        <tr v-for="lineItem in workOrder.workOrderItems" v-bind:key="lineItem.description">
         <td>
           <!-- TODO: SUSPEND USE OF V-MODEL -->
           <input
             class="checkbox"
             type="checkbox"
-            v-bind:id="repair.repairItemId"
-            v-bind:value="repair.repairItemId"
-            
-            @change="addRemoveRepairToSelected($event, repair)"
+            v-model="lineItem.isComplete"
             
           />
         </td>
         <td class="repair-desc">{{ lineItem.description }}</td>
-        <td class="repair-pc">${{ lineItem.isApproved }}</td>
-        <td class="repair-lc">${{ lineItem.isComplete}}</td>
+        <td id="chkComplete" class="repair-lc" v-show="lineItem.isComplete">&check;   </td>
       </tr>
     </form>
 
@@ -30,8 +26,17 @@ import WorkOrderService from '../services/WorkOrderService';
 export default {
     data() {
         return {
-            lineItems: [],
             
+            workOrder: {
+                workOrderId: 0,
+                workOrderDate: "",
+                workOrderStatus: "",
+                workOrderTotal: 0,
+                workOrderItems: [],
+
+            } ,
+            
+            workOrderId: 0,
         };
     },
     
@@ -43,15 +48,17 @@ export default {
             });
         },
         getWorkOrderItems() {
-           WorkOrderService.getWorkOrder(8).then((response) => {
-            this.workOrders = response.data;
+           WorkOrderService.getWorkOrder(this.workOrderId).then((response) => {
+            this.workOrder.workOrderItems = response.data;
                 console.log(response);
             });
         },
 
     },
     created() {
+        this.workOrderId = Number.parseInt(this.$route.params.id);
         this.getWorkOrderItems();
+
     },
 
 }

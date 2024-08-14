@@ -219,8 +219,8 @@ export default {
         .then((response) => {
           alert("Work Order Submitted!");
           this.$router.push({
-            path: "/workorder",
-            query: { registration: "Great success!" },
+            name: "workOrder",
+            params: { id: this.$store.state.estimate },
           });
         })
         .catch((error) => {

@@ -90,7 +90,7 @@ const routes = [
   },
   {
 
-    path: "/workorder",
+    path: "/workorder/:id",
     name: "workOrder",
     component: WorkOrderProgressView,
     meta: { requiresAuth: true }
