@@ -74,4 +74,14 @@ VALUES
 
 COMMIT;
 ROLLBACK;
+----------------------
+
+SELECT * from work_order_items wo
+	JOIN repair_items ri ON wo.repair_item_id =  ri.repair_item_id
+WHERE estimate_id =3;
+
+SELECT * FROM work_order_items wo
+	JOIN repair_items ri ON wo.repair_item_id = ri.repair_item_id
+	WHERE estimate_id = 3;
+
 

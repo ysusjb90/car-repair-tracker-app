@@ -2,9 +2,9 @@
   
   
     <h1>Select Estimate</h1>
-
-    <button v-on:click="toggleEvent">Hide/Show</button>
     <div class="table-container" v-show="!hidden">
+    <button v-on:click="toggleEvent">Hide/Show</button>
+    
 
     <hr class="divider" />
     <table id="table-estimates-list">

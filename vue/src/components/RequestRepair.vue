@@ -37,6 +37,9 @@
         </div>
       </div>
     </form>
+    <div class="button-trackRepair">
+          <button v-on:click="goToTrackingPage" type="submit">Track Repair</button>
+      </div>
 
 
             
@@ -133,6 +136,9 @@ export default {
       } else {
         this.selectedVehicle = {};
       }
+    },
+    goToTrackingPage() {
+      this.$router.push("/workorder");
     },
     
   },
