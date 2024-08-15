@@ -65,9 +65,10 @@
       <td class="total-cost">total cost: ${{ totalCost }}</td>
       <!-- TODO: SUBMIT SENDS TO PROPER SQL TABLE -->
     </table>
+    <button v-on:click="submitWorkOrder" type="button">Add To Work Order</button>
   </div>
 
-  <button v-on:click="submitWorkOrder" type="button">Add To Work Order</button>
+  
 
   <hr class="divider" />
 

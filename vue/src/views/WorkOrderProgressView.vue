@@ -26,6 +26,10 @@
     <button v-on:click="goToCreateRepair" type="submit">
       Create New Repair Request
     </button>
+
+    <button v-show="!hidden" class="button-go-to-estimates" v-on:click="goToEstimates" type="submit">
+      Go To Estimates
+      </button>
   </div>
 </template>
 
@@ -60,6 +64,13 @@ export default {
         console.log(response);
       });
     },
+    goToEstimates() {
+      if(this.$store.state.currRole === "ROLE_USER"){
+            this.hidden = true;
+        }
+      this.$router.push("/estimates");
+    },
+    
     goToCreateRepair() {
       this.$router.push("/");
     },

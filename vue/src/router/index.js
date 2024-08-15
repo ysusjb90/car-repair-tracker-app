@@ -11,6 +11,8 @@ import AdminView from '../views/AdminView.vue';
 import RegisterVehicleView from '../views/RegisterVehicleView.vue';
 import CreateEstimate from '../components/CreateEstimate.vue';
 import WorkOrderProgressView from '../views/WorkOrderProgressView.vue';
+import MyWorkOrderService from '../services/MyWorkOrderService';
+import MyWorkOrderView from '../views/MyWorkOrderView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -105,8 +107,13 @@ const routes = [
 
 
   },
+{
+  path: "/myworkorder/myid/:id",
+  name: "myWorkOrders",
+  component: MyWorkOrderView,
+  meta: { requiresAuth: true }
 
-
+}
 
 ];
 

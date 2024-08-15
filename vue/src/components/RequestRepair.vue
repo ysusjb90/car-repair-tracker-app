@@ -138,7 +138,8 @@ export default {
       }
     },
     goToTrackingPage() {
-      this.$router.push("/workorder");
+      const id = this.selectedVehicle.vehicleId;
+      this.$router.push(`/myworkorder/myid/${this.$store.state.user.id}`);
     },
     
   },

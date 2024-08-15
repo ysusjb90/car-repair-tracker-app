@@ -21,6 +21,7 @@ import com.techelevator.dao.UserDao;
 import com.techelevator.security.jwt.JWTFilter;
 import com.techelevator.security.jwt.TokenProvider;
 
+import javax.annotation.security.PermitAll;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +96,12 @@ public class RepairController {
         return repairDao.getListOfPendingRepairs(estimateId);
     }
 
+    @PreAuthorize("permitAll")
+    @RequestMapping(path = "/myworkorder/myid/{userId}", method= RequestMethod.GET)
+    public List<Estimate> getWorkOrderById(@PathVariable int userId) {
+        return estimateDAO.getWorkOrderById(userId);
+    }
+
 
 
 
@@ -156,6 +163,7 @@ public class RepairController {
     public String getSuccessMessage() {
         return "You have reached the server";
     }
+
 
 
 }

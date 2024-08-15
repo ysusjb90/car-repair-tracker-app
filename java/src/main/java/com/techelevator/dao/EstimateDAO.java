@@ -12,6 +12,7 @@ public interface EstimateDAO {
     List<Estimate> getListOfEstimates();
     void addRepairItemToEstimate(int repairItemId, int estimateId);
     Estimate addListOfRepairItemsToEstimate(List<Repair> SelectedItems, int estimateId);
+    List<Estimate> getWorkOrderById(int estimateId);
 
 
 

@@ -30,6 +30,24 @@ public class JdbcEstimateDAO implements EstimateDAO{
         return singleEstimate;
     }
 
+    public List<Estimate> getWorkOrderById(int userId) {
+        List<Estimate> listEstimates = new ArrayList<>();
+        String sql = "SELECT * FROM work_order_items wo JOIN estimates e " +
+                "ON e.estimate_id = wo.estimate_id JOIN repair_items r " +
+                "ON r.repair_item_id = wo.repair_item_id WHERE e.user_id = ?;";
+
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+            while (results.next()) {
+                Estimate estimate = mapRowToEstimate(results);
+                listEstimates.add(estimate);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect", e);
+
+        }
+        return listEstimates;
+    }
     @Override
     public List<Estimate> getListOfEstimates() {
         List<Estimate> estimatesList = new ArrayList<>();
@@ -91,6 +109,7 @@ public class JdbcEstimateDAO implements EstimateDAO{
                 estimate.isPaid());
         return estimate;
     }
+
 
     public void addRepairItemToEstimate( int repairItemId, int estimateId){
 
