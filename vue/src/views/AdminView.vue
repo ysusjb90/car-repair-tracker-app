@@ -5,8 +5,10 @@
   <button id="btnAddEmployee" @click="showAddEmployee = !showAddEmployee; showWorkEstimates = !showAddEmployee">{{(showAddEmployee)?"Work Estimates":"Add Employee Form"}}</button>
 </div>
 
-
-  <CreateEstimate v-if="showWorkEstimates"/>
+<div class="createEstimate">
+  <CreateEstimate  v-if="showWorkEstimates"/>
+</div>
+  
 
   <div id="register" class="reg" v-show="showAddEmployee">
     <form v-on:submit.prevent="registerEmployee">
@@ -134,8 +136,12 @@ export default {
   },
 };
 </script>
+
   
   <style scoped>
+  .createEstimate {
+    background-color: white;
+  }
 h1 {
   font-family: "Arial", sans-serif;
   text-align: center;

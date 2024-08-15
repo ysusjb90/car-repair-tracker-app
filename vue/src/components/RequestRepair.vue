@@ -110,7 +110,7 @@ export default {
         
         AuthService.registerEstimate(this.selectedVehicle).then((response) => {
           
-            alert("Estimate Requested!");
+            alert("Thank you for your request. We will give you a call or email soon about your estimate!");
             this.$router.push(
               {
                 path: '/',

@@ -3,7 +3,7 @@
   
     <h1>Select Estimate</h1>
     <div class="table-container" v-show="!hidden">
-    <button v-on:click="toggleEvent">Hide/Show</button>
+    
     
 
     <hr class="divider" />
@@ -33,6 +33,7 @@
         <!-- TODO add different class and CSS formatting? -->
       </tr>
     </table>
+    <button v-on:click="toggleEvent">Hide/Show</button>
   </div>
 
   <hr class="divider" />
@@ -62,7 +63,7 @@
 
       
 
-      <td class="total-cost">total cost: ${{ totalCost }}</td>
+      <td class="total-cost">Total Cost: ${{ totalCost }}</td>
       <!-- TODO: SUBMIT SENDS TO PROPER SQL TABLE -->
     </table>
     <button v-on:click="submitWorkOrder" type="button">Add To Work Order</button>
@@ -376,6 +377,9 @@ tr.deactivated {
   color: rgb(2, 2, 151);
 }
 .total-cost {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
   justify-content: right;
 }
 </style>
