@@ -43,9 +43,10 @@
     <table class="work-order">
       <thead class="table-head">
         <tr>
-          <th>Description</th>
+          
           <th>Parts Cost</th>
           <th>Labor Cost</th>
+          <th>Description</th>
           <th>Customer Approved?</th>
         </tr>
       </thead>
@@ -55,15 +56,20 @@
         v-bind:key="repair"
         class="selected-repair-items"
       >
-        <td class="repair-desc">{{ repair.description }}</td>
+        
         <td class="repair-pc">${{ repair.partsCost }}</td>
         <td class="repair-lc">${{ repair.laborCost }}</td>
+        <td class="repair-desc">{{ repair.description }}</td>
         <input class="checkbox" type="checkbox" v-model="repair.isApproved"/>
+     
+        
       </tr>
+      <hr class="divider-cost" />
+     
+<div class="total-cost">
+      <td>Total Cost: ${{ totalCost }}</td>
 
-      
-
-      <td class="total-cost">Total Cost: ${{ totalCost }}</td>
+    </div>
       <!-- TODO: SUBMIT SENDS TO PROPER SQL TABLE -->
     </table>
     <button v-on:click="submitWorkOrder" type="button">Add To Work Order</button>
@@ -273,6 +279,16 @@ export default {
   /* Make the line stretch across the container */
 }
 
+.divider-cost {
+  border: none;
+  border-top: 2px solid rgb(189, 14, 14);
+  /* Line color and thickness */
+  margin-bottom: 10px; 
+  /* Space around the line */
+  width: 100%;
+  /* Make the line stretch across the container */
+}
+
 body {
   background-color: #e3e1da;
 }
@@ -377,9 +393,10 @@ tr.deactivated {
   color: rgb(2, 2, 151);
 }
 .total-cost {
+  
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   font-size: 20px;
-  justify-content: right;
+  
 }
 </style>

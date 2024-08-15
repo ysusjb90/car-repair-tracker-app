@@ -7,7 +7,7 @@
 
     <div id="nav">
 
-      <router-link id="link" v-bind:to="{ name: 'home' }">Home</router-link>
+     <!--  <router-link id="link" v-bind:to="{ name: 'home' }">Home</router-link>-->
 
     <!-- Conditional Links with Delimiters -->
     <template v-if="$store.state.token != ''">

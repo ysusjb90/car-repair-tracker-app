@@ -4,7 +4,8 @@
     <form @submit.prevent="registerVehicle">
       <div>
        <label class="reg-vehicle-label" for="year">Vehicle Year:</label>
-            <select class="make-dropdown" id="year" v-model="vehicle.year" required>
+       <div class="make-dropdown-container">  
+       <select class="make-dropdown" id="year" v-model="vehicle.year" required>
                 <option value="">Select Year</option>
                 <option value="1965">1965</option>
                 <option value="1966">1966</option>
@@ -65,9 +66,11 @@
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>
             </select>
+          </div>   
       </div>
       <div>
         <label class="reg-vehicle-label" for="make">Make:</label>
+        <div class="make-dropdown-container">  
         <select class="reg-vehicle-input" id="make" v-model="vehicle.make" required>
           <option value="">Select Make</option>
           <option value="Ford">Ford</option>
@@ -81,9 +84,11 @@
           <option value="Subaru">Subaru</option>
           <option value="Hyundai">Hyundai</option>
         </select>
+        </div>
       </div>
-      <div>
+      
         <label class="reg-vehicle-label" for="model">Model:</label>
+        <div class="make-dropdown-container">  
         <select class="reg-vehicle-input" id="model" v-model="vehicle.model" required>
           <option value="">Select Model</option>
           <option v-if="vehicle.make === 'Ford'" value="F-150">F-150</option>
@@ -165,9 +170,10 @@
           <option v-if="vehicle.make === 'Hyundai'" value="Palisade">Palisade</option>
         </select>
       </div>
-      <div>
+      
         <label class="reg-vehicle-label" for="color">Vehicle Color:</label>
-            <select class="reg-vehicle-input" id="color" v-model="vehicle.color" required>
+        <div class="make-dropdown-container">     
+        <select class="reg-vehicle-input" id="color" v-model="vehicle.color" required>
                 <option value="">Select Color</option>
                 <option value="Black">Black</option>
                 <option value="White">White</option>
@@ -180,8 +186,8 @@
                 <option value="Orange">Orange</option>
                 <option value="Purple">Purple</option>
             </select>
-        
-      </div>
+        </div>
+      
       <div class="button-container">
         <button type="submit">Register</button>
       </div>
@@ -241,7 +247,10 @@ export default {
   font-size: 16px;
   color: rgb(189, 14, 14);
   font-weight: bold;
+  text-align: center; 
 }
+
+
 
 .reg-vehicle-input {
   width: 50%;
@@ -253,6 +262,9 @@ export default {
 }
 
 .register-vehicle-view {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
@@ -289,5 +301,15 @@ export default {
 
 .register-vehicle-view button:hover {
   background-color: #0056b3;
+}
+
+.make-dropdown-container {
+  display: grid;
+  place-items: center; /* Center both horizontally and vertically */
+  height: 100%; /* Adjust as needed */
+}
+
+.make-dropdown  {
+  align-content: center; 
 }
 </style>

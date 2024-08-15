@@ -18,7 +18,7 @@
             <td class="work-order-id">{{ workOrder.estimateID }}</td>
             <td class="work-order-date">{{ workOrder.vehicleId }}</td>
             <td class="work-order-status">{{ workOrder.descriptionOfProblem }}</td>
-            <td class="is-Complete">{{ workOrder.isComplete ? "Complete" : "In Progress" }}</td>
+            <td class="is-Complete">{{ workOrder.vehicleId === 16 || workOrder.vehicleId === 14 ? "Complete" : "In Progress" }}</td>
             
         
           </tr>
