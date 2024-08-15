@@ -13,6 +13,17 @@
           </tr>
         </thead>
         </table>
+        <tbody>
+          <tr v-for="workOrder in workOrders" v-bind:key="workOrder.lineItemId">
+            <td class="work-order-id">{{ workOrder.estimateID }}</td>
+            <td class="work-order-date">{{ workOrder.vehicleId }}</td>
+            <td class="work-order-status">{{ workOrder.descriptionOfProblem }}</td>
+            <td class="is-Complete">{{ workOrder.isComplete }}</td>"
+            
+        
+          </tr>
+          </tbody>
+        
        
     </div>
 </template>
@@ -22,7 +33,26 @@ import MyWorkOrderService from '../services/MyWorkOrderService';
 export default {
   data() {
     return {
-      workOrders: [],
+      workOrders: [
+        {
+        
+        estimateID: 0,
+        userId: 0,
+        vehicleId: 0,
+        descriptionOfProblem: "",
+        date: null,
+        totalCost: 0,
+        recallId: 0,
+        promisedDate: null,
+        customerApproval: false,
+        description: "",
+        lineItemId: 0,
+        completed: false,
+        paid: false,
+        isComplete: true,
+        },
+      ],
+
     };
   },
   created() {
