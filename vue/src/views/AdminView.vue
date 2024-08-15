@@ -133,13 +133,13 @@ h1 {
   text-align: center;
 }
 
-.center-text {
+h2 {
   text-align: center;
   /* Center the text */
   margin-top: 20px;
   /* Add spacing if needed */
   font-family: "Arial", sans-serif;
-  font-size: 14px;
+  font-size: 24px;
 }
 
 .form-input-group label {
@@ -148,6 +148,7 @@ h1 {
   margin-bottom: 5px;
   font-weight: bold;
   text-align: left;
+  background-color: white; 
 }
 
 #register {
@@ -155,12 +156,15 @@ h1 {
   margin: 0 auto;
   padding: 20px;
   text-align: left;
+  background-color: white; 
+  border-radius: 5px; 
 }
 
 .form-input-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
+  background-color: white; 
 }
 
 input {

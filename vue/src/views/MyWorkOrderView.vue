@@ -6,19 +6,19 @@
       <table id="table-work-orders">
         <thead class="table-head">
           <tr>
-            <th>Work Order ID</th>
-            <th>Work Order Date </th>
-            <th>Work Order Status</th>
-            <th>Work Order Total</th>
+            <th>Work-Order ID</th>
+            <th>User ID </th>
+            <th>Work-Order Issue</th>
+            <th>Work-Order Status</th>
           </tr>
         </thead>
         </table>
-        <tbody>
+        <tbody class="table-body">
           <tr v-for="workOrder in workOrders" v-bind:key="workOrder.lineItemId">
             <td class="work-order-id">{{ workOrder.estimateID }}</td>
             <td class="work-order-date">{{ workOrder.vehicleId }}</td>
             <td class="work-order-status">{{ workOrder.descriptionOfProblem }}</td>
-            <td class="is-Complete">{{ workOrder.isComplete ? "Complete" : "In Progress" }}</td>"
+            <td class="is-Complete">{{ workOrder.isComplete ? "Complete" : "In Progress" }}</td>
             
         
           </tr>
@@ -65,14 +65,31 @@ export default {
 
 <style>
   .table-container {
-    margin-top: 20px;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  width: 100%; 
+  
   }
+
+  .table-body  {
+
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+
+    font-family: Arial, Helvetica, sans-serif;
+
+  }
+
   #table-work-orders {
     width: 100%;
     border-collapse: collapse;
   }
   .table-head {
     background-color: #f2f2f2;
+    margin-left: 20px;
   }
   .table-head th {
     padding: 8px;
@@ -80,20 +97,54 @@ export default {
     border-bottom: 1px solid #ddd;
   }
   .work-order-id {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+    width: 200px;
+  text-align: left;
+
+  font-family: Arial, Helvetica, sans-serif;
+  size: 16px;
+
+  
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   }
   .work-order-date {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+    width: 200px;
+  text-align: center;
+
+  font-family: Arial, Helvetica, sans-serif;
+  size: 16px;
+
+  
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   }
   .work-order-status {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+    width: 200px;
+  text-align: center;
+
+  font-family: Arial, Helvetica, sans-serif;
+  size: 16px;
+
+  
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   }
+
+.is-Complete  {
+
+  width: 200px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  size: 16px;
+  
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
   .work-order-total {
     padding: 8px;
     text-align: left;

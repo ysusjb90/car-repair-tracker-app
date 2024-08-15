@@ -37,7 +37,7 @@
         </div>
       </div>
     </form>
-    <div class="button-trackRepair">
+    <div class="button-track-repair">
           <button v-on:click="goToTrackingPage" type="submit">Track Repair</button>
       </div>
 
@@ -177,6 +177,12 @@ h3 {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
  
+}
+
+.button-track-repair {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 

@@ -5,7 +5,7 @@
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password!
       </div>
-      <div role="alert" v-if="this.$route.query.registration">
+      <div id="thank-you" role="alert" v-if="this.$route.query.registration">
         Thank you for registering, please sign in.
       </div>
       <div class="form-input-group">
@@ -69,6 +69,15 @@ export default {
 body {
   background-color: #E3E1DA;
   margin: 0;
+}
+
+#thank-you  {
+
+  margin-bottom: 45px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center; 
+  font-style: italic; 
+ 
 }
 
 #sign-in {

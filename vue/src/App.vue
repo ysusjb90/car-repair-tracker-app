@@ -20,6 +20,8 @@
 
     </div>
     <router-view />
+
+ 
   </div>
 </template>
 
@@ -64,10 +66,15 @@ export default {
 }
 
 #manic-logo {
-  width: 250px;
- 
+  width: 350px;
+  
   margin-left: 50px;
   background-color: #636364;
+}
+
+.manic-footer  {
+
+  width: 500px;
 }
 
 #link {
@@ -80,5 +87,7 @@ export default {
 
 
 }
+
+
 
 </style>
