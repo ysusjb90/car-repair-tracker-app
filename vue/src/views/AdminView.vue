@@ -1,8 +1,14 @@
 <template>
   <h1>Administrative View</h1>
-  <Admin />
+  
+<div id="btnDiv">
+  <button id="btnAddEmployee" @click="showAddEmployee = !showAddEmployee; showWorkEstimates = !showAddEmployee">{{(showAddEmployee)?"Work Estimates":"Add Employee Form"}}</button>
+</div>
 
-  <div id="register" class="reg">
+
+  <CreateEstimate v-if="showWorkEstimates"/>
+
+  <div id="register" class="reg" v-show="showAddEmployee">
     <form v-on:submit.prevent="registerEmployee">
       <h2>Add Employee</h2>
       <div role="alert" v-if="registrationErrors">
@@ -68,11 +74,11 @@
   <script>
 import authService from "../services/AuthService";
 import RepairService from "../services/RepairService";
-import Admin from "../components/Admin.vue";
+import CreateEstimate from '../components/CreateEstimate.vue';
 
 export default {
   components: {
-    Admin,
+    CreateEstimate,
   },
 
   data() {
@@ -87,6 +93,8 @@ export default {
         emailAddress: "",
         phoneNumber: "",
       },
+      showAddEmployee: false,
+      showWorkEstimates: true,
       registrationErrors: false,
 
       registrationErrorMsg: "There were problems registering this user.",
@@ -131,6 +139,11 @@ export default {
 h1 {
   font-family: "Arial", sans-serif;
   text-align: center;
+}
+
+#btnDiv {
+  display: flex;  
+  justify-content: center;
 }
 
 h2 {

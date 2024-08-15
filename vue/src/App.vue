@@ -1,20 +1,21 @@
 <template>
   <div id="capstone-app">
-    
-    <div id="nav">
+
+    <div id="hero">
       <img id="manic-logo" src="src/assets/manic.png" />
+    </div>
+
+    <div id="nav">
 
       <router-link id="link" v-bind:to="{ name: 'home' }">Home</router-link>
 
     <!-- Conditional Links with Delimiters -->
     <template v-if="$store.state.token != ''">
 
-      
-      <router-link id="link" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>&nbsp;|&nbsp;
-      <router-link id="link" v-bind:to="{ name: 'estimates'}" v-if="$store.state.currRole != 'ROLE_USER'">Estimate</router-link>&nbsp;|&nbsp;
+      <router-link id="link" v-bind:to="{ name: 'admin'}" v-if="$store.state.currRole == 'ROLE_ADMIN'">Admin Home</router-link>
+      <router-link id="link" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
+      <router-link id="link" v-bind:to="{ name: 'estimates'}" v-if="$store.state.currRole != 'ROLE_USER' && $store.state.currRole != 'ROLE_ADMIN'">Estimate</router-link>
       <router-link id="link" v-bind:to="{ name: 'vehicle'}" v-if="$store.state.token != ''">Register Vehicle</router-link>
-     
-      {{role}}
 
       </template>
 
@@ -36,8 +37,9 @@ export default {
   },
   watch: {
     '$store.state.token': function() {
-      
+      if(this.$store.state.token != '') {
       this.$store.commit('SET_ROLE', this.$store.state.user.authorities[0].name);
+      }
     },
   },
   created() {
@@ -53,11 +55,17 @@ export default {
 
 <style>
 
+#hero {
+  display: flex;
+  justify-content: center;
+  background-color: #636364;
+
+}
 
 #nav {
  
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   background-color: #646363;
   align-items: center;
   margin-bottom: 50px;
@@ -66,10 +74,16 @@ export default {
 }
 
 #manic-logo {
-  width: 350px;
   
-  margin-left: 50px;
   background-color: #636364;
+}
+
+@media only screen and (max-width: 400px) {
+#manic-logo {
+  
+  height: 200px;
+  width: 334px;
+}
 }
 
 .manic-footer  {
