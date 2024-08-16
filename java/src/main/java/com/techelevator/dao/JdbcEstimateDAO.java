@@ -115,7 +115,7 @@ public class JdbcEstimateDAO implements EstimateDAO{
 
         String sql = "INSERT INTO work_order_items " +
                 "(estimate_id, repair_item_id, recall_id, item_complete, repair_notes, is_approved) " +
-                "VALUES (?, ?, ?, ?, ?, ?);";
+                "VALUES (?, ?, ?, ?, ?, ?) ORDER BY estimate_id;";
         jdbcTemplate.update(sql,
                 repairItemId,
                 estimateId) ;

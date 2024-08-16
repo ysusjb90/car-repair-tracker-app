@@ -6,10 +6,10 @@
       <table id="table-work-orders">
         <thead class="table-head">
           <tr>
-            <th>Work-Order ID</th>
-            <th>User ID </th>
-            <th>Work-Order Issue</th>
-            <th>Work-Order Status</th>
+            <th id="WO-ID">Work-Order ID</th>
+            <th id="vehicle-id">Vehicle ID </th>
+            <th id="issue">Work-Order Issue</th>
+            <th id="status">Work-Order Status</th>
           </tr>
         </thead>
         </table>
@@ -70,6 +70,7 @@ export default {
   align-items: center;
   margin-right: 20px;
   width: 100%; 
+ 
   
   }
 
@@ -165,5 +166,23 @@ export default {
   .work-order-actions button:hover {
     background-color: #45a049;
   }
+
+  #WO-ID  {
+
+   padding-left: 155px;  
+  }
+
+  #status  {
+
+    padding-right: 80px; 
+   }
+
+   #issue  {
+    padding-left: 75px; 
+   }
+
+   #vehicle-id  {
+    padding-left: 75px; 
+   }
 
 </style>
