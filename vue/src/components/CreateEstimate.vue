@@ -6,7 +6,7 @@
     
     
 
-    <hr class="divider" />
+    
     <table id="table-estimates-list">
       <thead class="table-head">
         <tr>
@@ -36,10 +36,11 @@
     <button v-on:click="toggleEvent">Hide/Show</button>
   </div>
 
-  <hr class="divider" />
+  <!-- <hr class="divider" /> -->
 
   <div class="table-container" >
     <!-- <h1>Selected Estimate: {{ this.$store.estimate }}</h1> -->
+     <h1>View Work Order</h1>
     <table class="work-order">
       <thead class="table-head">
         <tr>
@@ -60,24 +61,26 @@
         <td class="repair-pc">${{ repair.partsCost }}</td>
         <td class="repair-lc">${{ repair.laborCost }}</td>
         <td class="repair-desc">{{ repair.description }}</td>
-        <input class="checkbox" type="checkbox" v-model="repair.isApproved"/>
+        <input class="checkbox-approved" type="checkbox" v-model="repair.isApproved"/>
      
         
       </tr>
-      <hr class="divider-cost" />
+      <!-- <hr class="divider-cost" /> -->
      
-<div class="total-cost">
-      <td>Total Cost: ${{ totalCost }}</td>
 
-    </div>
       <!-- TODO: SUBMIT SENDS TO PROPER SQL TABLE -->
     </table>
+
+    <div class="total-cost">
+      <td>TOTAL COST: ${{ totalCost }}</td>
+
+    </div>
     <button v-on:click="submitWorkOrder" type="button">Add To Work Order</button>
   </div>
 
   
 
-  <hr class="divider" />
+  <!-- <hr class="divider" /> -->
 
   <h1>Add Repairs to Estimate</h1>
 
@@ -96,7 +99,7 @@
         <td>
           <!-- TODO: SUSPEND USE OF V-MODEL -->
           <input
-            class="checkbox"
+            class="checkbox-add-to-estimate"
             type="checkbox"
             v-bind:id="repair.repairItemId"
             v-bind:value="repair.repairItemId"
@@ -298,6 +301,7 @@ body {
   flex-direction: column;
   align-items: center;
   margin-right: 20px;
+  margin-bottom: 80px; 
 }
 
 .table-head {
@@ -306,10 +310,7 @@ body {
   font-size: 20px;
 }
 
-.checkbox {
-  margin-left: 75px;
-  margin-top: 12px;
-}
+
 
 table .repair-desc {
   width: 200px;
@@ -392,11 +393,57 @@ th {
 tr.deactivated {
   color: rgb(2, 2, 151);
 }
+
+
+table, th, td {
+  border: 1px solid #ccc; /* Adjust the color and thickness as needed */
+  border-collapse: collapse; /* Ensures there are no gaps between cells */
+}
+
+/* Optional: To make the borders more prominent */
+table th, table td {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  padding: 10px; /* Adds padding for better readability */
+  text-align: center; /* Center text in table cells */
+}
+
+/* Optional: Different border for the first and last columns */
+table th:first-child, table td:first-child {
+  border-left: none; /* Removes the left border for the first column */
+}
+
+table th:last-child, table td:last-child {
+  border-right: none; /* Removes the right border for the last column */
+}
+
+.total-cost td {
+
+  border: none; 
+}
+
+
 .total-cost {
   
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   font-size: 20px;
+  margin-bottom: 25px; 
+  margin-top: 25px; 
+ 
+  
+  border: none; 
   
 }
+
+table td {
+  border: 1px solid #ccc; /* Ensure all table cells have a border */
+}
+
+.checkbox-approved {
+  margin-left: 110px;
+  margin-top: 12px;
+  border: 1px solid #ccc; /* Ensure all table cells have a border */
+}
+
 </style>

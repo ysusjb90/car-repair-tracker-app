@@ -1,12 +1,20 @@
 <template>
-  <div>
-    Work Order Progress
-    <form action="">
-      <tr
+  <div class="page-form">
+    
+    <form class="work-order-tracker" action="">
+      <h1>Track Work Orders</h1>
+
+      <hr class="divider">
+
+     
+      <tr class="line-item" 
+     
         v-for="lineItem in workOrder.workOrderItems"
         v-bind:key="lineItem.description"
       >
       <!-- TODO have click set isCompleted to true; need to send back to server. -->
+
+      
         <td>
           <!-- TODO: SUSPEND USE OF V-MODEL -->
           <input v-show="!hidden"
@@ -20,17 +28,19 @@
           &check;
         </td>
       </tr>
-    </form>
-  </div>
-  <div class="button-trackRepair">
-    <button v-on:click="goToCreateRepair" type="submit">
-      Create New Repair Request
-    </button>
+   
+      <hr class="divider">
+      <div class="button-holder">
+    <button id="create" v-on:click="goToCreateRepair" type="submit">
+Create New Repair Request    </button>
+</div>
 
     <button v-show="!hidden" class="button-go-to-estimates" v-on:click="goToEstimates" type="submit">
-      Go To Estimates
-      </button>
+  Go to Estimates      </button>
+ 
+    </form>
   </div>
+ 
 </template>
 
 <script>
@@ -88,4 +98,97 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+
+.page-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  width: 100%; 
+  
+}
+
+.work-order-tracker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  margin-right: 20px;
+  margin-top: 50px; 
+  width: 500px; 
+  background-color: white; 
+  padding-bottom: 80px; 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.button-holder  {
+
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+  align-items: center;
+}
+
+#create  {
+
+  margin-bottom: 25px; 
+  margin-top: 25px; 
+}
+
+.line-item  {
+
+  
+
+  font-family: Arial, Helvetica, sans-serif; 
+  
+  margin-top: 10px;
+  margin-bottom: 25px; 
+  size: 18px; 
+  margin-right: 15px; 
+  align-content: auto; 
+  
+
+  
+  
+
+  
+  
+}
+
+.button-go-to-estimates  {
+
+  margin-top: 25px; 
+  margin-bottom: 25px; 
+  
+}
+
+.divider  { 
+  
+  border-top: .5px black solid;
+  margin-top: 10px; 
+  margin-bottom: 15px; 
+  width: 100%; 
+
+}
+
+.checkbox  {
+
+ margin-right: 10px; 
+}
+
+#chkComplete  {
+
+  font-size: 25px; 
+  color: green; 
+  margin-left: 7px; 
+ 
+}
+
+
+
+
+</style>

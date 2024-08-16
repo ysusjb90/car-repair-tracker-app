@@ -2,7 +2,7 @@
   <h1>Administrative View</h1>
   
 <div id="btnDiv">
-  <button id="btnAddEmployee" @click="showAddEmployee = !showAddEmployee; showWorkEstimates = !showAddEmployee">{{(showAddEmployee)?"Work Estimates":"Add Employee Form"}}</button>
+  <button id="btnAddEmployee" @click="showAddEmployee = !showAddEmployee; showWorkEstimates = !showAddEmployee">{{(showAddEmployee)?"Work Estimates":"Add Employee"}}</button>
 </div>
 
 <div class="createEstimate">
